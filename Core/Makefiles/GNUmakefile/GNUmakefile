@@ -61,7 +61,7 @@ all: ../Bakefile/../../../Lib/lib$(if $(call _equal,$(config),Debug),CodeSmithyC
 	$(RANLIB) $@
 
 $(_builddir)CodeSmithyCppParserCore_CppParser.o: ../../Source/CppParser.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/CodeSmithy/Cpp/Parser -std=c++11 ../../Source/CppParser.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../Include/CodeSmithy/Cpp/Parser/Core -std=c++11 ../../Source/CppParser.cpp
 
 clean:
 	rm -f $(_builddir)*.o

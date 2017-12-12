@@ -6,7 +6,7 @@ vs2013.solutionfile = ../VC12/CodeSmithyCppParserCore.sln;
 
 library CodeSmithyCppParserCore
 {
-    includedirs += ../../../Include/CodeSmithy/Cpp/Parser;
+    includedirs += ../../../Include/CodeSmithy/Cpp/Parser/Core;
 
     if ($(toolset) == gnu)
     {
@@ -27,8 +27,8 @@ library CodeSmithyCppParserCore
 
     headers
     {
-        ../../../Include/CodeSmithy/Cpp/Parser/CppParser.h
-        ../../../Include/CodeSmithy/Cpp/Parser/linkoptions.h
+        ../../../Include/CodeSmithy/Cpp/Parser/Core/CppParser.h
+        ../../../Include/CodeSmithy/Cpp/Parser/Core/linkoptions.h
     }
 
     sources
