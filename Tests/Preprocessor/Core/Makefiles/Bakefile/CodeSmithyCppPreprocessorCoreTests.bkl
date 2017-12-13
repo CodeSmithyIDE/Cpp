@@ -1,0 +1,27 @@
+ishikopath = envvar("ISHIKO");
+import $(ishikopath)/TestFramework/Include/Ishiko/TestFramework/TestFrameworkCore.bkl;
+
+toolsets = gnu vs2015 vs2013;
+
+gnu.makefile = ../GNUmakefile/GNUmakefile;
+vs2015.solutionfile = ../VC14/CodeSmithyCppPreprocessorCoreTests.sln;
+vs2013.solutionfile = ../VC12/CodeSmithyCppPreprocessorCoreTests.sln;
+
+program CodeSmithyCppPreprocessorCoreTests : IshikoTestFrameworkCore
+{
+    if ($(toolset) == gnu)
+    {
+        cxx-compiler-options = "-std=c++11";
+        libs += IshikoTestFrameworkCore IshikoProcess boost_filesystem boost_system;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        archs = x86 x86_64;
+    }
+
+    sources
+    {
+        ../../Source/main.cpp
+    }
+}
