@@ -17,10 +17,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Include\CodeSmithy\Cpp\Parser\Core\CppParser.h">
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Parser\Core\CppParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Include\CodeSmithy\Cpp\Parser\Core\linkoptions.h">
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Parser\Core\linkoptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
