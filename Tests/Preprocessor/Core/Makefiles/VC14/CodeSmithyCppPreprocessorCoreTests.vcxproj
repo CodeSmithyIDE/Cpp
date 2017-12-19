@@ -154,12 +154,16 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\CppSourceFileTests.cpp" />
-    <ClCompile Include="..\..\Source\CppPreprocessorTests.cpp" />
+    <ClCompile Include="..\..\Source\CppPreprocessorTokenTests.cpp" />
+    <ClCompile Include="..\..\Source\CppPreprocessorTests\CppPreprocessorTests.cpp" />
+    <ClCompile Include="..\..\Source\CppPreprocessorTests\TestCallbacks.cpp" />
     <ClCompile Include="..\..\Source\CppTranslationUnitTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\CppSourceFileTests.h" />
-    <ClInclude Include="..\..\Source\CppPreprocessorTests.h" />
+    <ClInclude Include="..\..\Source\CppPreprocessorTokenTests.h" />
+    <ClInclude Include="..\..\Source\CppPreprocessorTests\CppPreprocessorTests.h" />
+    <ClInclude Include="..\..\Source\CppPreprocessorTests\TestCallbacks.h" />
     <ClInclude Include="..\..\Source\CppTranslationUnitTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -20,7 +20,13 @@
     <ClInclude Include="..\..\Source\CppSourceFileTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\CppPreprocessorTests.h">
+    <ClInclude Include="..\..\Source\CppPreprocessorTokenTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\CppPreprocessorTests\CppPreprocessorTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\CppPreprocessorTests\TestCallbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\CppTranslationUnitTests.h">
@@ -34,7 +40,13 @@
     <ClCompile Include="..\..\Source\CppSourceFileTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppPreprocessorTests.cpp">
+    <ClCompile Include="..\..\Source\CppPreprocessorTokenTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\CppPreprocessorTests\CppPreprocessorTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\CppPreprocessorTests\TestCallbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\CppTranslationUnitTests.cpp">
