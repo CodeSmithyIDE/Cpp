@@ -23,4 +23,13 @@
 #ifndef _CODESMITHY_CPP_PARSER_CORE_CPPPARSER_H_
 #define _CODESMITHY_CPP_PARSER_CORE_CPPPARSER_H_
 
+namespace CodeSmithy
+{
+
+class CppParser
+{
+};
+
+}
+
 #endif
