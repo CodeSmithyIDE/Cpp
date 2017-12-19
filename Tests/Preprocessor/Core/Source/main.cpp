@@ -21,8 +21,9 @@
 */
 
 #include "CppSourceFileTests.h"
+#include "CppPreprocessorTokenTests.h"
 #include "CppTranslationUnitTests.h"
-#include "CppPreprocessorTests.h"
+#include "CppPreprocessorTests/CppPreprocessorTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
 int main(int argc, char* argv[])
@@ -32,6 +33,7 @@ int main(int argc, char* argv[])
     theTestHarness.environment().setTestDataDirectory("../../TestData");
 
     AddCppSourceFileTests(theTestHarness);
+    AddCppPreprocessorTokenTests(theTestHarness);
     AddCppTranslationUnitTests(theTestHarness);
     AddCppPreprocessorTests(theTestHarness);
 

@@ -20,16 +20,4 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORTESTS_CPPPREPROCESSORTESTS_H_
-#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORTESTS_CPPPREPROCESSORTESTS_H_
-
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
-
-using namespace Ishiko::TestFramework;
-
-void AddCppPreprocessorTests(TestHarness& theTestHarness);
-
-TestResult::EOutcome CppPreprocessorCreationTest1(Test& test);
-TestResult::EOutcome CppPreprocessorRunTest1(Test& test);
-
-#endif
+#include "TestCallbacks.h"
