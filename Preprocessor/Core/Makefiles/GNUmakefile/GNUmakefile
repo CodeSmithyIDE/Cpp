@@ -56,12 +56,15 @@ $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_er
 endif
 all: ../Bakefile/../../../../Lib/lib$(if $(call _equal,$(config),Debug),CodeSmithyCppPreprocessorCore-d,CodeSmithyCppPreprocessorCore).a
 
-../Bakefile/../../../../Lib/lib$(if $(call _equal,$(config),Debug),CodeSmithyCppPreprocessorCore-d,CodeSmithyCppPreprocessorCore).a: $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o
-	$(AR) rcu $@ $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o
+../Bakefile/../../../../Lib/lib$(if $(call _equal,$(config),Debug),CodeSmithyCppPreprocessorCore-d,CodeSmithyCppPreprocessorCore).a: $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o $(_builddir)CodeSmithyCppPreprocessorCore_CppTranslationUnit.o
+	$(AR) rcu $@ $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o $(_builddir)CodeSmithyCppPreprocessorCore_CppTranslationUnit.o
 	$(RANLIB) $@
 
 $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o: ../../Source/CppPreprocessor.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../../Include/CodeSmithy/Cpp/Preprocessor/Core -std=c++11 ../../Source/CppPreprocessor.cpp
+
+$(_builddir)CodeSmithyCppPreprocessorCore_CppTranslationUnit.o: ../../Source/CppTranslationUnit.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../../Include/CodeSmithy/Cpp/Preprocessor/Core -std=c++11 ../../Source/CppTranslationUnit.cpp
 
 clean:
 	rm -f $(_builddir)*.o

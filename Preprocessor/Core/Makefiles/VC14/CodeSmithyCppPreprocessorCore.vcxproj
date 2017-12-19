@@ -151,9 +151,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\CppPreprocessor.cpp" />
+    <ClCompile Include="..\..\Source\CppTranslationUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessor.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppTranslationUnit.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\linkoptions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

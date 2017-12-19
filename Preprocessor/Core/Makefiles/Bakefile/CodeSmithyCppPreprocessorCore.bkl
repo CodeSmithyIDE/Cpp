@@ -28,11 +28,13 @@ library CodeSmithyCppPreprocessorCore
     headers
     {
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessor.h
+        ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppTranslationUnit.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/linkoptions.h
     }
 
     sources
     {
         ../../Source/CppPreprocessor.cpp
+        ../../Source/CppTranslationUnit.cpp
     }
 }
