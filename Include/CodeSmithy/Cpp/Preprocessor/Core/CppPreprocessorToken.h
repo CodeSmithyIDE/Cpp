@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2017 Xavier Leclercq
+    Copyright (c) 2008-2017 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -22,5 +22,32 @@
 
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORTOKEN_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORTOKEN_H_
+
+#include <string>
+
+namespace CodeSmithy
+{
+
+class CppPreprocessorToken
+{
+public:
+    enum EType
+    {
+        eIdentifier
+    };
+
+    CppPreprocessorToken(EType type);
+    ~CppPreprocessorToken();
+
+    EType type() const;
+    const std::string& text() const;
+    void setText(const std::string& text);
+
+private:
+    EType m_type;
+    std::string m_text;
+};
+
+}
 
 #endif

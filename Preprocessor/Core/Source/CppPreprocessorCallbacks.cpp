@@ -21,3 +21,21 @@
 */
 
 #include "CppPreprocessorCallbacks.h"
+
+namespace CodeSmithy
+{
+
+CppPreprocessorCallbacks::CppPreprocessorCallbacks()
+{
+}
+
+CppPreprocessorCallbacks::~CppPreprocessorCallbacks()
+{
+}
+
+void CppPreprocessorCallbacks::onToken(const CppPreprocessorToken& token)
+{
+    // Do nothing
+}
+
+}

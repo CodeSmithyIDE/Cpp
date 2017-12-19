@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2017 Xavier Leclercq
+    Copyright (c) 2008-2017 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -36,6 +36,33 @@ CppPreprocessor::~CppPreprocessor()
 
 void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
 {
+    m_position = 0;
+    while (m_source.read(&m_buffer[0], (m_bufferSize - 1)))
+    {
+    }
+    if (m_source.eof())
+    {
+        m_buffer[(unsigned int)m_source.gcount()] = '\0';
+        CppPreprocessorToken token = readIdentifier();
+        callbacks.onToken(token);
+    }
+}
+
+CppPreprocessorToken CppPreprocessor::readIdentifier()
+{
+    CppPreprocessorToken result(CppPreprocessorToken::eIdentifier);
+
+    size_t start = m_position;
+
+    char c = m_buffer[m_position];
+    while ((c >= 'a') && (c <= 'z'))
+    {
+        c = m_buffer[++m_position];
+    }
+
+    result.setText(std::string(&m_buffer[start], m_position - start));
+
+    return result;
 }
 
 }

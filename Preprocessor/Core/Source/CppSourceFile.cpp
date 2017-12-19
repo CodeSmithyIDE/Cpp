@@ -34,8 +34,25 @@ CppSourceFile::~CppSourceFile()
 {
 }
 
-void CppSourceFile::read()
+std::streamsize CppSourceFile::gcount() const
 {
+    return m_input.gcount();
+}
+
+CppSourceFile& CppSourceFile::read(char* s, std::streamsize n)
+{
+    m_input.read(s, n);
+    return *this;
+}
+
+bool CppSourceFile::eof() const
+{
+    return m_input.eof();
+}
+
+CppSourceFile::operator bool() const
+{
+    return ((bool)m_input);
 }
 
 }

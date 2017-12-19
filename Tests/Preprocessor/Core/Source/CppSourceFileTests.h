@@ -30,5 +30,6 @@ using namespace Ishiko::TestFramework;
 void AddCppSourceFileTests(TestHarness& theTestHarness);
 
 TestResult::EOutcome CppSourceFileCreationTest1(Test& test);
+TestResult::EOutcome CppSourceFileReadTest1(Test& test);
 
 #endif

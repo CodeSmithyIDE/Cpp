@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2017 Xavier Leclercq
+    Copyright (c) 2008-2017 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -24,6 +24,7 @@
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSOR_H_
 
 #include "CppSourceFile.h"
+#include "CppPreprocessorToken.h"
 #include "CppPreprocessorCallbacks.h"
 #include <istream>
 
@@ -39,7 +40,13 @@ public:
     void run(CppPreprocessorCallbacks& callbacks);
 
 private:
+    CppPreprocessorToken readIdentifier();
+
+private:
     CppSourceFile m_source;
+    static const int m_bufferSize = 1024;
+    char m_buffer[m_bufferSize];
+    size_t m_position;
 };
 
 }

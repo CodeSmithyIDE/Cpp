@@ -23,11 +23,18 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORCALLBACKS_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORCALLBACKS_H_
 
+#include "CppPreprocessorToken.h"
+
 namespace CodeSmithy
 {
 
 class CppPreprocessorCallbacks
 {
+public:
+    CppPreprocessorCallbacks();
+    ~CppPreprocessorCallbacks();
+
+    virtual void onToken(const CppPreprocessorToken& token);
 };
 
 }

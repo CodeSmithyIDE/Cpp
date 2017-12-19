@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2017 Xavier Leclercq
+    Copyright (c) 2008-2017 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -21,3 +21,32 @@
 */
 
 #include "CppPreprocessorToken.h"
+
+namespace CodeSmithy
+{
+
+CppPreprocessorToken::CppPreprocessorToken(EType type)
+    : m_type(type)
+{
+}
+
+CppPreprocessorToken::~CppPreprocessorToken()
+{
+}
+
+CppPreprocessorToken::EType CppPreprocessorToken::type() const
+{
+    return m_type;
+}
+
+const std::string& CppPreprocessorToken::text() const
+{
+    return m_text;
+}
+
+void CppPreprocessorToken::setText(const std::string& text)
+{
+    m_text = text;
+}
+
+}

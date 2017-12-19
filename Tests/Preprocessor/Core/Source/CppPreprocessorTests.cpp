@@ -29,6 +29,8 @@ void AddCppPreprocessorTests(TestHarness& theTestHarness)
     TestSequence& cppPreprocessorTestSequence = theTestHarness.appendTestSequence("CppPreprocessor tests");
 
     new HeapAllocationErrorsTest("Creation test 1", CppPreprocessorCreationTest1, cppPreprocessorTestSequence);
+
+    new HeapAllocationErrorsTest("run test 1", CppPreprocessorRunTest1, cppPreprocessorTestSequence);
 }
 
 TestResult::EOutcome CppPreprocessorCreationTest1(Test& test)
@@ -39,4 +41,19 @@ TestResult::EOutcome CppPreprocessorCreationTest1(Test& test)
     CodeSmithy::CppPreprocessor preprocessor(input);
 
     return TestResult::ePassed;
+}
+
+TestResult::EOutcome CppPreprocessorRunTest1(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::CppPreprocessor preprocessor(input);
+
+    CodeSmithy::CppPreprocessorCallbacks callbacks;
+    preprocessor.run(callbacks);
+
+    return result;
 }

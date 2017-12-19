@@ -29,6 +29,8 @@ void AddCppSourceFileTests(TestHarness& theTestHarness)
     TestSequence& cppSourceFileTestSequence = theTestHarness.appendTestSequence("CppSourceFile tests");
 
     new HeapAllocationErrorsTest("Creation test 1", CppSourceFileCreationTest1, cppSourceFileTestSequence);
+
+    new HeapAllocationErrorsTest("read test 1", CppSourceFileReadTest1, cppSourceFileTestSequence);
 }
 
 TestResult::EOutcome CppSourceFileCreationTest1(Test& test)
@@ -39,4 +41,25 @@ TestResult::EOutcome CppSourceFileCreationTest1(Test& test)
     CodeSmithy::CppSourceFile source(input);
 
     return TestResult::ePassed;
+}
+
+TestResult::EOutcome CppSourceFileReadTest1(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::CppSourceFile source(input);
+
+    char buffer[3];
+    if (source.read(buffer, 3))
+    {
+        if ((source.gcount() == 3) && (strncmp(buffer, "int", 3) == 0))
+        {
+            result = TestResult::ePassed;
+        }
+    }
+
+    return result;
 }

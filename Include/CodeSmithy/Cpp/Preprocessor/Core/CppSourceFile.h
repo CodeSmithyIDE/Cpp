@@ -37,7 +37,10 @@ public:
     CppSourceFile(std::istream& input);
     ~CppSourceFile();
 
-    void read();
+    std::streamsize gcount() const;
+    CppSourceFile& read(char* s, std::streamsize n);
+    bool eof() const;
+    explicit operator bool() const;
 
 private:
     std::istream& m_input;
