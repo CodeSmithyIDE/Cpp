@@ -21,15 +21,8 @@
 */
 
 #include "CppTranslationUnitTests.h"
-#include "CppPreprocessorTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-int main(int argc, char* argv[])
+void AddCppTranslationUnitTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("CodeSmithyCppPreprocessorCore");
-
-    AddCppTranslationUnitTests(theTestHarness);
-    AddCppPreprocessorTests(theTestHarness);
-
-    return theTestHarness.run();
+    TestSequence& cppTranslationUnitTestSequence = theTestHarness.appendTestSequence("CppTranslationUnit tests");
 }

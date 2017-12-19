@@ -20,8 +20,16 @@ program CodeSmithyCppPreprocessorCoreTests : IshikoTestFrameworkCore
         archs = x86 x86_64;
     }
 
+    headers
+    {
+        ../../Source/CppPreprocessorTests.h
+        ../../Source/CppTranslationUnitTests.h
+    }
+
     sources
     {
         ../../Source/main.cpp
+        ../../Source/CppPreprocessorTests.cpp
+        ../../Source/CppTranslationUnitTests.cpp
     }
 }

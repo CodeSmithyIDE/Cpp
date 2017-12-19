@@ -71,11 +71,17 @@ ISHIKO_TESTFRAMEWORK_ROOT ?= $(ISHIKO)/TestFramework
 
 all: $(_builddir)CodeSmithyCppPreprocessorCoreTests
 
-$(_builddir)CodeSmithyCppPreprocessorCoreTests: $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o -L$(ISHIKO_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/stage/lib -L$(ISHIKO_TESTFRAMEWORK_ROOT)/Lib -lIshikoTestFrameworkCore -lIshikoProcess -lboost_filesystem -lboost_system -pthread
+$(_builddir)CodeSmithyCppPreprocessorCoreTests: $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppPreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppTranslationUnitTests.o
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppPreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppTranslationUnitTests.o -L$(ISHIKO_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/stage/lib -L$(ISHIKO_TESTFRAMEWORK_ROOT)/Lib -lIshikoTestFrameworkCore -lIshikoProcess -lboost_filesystem -lboost_system -pthread
 
 $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o: ../../Source/main.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/main.cpp
+
+$(_builddir)CodeSmithyCppPreprocessorCoreTests_CppPreprocessorTests.o: ../../Source/CppPreprocessorTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/CppPreprocessorTests.cpp
+
+$(_builddir)CodeSmithyCppPreprocessorCoreTests_CppTranslationUnitTests.o: ../../Source/CppTranslationUnitTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/CppTranslationUnitTests.cpp
 
 clean:
 	rm -f $(_builddir)*.o

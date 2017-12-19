@@ -20,16 +20,9 @@
     IN THE SOFTWARE.
 */
 
-#include "CppTranslationUnitTests.h"
 #include "CppPreprocessorTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
 
-int main(int argc, char* argv[])
+void AddCppPreprocessorTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("CodeSmithyCppPreprocessorCore");
-
-    AddCppTranslationUnitTests(theTestHarness);
-    AddCppPreprocessorTests(theTestHarness);
-
-    return theTestHarness.run();
+    TestSequence& cppPreprocessorTestSequence = theTestHarness.appendTestSequence("CppPreprocessor tests");
 }
