@@ -23,4 +23,21 @@
 #ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORTESTS_TESTCALLBACKS_H_
 #define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORTESTS_TESTCALLBACKS_H_
 
+#include "CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessorCallbacks.h"
+#include <boost/filesystem/path.hpp>
+
+class TestCallbacks : public CodeSmithy::CppPreprocessorCallbacks
+{
+public:
+    TestCallbacks();
+    ~TestCallbacks() override;
+
+    void onToken(const CodeSmithy::CppPreprocessorToken& token) override;
+
+    void write(const boost::filesystem::path& path);
+
+private:
+    std::vector<CodeSmithy::CppPreprocessorToken> m_tokens;
+};
+
 #endif

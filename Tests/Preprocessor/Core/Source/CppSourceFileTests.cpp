@@ -31,6 +31,7 @@ void AddCppSourceFileTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("Creation test 1", CppSourceFileCreationTest1, cppSourceFileTestSequence);
 
     new HeapAllocationErrorsTest("read test 1", CppSourceFileReadTest1, cppSourceFileTestSequence);
+    new HeapAllocationErrorsTest("read test 2", CppSourceFileReadTest2, cppSourceFileTestSequence);
 }
 
 TestResult::EOutcome CppSourceFileCreationTest1(Test& test)
@@ -59,6 +60,24 @@ TestResult::EOutcome CppSourceFileReadTest1(Test& test)
         {
             result = TestResult::ePassed;
         }
+    }
+
+    return result;
+}
+
+TestResult::EOutcome CppSourceFileReadTest2(Test& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyFile.cpp");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::CppSourceFile source(input);
+
+    char buffer[3];
+    if ((!source.read(buffer, 3)) && (input.gcount() == 0))
+    {
+        result = TestResult::ePassed;
     }
 
     return result;

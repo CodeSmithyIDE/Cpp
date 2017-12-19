@@ -21,3 +21,27 @@
 */
 
 #include "TestCallbacks.h"
+#include <fstream>
+
+TestCallbacks::TestCallbacks()
+{
+}
+
+TestCallbacks::~TestCallbacks()
+{
+}
+
+void TestCallbacks::onToken(const CodeSmithy::CppPreprocessorToken& token)
+{
+    m_tokens.push_back(token);
+}
+
+void TestCallbacks::write(const boost::filesystem::path& path)
+{
+    std::ofstream stream(path.c_str());
+
+    for (CodeSmithy::CppPreprocessorToken& token : m_tokens)
+    {
+        stream << token.text() << std::endl;
+    }
+}

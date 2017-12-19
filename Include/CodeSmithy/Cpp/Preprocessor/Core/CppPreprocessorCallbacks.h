@@ -32,7 +32,7 @@ class CppPreprocessorCallbacks
 {
 public:
     CppPreprocessorCallbacks();
-    ~CppPreprocessorCallbacks();
+    virtual ~CppPreprocessorCallbacks();
 
     virtual void onToken(const CppPreprocessorToken& token);
 };

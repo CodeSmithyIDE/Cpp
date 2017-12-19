@@ -31,5 +31,6 @@ void AddCppSourceFileTests(TestHarness& theTestHarness);
 
 TestResult::EOutcome CppSourceFileCreationTest1(Test& test);
 TestResult::EOutcome CppSourceFileReadTest1(Test& test);
+TestResult::EOutcome CppSourceFileReadTest2(Test& test);
 
 #endif

@@ -30,6 +30,7 @@ using namespace Ishiko::TestFramework;
 void AddCppPreprocessorTests(TestHarness& theTestHarness);
 
 TestResult::EOutcome CppPreprocessorCreationTest1(Test& test);
-TestResult::EOutcome CppPreprocessorRunTest1(Test& test);
+TestResult::EOutcome CppPreprocessorRunTest1(FileComparisonTest& test);
+TestResult::EOutcome CppPreprocessorRunTest2(FileComparisonTest& test);
 
 #endif

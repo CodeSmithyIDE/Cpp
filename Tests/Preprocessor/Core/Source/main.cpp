@@ -25,12 +25,16 @@
 #include "CppTranslationUnitTests.h"
 #include "CppPreprocessorTests/CppPreprocessorTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
+#include <boost/filesystem/operations.hpp>
 
 int main(int argc, char* argv[])
 {
     Ishiko::TestFramework::TestHarness theTestHarness("CodeSmithyCppPreprocessorCore");
 
     theTestHarness.environment().setTestDataDirectory("../../TestData");
+    theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
+    boost::filesystem::create_directories("../../TestOutput");
+    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
 
     AddCppSourceFileTests(theTestHarness);
     AddCppPreprocessorTokenTests(theTestHarness);

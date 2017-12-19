@@ -43,8 +43,12 @@ void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
     if (m_source.eof())
     {
         m_buffer[(unsigned int)m_source.gcount()] = '\0';
-        CppPreprocessorToken token = readIdentifier();
-        callbacks.onToken(token);
+        char c = m_buffer[m_position];
+        if ((c >= 'a') && (c <= 'z'))
+        {
+            CppPreprocessorToken token = readIdentifier();
+            callbacks.onToken(token);
+        }
     }
 }
 
