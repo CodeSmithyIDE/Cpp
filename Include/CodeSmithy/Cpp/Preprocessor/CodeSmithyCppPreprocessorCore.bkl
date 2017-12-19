@@ -1,0 +1,20 @@
+setting CODESMITHY_ROOT
+{
+    help = "Path to the CodeSmithy installation";
+    default = '$(CODESMITHY)';
+}
+
+template CodeSmithyCppPreprocessorCore
+{
+    includedirs += $(CODESMITHY_ROOT)/Cpp/Include;
+
+    if ($(toolset) == gnu)
+    {
+        libdirs += $(CODESMITHY_ROOT)/Cpp/Lib;
+    }
+
+    if ($(toolset) != gnu)
+    {
+        libdirs += $(CODESMITHY_ROOT)/Cpp/Lib/$(arch);
+    }
+}
