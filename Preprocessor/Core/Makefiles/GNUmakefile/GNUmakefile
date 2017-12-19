@@ -56,8 +56,8 @@ $(if $(_builddir_error),$(error Failed to create build directory: $(_builddir_er
 endif
 all: ../Bakefile/../../../../Lib/lib$(if $(call _equal,$(config),Debug),CodeSmithyCppPreprocessorCore-d,CodeSmithyCppPreprocessorCore).a
 
-../Bakefile/../../../../Lib/lib$(if $(call _equal,$(config),Debug),CodeSmithyCppPreprocessorCore-d,CodeSmithyCppPreprocessorCore).a: $(_builddir)CodeSmithyCppPreprocessorCore_CppSourceFile.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessorCallbacks.o $(_builddir)CodeSmithyCppPreprocessorCore_CppTranslationUnit.o
-	$(AR) rcu $@ $(_builddir)CodeSmithyCppPreprocessorCore_CppSourceFile.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessorCallbacks.o $(_builddir)CodeSmithyCppPreprocessorCore_CppTranslationUnit.o
+../Bakefile/../../../../Lib/lib$(if $(call _equal,$(config),Debug),CodeSmithyCppPreprocessorCore-d,CodeSmithyCppPreprocessorCore).a: $(_builddir)CodeSmithyCppPreprocessorCore_CppSourceFile.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessorCallbacks.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessorToken.o $(_builddir)CodeSmithyCppPreprocessorCore_CppTranslationUnit.o
+	$(AR) rcu $@ $(_builddir)CodeSmithyCppPreprocessorCore_CppSourceFile.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessorCallbacks.o $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessorToken.o $(_builddir)CodeSmithyCppPreprocessorCore_CppTranslationUnit.o
 	$(RANLIB) $@
 
 $(_builddir)CodeSmithyCppPreprocessorCore_CppSourceFile.o: ../../Source/CppSourceFile.cpp
@@ -68,6 +68,9 @@ $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessor.o: ../../Source/CppPre
 
 $(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessorCallbacks.o: ../../Source/CppPreprocessorCallbacks.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../../Include/CodeSmithy/Cpp/Preprocessor/Core -std=c++11 ../../Source/CppPreprocessorCallbacks.cpp
+
+$(_builddir)CodeSmithyCppPreprocessorCore_CppPreprocessorToken.o: ../../Source/CppPreprocessorToken.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../../Include/CodeSmithy/Cpp/Preprocessor/Core -std=c++11 ../../Source/CppPreprocessorToken.cpp
 
 $(_builddir)CodeSmithyCppPreprocessorCore_CppTranslationUnit.o: ../../Source/CppTranslationUnit.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -fPIC -DPIC -pthread -I../../../../Include/CodeSmithy/Cpp/Preprocessor/Core -std=c++11 ../../Source/CppTranslationUnit.cpp

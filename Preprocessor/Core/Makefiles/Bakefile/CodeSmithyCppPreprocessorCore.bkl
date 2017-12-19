@@ -30,6 +30,7 @@ library CodeSmithyCppPreprocessorCore
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppSourceFile.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessor.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessorCallbacks.h
+        ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessorToken.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppTranslationUnit.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/linkoptions.h
     }
@@ -39,6 +40,7 @@ library CodeSmithyCppPreprocessorCore
         ../../Source/CppSourceFile.cpp
         ../../Source/CppPreprocessor.cpp
         ../../Source/CppPreprocessorCallbacks.cpp
+        ../../Source/CppPreprocessorToken.cpp
         ../../Source/CppTranslationUnit.cpp
     }
 }
