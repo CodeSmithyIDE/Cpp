@@ -24,6 +24,7 @@ program CodeSmithyCppPreprocessorCoreTests : CodeSmithyCppPreprocessorCore, Ishi
 
     headers
     {
+        ../../Source/CppSourceFileTests.h
         ../../Source/CppPreprocessorTests.h
         ../../Source/CppTranslationUnitTests.h
     }
@@ -31,6 +32,7 @@ program CodeSmithyCppPreprocessorCoreTests : CodeSmithyCppPreprocessorCore, Ishi
     sources
     {
         ../../Source/main.cpp
+        ../../Source/CppSourceFileTests.cpp
         ../../Source/CppPreprocessorTests.cpp
         ../../Source/CppTranslationUnitTests.cpp
     }
