@@ -23,6 +23,7 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSOR_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSOR_H_
 
+#include "CppSourceFile.h"
 #include "CppPreprocessorCallbacks.h"
 #include <istream>
 
@@ -38,7 +39,7 @@ public:
     void run(CppPreprocessorCallbacks& callbacks);
 
 private:
-    std::istream& m_input;
+    CppSourceFile m_source;
 };
 
 }

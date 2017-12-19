@@ -26,7 +26,7 @@ namespace CodeSmithy
 {
 
 CppPreprocessor::CppPreprocessor(std::istream& input)
-    : m_input(input)
+    : m_source(input)
 {
 }
 

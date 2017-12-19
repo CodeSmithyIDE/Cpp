@@ -29,6 +29,6 @@ using namespace Ishiko::TestFramework;
 
 void AddCppSourceFileTests(TestHarness& theTestHarness);
 
-TestResult::EOutcome CppSourceFileCreationTest1();
+TestResult::EOutcome CppSourceFileCreationTest1(Test& test);
 
 #endif

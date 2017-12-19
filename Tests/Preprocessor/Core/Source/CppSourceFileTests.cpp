@@ -22,6 +22,7 @@
 
 #include "CppSourceFileTests.h"
 #include "CodeSmithy/Cpp/Preprocessor/Core/CppSourceFile.h"
+#include <fstream>
 
 void AddCppSourceFileTests(TestHarness& theTestHarness)
 {
@@ -30,8 +31,12 @@ void AddCppSourceFileTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("Creation test 1", CppSourceFileCreationTest1, cppSourceFileTestSequence);
 }
 
-TestResult::EOutcome CppSourceFileCreationTest1()
+TestResult::EOutcome CppSourceFileCreationTest1(Test& test)
 {
-    CodeSmithy::CppSourceFile source;
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::CppSourceFile source(input);
+
     return TestResult::ePassed;
 }

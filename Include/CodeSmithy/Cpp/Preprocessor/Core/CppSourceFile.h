@@ -23,6 +23,8 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPSOURCEFILE_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPSOURCEFILE_H_
 
+#include <istream>
+
 namespace CodeSmithy
 {
 
@@ -32,10 +34,17 @@ namespace CodeSmithy
 class CppSourceFile
 {
 public:
-    CppSourceFile();
+    CppSourceFile(std::istream& input);
     ~CppSourceFile();
+
+    void read();
+
+private:
+    std::istream& m_input;
 };
 
 }
+
+#include "linkoptions.h"
 
 #endif

@@ -25,11 +25,16 @@
 namespace CodeSmithy
 {
 
-CppSourceFile::CppSourceFile()
+CppSourceFile::CppSourceFile(std::istream& input)
+    : m_input(input)
 {
 }
 
 CppSourceFile::~CppSourceFile()
+{
+}
+
+void CppSourceFile::read()
 {
 }
 
