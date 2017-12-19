@@ -20,6 +20,7 @@
     IN THE SOFTWARE.
 */
 
+#include "CppSourceFileTests.h"
 #include "CppTranslationUnitTests.h"
 #include "CppPreprocessorTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
@@ -30,6 +31,7 @@ int main(int argc, char* argv[])
 
     theTestHarness.environment().setTestDataDirectory("../../TestData");
 
+    AddCppSourceFileTests(theTestHarness);
     AddCppTranslationUnitTests(theTestHarness);
     AddCppPreprocessorTests(theTestHarness);
 

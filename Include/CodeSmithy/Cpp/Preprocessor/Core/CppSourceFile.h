@@ -23,4 +23,19 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPSOURCEFILE_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPSOURCEFILE_H_
 
+namespace CodeSmithy
+{
+
+// This is a source file as defined in the standard so it can be a .h or .cpp, .cxx.
+// Note that a header in the standard is defined as something else than a header file
+// (see note 158 in section 17.4.1.2)
+class CppSourceFile
+{
+public:
+    CppSourceFile();
+    ~CppSourceFile();
+};
+
+}
+
 #endif

@@ -21,3 +21,16 @@
 */
 
 #include "CppSourceFile.h"
+
+namespace CodeSmithy
+{
+
+CppSourceFile::CppSourceFile()
+{
+}
+
+CppSourceFile::~CppSourceFile()
+{
+}
+
+}
