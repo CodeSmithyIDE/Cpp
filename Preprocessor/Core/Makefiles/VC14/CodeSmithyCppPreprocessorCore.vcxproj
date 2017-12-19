@@ -151,10 +151,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\CppPreprocessor.cpp" />
+    <ClCompile Include="..\..\Source\CppPreprocessorCallbacks.cpp" />
     <ClCompile Include="..\..\Source\CppTranslationUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessor.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessorCallbacks.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppTranslationUnit.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\linkoptions.h" />
   </ItemGroup>

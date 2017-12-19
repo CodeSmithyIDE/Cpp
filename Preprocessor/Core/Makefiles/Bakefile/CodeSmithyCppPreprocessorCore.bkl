@@ -28,6 +28,7 @@ library CodeSmithyCppPreprocessorCore
     headers
     {
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessor.h
+        ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessorCallbacks.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/CppTranslationUnit.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/linkoptions.h
     }
@@ -35,6 +36,7 @@ library CodeSmithyCppPreprocessorCore
     sources
     {
         ../../Source/CppPreprocessor.cpp
+        ../../Source/CppPreprocessorCallbacks.cpp
         ../../Source/CppTranslationUnit.cpp
     }
 }
