@@ -40,6 +40,7 @@ endif
 #      BOOST_ROOT                 Path to the Boost installation
 #      ISHIKO_PROCESS_ROOT        Path to the Ishiko Process installation
 #      ISHIKO_TESTFRAMEWORK_ROOT  Path to the Ishiko TestFramework installation
+#      CODESMITHY_ROOT            Path to the CodeSmithy installation
 
 # Use "make RANLIB=''" for platforms without ranlib.
 RANLIB ?= ranlib
@@ -66,22 +67,24 @@ BOOST_ROOT ?= $(BOOST)
 ISHIKO_PROCESS_ROOT ?= $(ISHIKO)/Process
 # Path to the Ishiko TestFramework installation
 ISHIKO_TESTFRAMEWORK_ROOT ?= $(ISHIKO)/TestFramework
+# Path to the CodeSmithy installation
+CODESMITHY_ROOT ?= $(CODESMITHY)
 
 # ------------
 
 all: $(_builddir)CodeSmithyCppPreprocessorCoreTests
 
 $(_builddir)CodeSmithyCppPreprocessorCoreTests: $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppPreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppTranslationUnitTests.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppPreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppTranslationUnitTests.o -L$(ISHIKO_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/stage/lib -L$(ISHIKO_TESTFRAMEWORK_ROOT)/Lib -lIshikoTestFrameworkCore -lIshikoProcess -lboost_filesystem -lboost_system -pthread
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppPreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppTranslationUnitTests.o -L$(CODESMITHY_ROOT)/Cpp/Lib -L$(ISHIKO_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/stage/lib -L$(ISHIKO_TESTFRAMEWORK_ROOT)/Lib -lIshikoTestFrameworkCore -lIshikoProcess -lboost_filesystem -lboost_system -pthread
 
 $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o: ../../Source/main.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/main.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(CODESMITHY_ROOT)/Cpp/Include -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/main.cpp
 
 $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppPreprocessorTests.o: ../../Source/CppPreprocessorTests.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/CppPreprocessorTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(CODESMITHY_ROOT)/Cpp/Include -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/CppPreprocessorTests.cpp
 
 $(_builddir)CodeSmithyCppPreprocessorCoreTests_CppTranslationUnitTests.o: ../../Source/CppTranslationUnitTests.cpp
-	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/CppTranslationUnitTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(CODESMITHY_ROOT)/Cpp/Include -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/CppTranslationUnitTests.cpp
 
 clean:
 	rm -f $(_builddir)*.o

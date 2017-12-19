@@ -29,4 +29,6 @@ using namespace Ishiko::TestFramework;
 
 void AddCppTranslationUnitTests(TestHarness& theTestHarness);
 
+TestResult::EOutcome CppTranslationUnitCreationTest1();
+
 #endif

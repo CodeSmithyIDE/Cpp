@@ -21,8 +21,17 @@
 */
 
 #include "CppTranslationUnitTests.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/CppTranslationUnit.h"
 
 void AddCppTranslationUnitTests(TestHarness& theTestHarness)
 {
     TestSequence& cppTranslationUnitTestSequence = theTestHarness.appendTestSequence("CppTranslationUnit tests");
+
+    new HeapAllocationErrorsTest("Creation test 1", CppTranslationUnitCreationTest1, cppTranslationUnitTestSequence);
+}
+
+TestResult::EOutcome CppTranslationUnitCreationTest1()
+{
+    CodeSmithy::CppTranslationUnit translationUnit;
+    return TestResult::ePassed;
 }

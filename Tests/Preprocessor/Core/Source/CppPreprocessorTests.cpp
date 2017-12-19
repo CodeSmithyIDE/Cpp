@@ -21,8 +21,17 @@
 */
 
 #include "CppPreprocessorTests.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessor.h"
 
 void AddCppPreprocessorTests(TestHarness& theTestHarness)
 {
     TestSequence& cppPreprocessorTestSequence = theTestHarness.appendTestSequence("CppPreprocessor tests");
+
+    new HeapAllocationErrorsTest("Creation test 1", CppPreprocessorCreationTest1, cppPreprocessorTestSequence);
+}
+
+TestResult::EOutcome CppPreprocessorCreationTest1()
+{
+    CodeSmithy::CppPreprocessor preprocessor;
+    return TestResult::ePassed;
 }
