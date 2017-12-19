@@ -21,3 +21,16 @@
 */
 
 #include "CppTranslationUnit.h"
+
+namespace CodeSmithy
+{
+
+CppTranslationUnit::CppTranslationUnit()
+{
+}
+
+CppTranslationUnit::~CppTranslationUnit()
+{
+}
+
+}

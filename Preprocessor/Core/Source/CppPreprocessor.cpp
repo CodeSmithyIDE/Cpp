@@ -21,3 +21,21 @@
 */
 
 #include "CppPreprocessor.h"
+
+namespace CodeSmithy
+{
+
+CppPreprocessor::CppPreprocessor(std::istream& input)
+    : m_input(input)
+{
+}
+
+CppPreprocessor::~CppPreprocessor()
+{
+}
+
+void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
+{
+}
+
+}

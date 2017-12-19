@@ -28,6 +28,8 @@ int main(int argc, char* argv[])
 {
     Ishiko::TestFramework::TestHarness theTestHarness("CodeSmithyCppPreprocessorCore");
 
+    theTestHarness.environment().setTestDataDirectory("../../TestData");
+
     AddCppTranslationUnitTests(theTestHarness);
     AddCppPreprocessorTests(theTestHarness);
 

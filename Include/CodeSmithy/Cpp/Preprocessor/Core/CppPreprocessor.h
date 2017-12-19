@@ -23,13 +23,26 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSOR_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSOR_H_
 
+#include "CppPreprocessorCallbacks.h"
+#include <istream>
+
 namespace CodeSmithy
 {
 
 class CppPreprocessor
 {
+public:
+    CppPreprocessor(std::istream& input);
+    ~CppPreprocessor();
+
+    void run(CppPreprocessorCallbacks& callbacks);
+
+private:
+    std::istream& m_input;
 };
 
 }
+
+#include "linkoptions.h"
 
 #endif

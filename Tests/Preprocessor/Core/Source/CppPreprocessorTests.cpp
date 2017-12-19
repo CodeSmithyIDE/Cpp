@@ -22,6 +22,7 @@
 
 #include "CppPreprocessorTests.h"
 #include "CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessor.h"
+#include <fstream>
 
 void AddCppPreprocessorTests(TestHarness& theTestHarness)
 {
@@ -30,8 +31,12 @@ void AddCppPreprocessorTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("Creation test 1", CppPreprocessorCreationTest1, cppPreprocessorTestSequence);
 }
 
-TestResult::EOutcome CppPreprocessorCreationTest1()
+TestResult::EOutcome CppPreprocessorCreationTest1(Test& test)
 {
-    CodeSmithy::CppPreprocessor preprocessor;
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::CppPreprocessor preprocessor(input);
+
     return TestResult::ePassed;
 }

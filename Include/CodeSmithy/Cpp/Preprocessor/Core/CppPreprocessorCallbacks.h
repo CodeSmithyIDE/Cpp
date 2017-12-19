@@ -23,4 +23,13 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORCALLBACKS_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORCALLBACKS_H_
 
+namespace CodeSmithy
+{
+
+class CppPreprocessorCallbacks
+{
+};
+
+}
+
 #endif

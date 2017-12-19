@@ -29,6 +29,6 @@ using namespace Ishiko::TestFramework;
 
 void AddCppPreprocessorTests(TestHarness& theTestHarness);
 
-TestResult::EOutcome CppPreprocessorCreationTest1();
+TestResult::EOutcome CppPreprocessorCreationTest1(Test& test);
 
 #endif

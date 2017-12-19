@@ -28,8 +28,13 @@ namespace CodeSmithy
 
 class CppTranslationUnit
 {
+public:
+    CppTranslationUnit();
+    ~CppTranslationUnit();
 };
 
 }
+
+#include "linkoptions.h"
 
 #endif
