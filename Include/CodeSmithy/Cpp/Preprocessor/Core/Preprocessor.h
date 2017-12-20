@@ -20,12 +20,12 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSOR_H_
-#define _CODESMITHY_CPP_PREPROCESSOR_CORE_CPPPREPROCESSOR_H_
+#ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSOR_H_
+#define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSOR_H_
 
-#include "CppSourceFile.h"
-#include "CppPreprocessorToken.h"
-#include "CppPreprocessorCallbacks.h"
+#include "SourceFile.h"
+#include "PreprocessorToken.h"
+#include "PreprocessorCallbacks.h"
 #include <istream>
 
 namespace CodeSmithy

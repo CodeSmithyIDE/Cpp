@@ -20,7 +20,7 @@
     IN THE SOFTWARE.
 */
 
-#include "CppTranslationUnit.h"
+#include "TranslationUnit.h"
 
 namespace CodeSmithy
 {

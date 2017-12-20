@@ -20,7 +20,7 @@
     IN THE SOFTWARE.
 */
 
-#include "CppSourceFile.h"
+#include "SourceFile.h"
 
 namespace CodeSmithy
 {
