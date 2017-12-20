@@ -20,9 +20,9 @@
     IN THE SOFTWARE.
 */
 
-#include "CppPreprocessorTokenTests.h"
+#include "PreprocessorTokenTests.h"
 
-void AddCppPreprocessorTokenTests(TestHarness& theTestHarness)
+void AddPreprocessorTokenTests(TestHarness& theTestHarness)
 {
-    TestSequence& cppPreprocessorTokenTestSequence = theTestHarness.appendTestSequence("CppPreprocessorToken tests");
+    TestSequence& preprocessorTokenTestSequence = theTestHarness.appendTestSequence("PreprocessorToken tests");
 }

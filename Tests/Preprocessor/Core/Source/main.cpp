@@ -20,10 +20,10 @@
     IN THE SOFTWARE.
 */
 
-#include "CppSourceFileTests.h"
-#include "CppPreprocessorTokenTests.h"
-#include "CppTranslationUnitTests.h"
-#include "CppPreprocessorTests/CppPreprocessorTests.h"
+#include "SourceFileTests.h"
+#include "PreprocessorTokenTests.h"
+#include "TranslationUnitTests.h"
+#include "PreprocessorTests/PreprocessorTests.h"
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 #include <boost/filesystem/operations.hpp>
 
@@ -36,10 +36,10 @@ int main(int argc, char* argv[])
     boost::filesystem::create_directories("../../TestOutput");
     theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
 
-    AddCppSourceFileTests(theTestHarness);
-    AddCppPreprocessorTokenTests(theTestHarness);
-    AddCppTranslationUnitTests(theTestHarness);
-    AddCppPreprocessorTests(theTestHarness);
+    AddSourceFileTests(theTestHarness);
+    AddPreprocessorTokenTests(theTestHarness);
+    AddTranslationUnitTests(theTestHarness);
+    AddPreprocessorTests(theTestHarness);
 
     return theTestHarness.run();
 }
