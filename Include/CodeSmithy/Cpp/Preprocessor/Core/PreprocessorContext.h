@@ -1,5 +1,5 @@
 /*
-    Copyright (c) 2008-2017 Xavier Leclercq
+    Copyright (c) 2017 Xavier Leclercq
 
     Permission is hereby granted, free of charge, to any person obtaining a
     copy of this software and associated documentation files (the "Software"),
@@ -20,42 +20,7 @@
     IN THE SOFTWARE.
 */
 
-#include "SourceFile.h"
+#ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORCONTEXT_H_
+#define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORCONTEXT_H_
 
-namespace CodeSmithy
-{
-namespace Cpp
-{
-
-CppSourceFile::CppSourceFile(std::istream& input)
-    : m_input(input)
-{
-}
-
-CppSourceFile::~CppSourceFile()
-{
-}
-
-std::streamsize CppSourceFile::gcount() const
-{
-    return m_input.gcount();
-}
-
-CppSourceFile& CppSourceFile::read(char* s, std::streamsize n)
-{
-    m_input.read(s, n);
-    return *this;
-}
-
-bool CppSourceFile::eof() const
-{
-    return m_input.eof();
-}
-
-CppSourceFile::operator bool() const
-{
-    return ((bool)m_input);
-}
-
-}
-}
+#endif

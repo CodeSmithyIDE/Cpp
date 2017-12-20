@@ -23,6 +23,9 @@
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\Preprocessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorCallbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -30,6 +33,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnitBuilderCallbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\linkoptions.h">
@@ -43,6 +49,9 @@
     <ClCompile Include="..\..\Source\Preprocessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\PreprocessorContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PreprocessorCallbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -50,6 +59,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TranslationUnit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\TranslationUnitBuilderCallbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
