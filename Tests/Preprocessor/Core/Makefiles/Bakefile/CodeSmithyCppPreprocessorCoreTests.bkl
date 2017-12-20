@@ -24,20 +24,20 @@ program CodeSmithyCppPreprocessorCoreTests : CodeSmithyCppPreprocessorCore, Ishi
 
     headers
     {
-        ../../Source/CppSourceFileTests.h
-        ../../Source/CppPreprocessorTokenTests.h
-        ../../Source/CppPreprocessorTests/CppPreprocessorTests.h
-        ../../Source/CppPreprocessorTests/TestCallbacks.h
-        ../../Source/CppTranslationUnitTests.h
+        ../../Source/SourceFileTests.h
+        ../../Source/PreprocessorTokenTests.h
+        ../../Source/PreprocessorTests/CppPreprocessorTests.h
+        ../../Source/PreprocessorTests/TestCallbacks.h
+        ../../Source/TranslationUnitTests.h
     }
 
     sources
     {
         ../../Source/main.cpp
-        ../../Source/CppSourceFileTests.cpp
-        ../../Source/CppPreprocessorTokenTests.cpp
-        ../../Source/CppPreprocessorTests/CppPreprocessorTests.cpp
-        ../../Source/CppPreprocessorTests/TestCallbacks.cpp
-        ../../Source/CppTranslationUnitTests.cpp
+        ../../Source/SourceFileTests.cpp
+        ../../Source/PreprocessorTokenTests.cpp
+        ../../Source/PreprocessorTests/CppPreprocessorTests.cpp
+        ../../Source/PreprocessorTests/TestCallbacks.cpp
+        ../../Source/TranslationUnitTests.cpp
     }
 }

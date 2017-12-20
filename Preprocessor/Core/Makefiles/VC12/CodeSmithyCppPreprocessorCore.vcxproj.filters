@@ -17,19 +17,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppSourceFile.h">
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\SourceFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessor.h">
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\Preprocessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessorCallbacks.h">
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorCallbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessorToken.h">
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorToken.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppTranslationUnit.h">
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\linkoptions.h">
@@ -37,19 +37,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\CppSourceFile.cpp">
+    <ClCompile Include="..\..\Source\SourceFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppPreprocessor.cpp">
+    <ClCompile Include="..\..\Source\Preprocessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppPreprocessorCallbacks.cpp">
+    <ClCompile Include="..\..\Source\PreprocessorCallbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppPreprocessorToken.cpp">
+    <ClCompile Include="..\..\Source\PreprocessorToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppTranslationUnit.cpp">
+    <ClCompile Include="..\..\Source\TranslationUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

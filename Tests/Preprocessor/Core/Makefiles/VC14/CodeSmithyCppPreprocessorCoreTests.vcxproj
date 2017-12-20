@@ -153,18 +153,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp" />
-    <ClCompile Include="..\..\Source\CppSourceFileTests.cpp" />
-    <ClCompile Include="..\..\Source\CppPreprocessorTokenTests.cpp" />
-    <ClCompile Include="..\..\Source\CppPreprocessorTests\CppPreprocessorTests.cpp" />
-    <ClCompile Include="..\..\Source\CppPreprocessorTests\TestCallbacks.cpp" />
-    <ClCompile Include="..\..\Source\CppTranslationUnitTests.cpp" />
+    <ClCompile Include="..\..\Source\SourceFileTests.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessorTokenTests.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessorTests\CppPreprocessorTests.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessorTests\TestCallbacks.cpp" />
+    <ClCompile Include="..\..\Source\TranslationUnitTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\CppSourceFileTests.h" />
-    <ClInclude Include="..\..\Source\CppPreprocessorTokenTests.h" />
-    <ClInclude Include="..\..\Source\CppPreprocessorTests\CppPreprocessorTests.h" />
-    <ClInclude Include="..\..\Source\CppPreprocessorTests\TestCallbacks.h" />
-    <ClInclude Include="..\..\Source\CppTranslationUnitTests.h" />
+    <ClInclude Include="..\..\Source\SourceFileTests.h" />
+    <ClInclude Include="..\..\Source\PreprocessorTokenTests.h" />
+    <ClInclude Include="..\..\Source\PreprocessorTests\CppPreprocessorTests.h" />
+    <ClInclude Include="..\..\Source\PreprocessorTests\TestCallbacks.h" />
+    <ClInclude Include="..\..\Source\TranslationUnitTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

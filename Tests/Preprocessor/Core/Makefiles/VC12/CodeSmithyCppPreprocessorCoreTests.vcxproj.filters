@@ -17,19 +17,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\CppSourceFileTests.h">
+    <ClInclude Include="..\..\Source\SourceFileTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\CppPreprocessorTokenTests.h">
+    <ClInclude Include="..\..\Source\PreprocessorTokenTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\CppPreprocessorTests\CppPreprocessorTests.h">
+    <ClInclude Include="..\..\Source\PreprocessorTests\CppPreprocessorTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\CppPreprocessorTests\TestCallbacks.h">
+    <ClInclude Include="..\..\Source\PreprocessorTests\TestCallbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\CppTranslationUnitTests.h">
+    <ClInclude Include="..\..\Source\TranslationUnitTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -37,19 +37,19 @@
     <ClCompile Include="..\..\Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppSourceFileTests.cpp">
+    <ClCompile Include="..\..\Source\SourceFileTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppPreprocessorTokenTests.cpp">
+    <ClCompile Include="..\..\Source\PreprocessorTokenTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppPreprocessorTests\CppPreprocessorTests.cpp">
+    <ClCompile Include="..\..\Source\PreprocessorTests\CppPreprocessorTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppPreprocessorTests\TestCallbacks.cpp">
+    <ClCompile Include="..\..\Source\PreprocessorTests\TestCallbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\CppTranslationUnitTests.cpp">
+    <ClCompile Include="..\..\Source\TranslationUnitTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

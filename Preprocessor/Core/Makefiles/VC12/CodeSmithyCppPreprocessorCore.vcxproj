@@ -150,18 +150,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\CppSourceFile.cpp" />
-    <ClCompile Include="..\..\Source\CppPreprocessor.cpp" />
-    <ClCompile Include="..\..\Source\CppPreprocessorCallbacks.cpp" />
-    <ClCompile Include="..\..\Source\CppPreprocessorToken.cpp" />
-    <ClCompile Include="..\..\Source\CppTranslationUnit.cpp" />
+    <ClCompile Include="..\..\Source\SourceFile.cpp" />
+    <ClCompile Include="..\..\Source\Preprocessor.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessorCallbacks.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessorToken.cpp" />
+    <ClCompile Include="..\..\Source\TranslationUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppSourceFile.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessor.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessorCallbacks.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppPreprocessorToken.h" />
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\CppTranslationUnit.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\SourceFile.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\Preprocessor.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorCallbacks.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorToken.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnit.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\linkoptions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
