@@ -20,47 +20,47 @@
     IN THE SOFTWARE.
 */
 
-#include "CppPreprocessorTests.h"
+#include "PreprocessorTests.h"
 #include "TestCallbacks.h"
-#include "CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessor.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/Preprocessor.h"
 #include <fstream>
 
-void AddCppPreprocessorTests(TestHarness& theTestHarness)
+void AddPreprocessorTests(TestHarness& theTestHarness)
 {
-    TestSequence& cppPreprocessorTestSequence = theTestHarness.appendTestSequence("CppPreprocessor tests");
+    TestSequence& preprocessorTestSequence = theTestHarness.appendTestSequence("Preprocessor tests");
 
-    new HeapAllocationErrorsTest("Creation test 1", CppPreprocessorCreationTest1, cppPreprocessorTestSequence);
+    new HeapAllocationErrorsTest("Creation test 1", PreprocessorCreationTest1, preprocessorTestSequence);
 
-    new FileComparisonTest("run test 1", CppPreprocessorRunTest1, cppPreprocessorTestSequence);
-    new FileComparisonTest("run test 2", CppPreprocessorRunTest2, cppPreprocessorTestSequence);
+    new FileComparisonTest("run test 1", PreprocessorRunTest1, preprocessorTestSequence);
+    new FileComparisonTest("run test 2", PreprocessorRunTest2, preprocessorTestSequence);
 }
 
-TestResult::EOutcome CppPreprocessorCreationTest1(Test& test)
+TestResult::EOutcome PreprocessorCreationTest1(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::Cpp::CppPreprocessor preprocessor(input);
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
 
     return TestResult::ePassed;
 }
 
-TestResult::EOutcome CppPreprocessorRunTest1(FileComparisonTest& test)
+TestResult::EOutcome PreprocessorRunTest1(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyFile.cpp");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "CppPreprocessorRunTest1.txt");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorRunTest1.txt");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::Cpp::CppPreprocessor preprocessor(input);
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
 
     TestCallbacks callbacks;
     preprocessor.run(callbacks);
     callbacks.write(outputPath);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "CppPreprocessorRunTest1.txt");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorRunTest1.txt");
 
     if (callbacks.unexpectedCharactersCount() == 0)
     {
@@ -70,22 +70,22 @@ TestResult::EOutcome CppPreprocessorRunTest1(FileComparisonTest& test)
     return result;
 }
 
-TestResult::EOutcome CppPreprocessorRunTest2(FileComparisonTest& test)
+TestResult::EOutcome PreprocessorRunTest2(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "CppPreprocessorRunTest2.txt");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorRunTest2.txt");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::Cpp::CppPreprocessor preprocessor(input);
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
 
     TestCallbacks callbacks;
     preprocessor.run(callbacks);
     callbacks.write(outputPath);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "CppPreprocessorRunTest2.txt");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorRunTest2.txt");
 
     if (callbacks.unexpectedCharactersCount() == 0)
     {

@@ -37,7 +37,7 @@ size_t TestCallbacks::unexpectedCharactersCount() const
     return m_unexpectedCharactersCount;
 }
 
-void TestCallbacks::onToken(const CodeSmithy::Cpp::CppPreprocessorToken& token)
+void TestCallbacks::onToken(const CodeSmithy::Cpp::PreprocessorToken& token)
 {
     m_tokens.push_back(token);
 }
@@ -52,31 +52,31 @@ void TestCallbacks::write(const boost::filesystem::path& path)
 {
     std::ofstream stream(path.c_str());
 
-    for (CodeSmithy::Cpp::CppPreprocessorToken& token : m_tokens)
+    for (CodeSmithy::Cpp::PreprocessorToken& token : m_tokens)
     {
         stream << typeToString(token.type()) << ": " << token.text() << std::endl;
     }
 }
 
-std::string TestCallbacks::typeToString(CodeSmithy::Cpp::CppPreprocessorToken::EType type)
+std::string TestCallbacks::typeToString(CodeSmithy::Cpp::PreprocessorToken::EType type)
 {
     std::string result = "Invalid type";
 
     switch (type)
     {
-    case CodeSmithy::Cpp::CppPreprocessorToken::eWhiteSpaceCharacters:
+    case CodeSmithy::Cpp::PreprocessorToken::eWhiteSpaceCharacters:
         result = "white-space";
         break;
 
-    case CodeSmithy::Cpp::CppPreprocessorToken::eIdentifier:
+    case CodeSmithy::Cpp::PreprocessorToken::eIdentifier:
         result = "identifier";
         break;
 
-    case CodeSmithy::Cpp::CppPreprocessorToken::eOpOrPunctuator:
+    case CodeSmithy::Cpp::PreprocessorToken::eOpOrPunctuator:
         result = "op-or-punctuator";
         break;
 
-    case CodeSmithy::Cpp::CppPreprocessorToken::eNumber:
+    case CodeSmithy::Cpp::PreprocessorToken::eNumber:
         result = "number";
         break;
 

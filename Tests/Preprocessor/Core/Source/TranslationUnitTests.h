@@ -20,15 +20,15 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPTRANSLATIONUNITTESTS_H_
-#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPTRANSLATIONUNITTESTS_H_
+#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_TRANSLATIONUNITTESTS_H_
+#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_TRANSLATIONUNITTESTS_H_
 
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
 using namespace Ishiko::TestFramework;
 
-void AddCppTranslationUnitTests(TestHarness& theTestHarness);
+void AddTranslationUnitTests(TestHarness& theTestHarness);
 
-TestResult::EOutcome CppTranslationUnitCreationTest1();
+TestResult::EOutcome TranslationUnitCreationTest1();
 
 #endif

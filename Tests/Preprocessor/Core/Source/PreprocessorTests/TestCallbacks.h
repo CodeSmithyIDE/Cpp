@@ -20,13 +20,13 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORTESTS_TESTCALLBACKS_H_
-#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPPREPROCESSORTESTS_TESTCALLBACKS_H_
+#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_PREPROCESSORTESTS_TESTCALLBACKS_H_
+#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_PREPROCESSORTESTS_TESTCALLBACKS_H_
 
-#include "CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessorCallbacks.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/PreprocessorCallbacks.h"
 #include <boost/filesystem/path.hpp>
 
-class TestCallbacks : public CodeSmithy::Cpp::CppPreprocessorCallbacks
+class TestCallbacks : public CodeSmithy::Cpp::PreprocessorCallbacks
 {
 public:
     TestCallbacks();
@@ -34,16 +34,16 @@ public:
 
     size_t unexpectedCharactersCount() const;
 
-    void onToken(const CodeSmithy::Cpp::CppPreprocessorToken& token) override;
+    void onToken(const CodeSmithy::Cpp::PreprocessorToken& token) override;
     bool onUnexpectedCharacter(char c) override;
 
     void write(const boost::filesystem::path& path);
 
 private:
-    static std::string typeToString(CodeSmithy::Cpp::CppPreprocessorToken::EType type);
+    static std::string typeToString(CodeSmithy::Cpp::PreprocessorToken::EType type);
 
 private:
-    std::vector<CodeSmithy::Cpp::CppPreprocessorToken> m_tokens;
+    std::vector<CodeSmithy::Cpp::PreprocessorToken> m_tokens;
     size_t m_unexpectedCharactersCount;
 };
 

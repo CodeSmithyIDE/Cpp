@@ -20,18 +20,18 @@
     IN THE SOFTWARE.
 */
 
-#include "CppTranslationUnitTests.h"
-#include "CodeSmithy/Cpp/Preprocessor/Core/CppTranslationUnit.h"
+#include "TranslationUnitTests.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/TranslationUnit.h"
 
-void AddCppTranslationUnitTests(TestHarness& theTestHarness)
+void AddTranslationUnitTests(TestHarness& theTestHarness)
 {
-    TestSequence& cppTranslationUnitTestSequence = theTestHarness.appendTestSequence("CppTranslationUnit tests");
+    TestSequence& translationUnitTestSequence = theTestHarness.appendTestSequence("TranslationUnit tests");
 
-    new HeapAllocationErrorsTest("Creation test 1", CppTranslationUnitCreationTest1, cppTranslationUnitTestSequence);
+    new HeapAllocationErrorsTest("Creation test 1", TranslationUnitCreationTest1, translationUnitTestSequence);
 }
 
-TestResult::EOutcome CppTranslationUnitCreationTest1()
+TestResult::EOutcome TranslationUnitCreationTest1()
 {
-    CodeSmithy::Cpp::CppTranslationUnit translationUnit;
+    CodeSmithy::Cpp::TranslationUnit translationUnit;
     return TestResult::ePassed;
 }

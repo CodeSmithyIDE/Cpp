@@ -20,38 +20,38 @@
     IN THE SOFTWARE.
 */
 
-#include "CppSourceFileTests.h"
-#include "CodeSmithy/Cpp/Preprocessor/Core/CppSourceFile.h"
+#include "SourceFileTests.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/SourceFile.h"
 #include <fstream>
 
-void AddCppSourceFileTests(TestHarness& theTestHarness)
+void AddSourceFileTests(TestHarness& theTestHarness)
 {
-    TestSequence& cppSourceFileTestSequence = theTestHarness.appendTestSequence("CppSourceFile tests");
+    TestSequence& sourceFileTestSequence = theTestHarness.appendTestSequence("SourceFile tests");
 
-    new HeapAllocationErrorsTest("Creation test 1", CppSourceFileCreationTest1, cppSourceFileTestSequence);
+    new HeapAllocationErrorsTest("Creation test 1", SourceFileCreationTest1, sourceFileTestSequence);
 
-    new HeapAllocationErrorsTest("read test 1", CppSourceFileReadTest1, cppSourceFileTestSequence);
-    new HeapAllocationErrorsTest("read test 2", CppSourceFileReadTest2, cppSourceFileTestSequence);
+    new HeapAllocationErrorsTest("read test 1", SourceFileReadTest1, sourceFileTestSequence);
+    new HeapAllocationErrorsTest("read test 2", SourceFileReadTest2, sourceFileTestSequence);
 }
 
-TestResult::EOutcome CppSourceFileCreationTest1(Test& test)
+TestResult::EOutcome SourceFileCreationTest1(Test& test)
 {
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::Cpp::CppSourceFile source(input);
+    CodeSmithy::Cpp::SourceFile source(input);
 
     return TestResult::ePassed;
 }
 
-TestResult::EOutcome CppSourceFileReadTest1(Test& test)
+TestResult::EOutcome SourceFileReadTest1(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::Cpp::CppSourceFile source(input);
+    CodeSmithy::Cpp::SourceFile source(input);
 
     char buffer[3];
     if (source.read(buffer, 3))
@@ -65,14 +65,14 @@ TestResult::EOutcome CppSourceFileReadTest1(Test& test)
     return result;
 }
 
-TestResult::EOutcome CppSourceFileReadTest2(Test& test)
+TestResult::EOutcome SourceFileReadTest2(Test& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyFile.cpp");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::Cpp::CppSourceFile source(input);
+    CodeSmithy::Cpp::SourceFile source(input);
 
     char buffer[3];
     if ((!source.read(buffer, 3)) && (input.gcount() == 0))

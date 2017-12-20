@@ -20,17 +20,17 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPSOURCEFILETESTS_H_
-#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_CPPSOURCEFILETESTS_H_
+#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_SOURCEFILETESTS_H_
+#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_SOURCEFILETESTS_H_
 
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
 using namespace Ishiko::TestFramework;
 
-void AddCppSourceFileTests(TestHarness& theTestHarness);
+void AddSourceFileTests(TestHarness& theTestHarness);
 
-TestResult::EOutcome CppSourceFileCreationTest1(Test& test);
-TestResult::EOutcome CppSourceFileReadTest1(Test& test);
-TestResult::EOutcome CppSourceFileReadTest2(Test& test);
+TestResult::EOutcome SourceFileCreationTest1(Test& test);
+TestResult::EOutcome SourceFileReadTest1(Test& test);
+TestResult::EOutcome SourceFileReadTest2(Test& test);
 
 #endif
