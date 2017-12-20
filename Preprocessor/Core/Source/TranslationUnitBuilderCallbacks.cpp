@@ -21,3 +21,20 @@
 */
 
 #include "TranslationUnitBuilderCallbacks.h"
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+TranslationUnitBuilderCallbacks::TranslationUnitBuilderCallbacks(TranslationUnit& translationUnit)
+    : m_translationUnit(translationUnit)
+{
+}
+
+TranslationUnitBuilderCallbacks::~TranslationUnitBuilderCallbacks()
+{
+}
+
+}
+}

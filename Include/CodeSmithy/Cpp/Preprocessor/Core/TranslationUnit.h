@@ -23,6 +23,8 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_TRANSLATIONUNIT_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_TRANSLATIONUNIT_H_
 
+#include <ostream>
+
 namespace CodeSmithy
 {
 namespace Cpp
@@ -33,6 +35,8 @@ class TranslationUnit
 public:
     TranslationUnit();
     ~TranslationUnit();
+
+    void write(std::ostream& output) const;
 };
 
 }

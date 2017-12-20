@@ -43,4 +43,6 @@ public:
 }
 }
 
+#include "linkoptions.h"
+
 #endif

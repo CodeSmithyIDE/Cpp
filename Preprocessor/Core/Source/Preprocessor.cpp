@@ -21,6 +21,7 @@
 */
 
 #include "Preprocessor.h"
+#include "TranslationUnitBuilderCallbacks.h"
 
 namespace CodeSmithy
 {
@@ -91,6 +92,12 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
             c = m_buffer[m_position];
         }
     }
+}
+
+void Preprocessor::run(TranslationUnit& translationUnit)
+{
+    TranslationUnitBuilderCallbacks callbacks(translationUnit);
+    run(callbacks);
 }
 
 PreprocessorToken Preprocessor::readWhiteSpaceCharacters()

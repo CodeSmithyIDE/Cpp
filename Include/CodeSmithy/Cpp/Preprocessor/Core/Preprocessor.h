@@ -26,6 +26,7 @@
 #include "SourceFile.h"
 #include "PreprocessorToken.h"
 #include "PreprocessorCallbacks.h"
+#include "TranslationUnit.h"
 #include <istream>
 
 namespace CodeSmithy
@@ -40,6 +41,7 @@ public:
     ~Preprocessor();
 
     void run(PreprocessorCallbacks& callbacks);
+    void run(TranslationUnit& translationUnit);
 
 private:
     PreprocessorToken readWhiteSpaceCharacters();

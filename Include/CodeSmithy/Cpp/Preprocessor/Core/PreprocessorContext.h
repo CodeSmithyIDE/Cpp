@@ -23,4 +23,21 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORCONTEXT_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORCONTEXT_H_
 
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+// The preprocessor allows the definitioon of macros.
+// The PreprocessorContext class is used to stored the
+// list of defined macros.
+class PreprocessorContext
+{
+};
+
+}
+}
+
+#include "linkoptions.h"
+
 #endif

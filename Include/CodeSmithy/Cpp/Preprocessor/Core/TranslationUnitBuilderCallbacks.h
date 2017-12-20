@@ -23,4 +23,30 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_TRANSLATIONUNITBUILDERCALLBACKS_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_TRANSLATIONUNITBUILDERCALLBACKS_H_
 
+#include "PreprocessorCallbacks.h"
+#include "TranslationUnit.h"
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+// An implementation of the PreprocessorCallbacks class that
+// will populate a TranslationUnit instance with the contents
+// of a preprocessed file.
+class TranslationUnitBuilderCallbacks : public PreprocessorCallbacks
+{
+public:
+    TranslationUnitBuilderCallbacks(TranslationUnit& translationUnit);
+    ~TranslationUnitBuilderCallbacks() override;
+
+private:
+    TranslationUnit& m_translationUnit;
+};
+
+}
+}
+
+#include "linkoptions.h"
+
 #endif

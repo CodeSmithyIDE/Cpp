@@ -35,5 +35,9 @@ TranslationUnit::~TranslationUnit()
 {
 }
 
+void TranslationUnit::write(std::ostream& output) const
+{
+}
+
 }
 }
