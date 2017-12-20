@@ -11,3 +11,4 @@ Debug/
 Release/
 Bin/
 Lib/
+Tests/Preprocessor/Core/TestOutput
