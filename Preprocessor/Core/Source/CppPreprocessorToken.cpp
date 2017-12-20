@@ -24,6 +24,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 CppPreprocessorToken::CppPreprocessorToken(EType type)
     : m_type(type)
@@ -49,4 +51,5 @@ void CppPreprocessorToken::setText(const std::string& text)
     m_text = text;
 }
 
+}
 }

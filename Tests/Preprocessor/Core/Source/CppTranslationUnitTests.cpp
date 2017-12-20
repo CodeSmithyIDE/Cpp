@@ -32,6 +32,6 @@ void AddCppTranslationUnitTests(TestHarness& theTestHarness)
 
 TestResult::EOutcome CppTranslationUnitCreationTest1()
 {
-    CodeSmithy::CppTranslationUnit translationUnit;
+    CodeSmithy::Cpp::CppTranslationUnit translationUnit;
     return TestResult::ePassed;
 }

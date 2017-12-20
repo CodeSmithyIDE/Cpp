@@ -24,6 +24,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 CppPreprocessor::CppPreprocessor(std::istream& input)
     : m_source(input)
@@ -119,4 +121,5 @@ CppPreprocessorToken CppPreprocessor::readOpOrPunctuator()
     return result;
 }
 
+}
 }

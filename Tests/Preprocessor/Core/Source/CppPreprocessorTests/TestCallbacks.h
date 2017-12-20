@@ -26,21 +26,21 @@
 #include "CodeSmithy/Cpp/Preprocessor/Core/CppPreprocessorCallbacks.h"
 #include <boost/filesystem/path.hpp>
 
-class TestCallbacks : public CodeSmithy::CppPreprocessorCallbacks
+class TestCallbacks : public CodeSmithy::Cpp::CppPreprocessorCallbacks
 {
 public:
     TestCallbacks();
     ~TestCallbacks() override;
 
-    void onToken(const CodeSmithy::CppPreprocessorToken& token) override;
+    void onToken(const CodeSmithy::Cpp::CppPreprocessorToken& token) override;
 
     void write(const boost::filesystem::path& path);
 
 private:
-    static std::string typeToString(CodeSmithy::CppPreprocessorToken::EType type);
+    static std::string typeToString(CodeSmithy::Cpp::CppPreprocessorToken::EType type);
 
 private:
-    std::vector<CodeSmithy::CppPreprocessorToken> m_tokens;
+    std::vector<CodeSmithy::Cpp::CppPreprocessorToken> m_tokens;
 };
 
 #endif

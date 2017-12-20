@@ -27,6 +27,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 class CppPreprocessorToken
 {
@@ -50,6 +52,7 @@ private:
     std::string m_text;
 };
 
+}
 }
 
 #endif

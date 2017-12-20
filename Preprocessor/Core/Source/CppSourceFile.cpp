@@ -24,6 +24,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 CppSourceFile::CppSourceFile(std::istream& input)
     : m_input(input)
@@ -55,4 +57,5 @@ CppSourceFile::operator bool() const
     return ((bool)m_input);
 }
 
+}
 }

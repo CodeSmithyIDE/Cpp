@@ -24,6 +24,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 CppPreprocessorCallbacks::CppPreprocessorCallbacks()
 {
@@ -38,4 +40,5 @@ void CppPreprocessorCallbacks::onToken(const CppPreprocessorToken& token)
     // Do nothing
 }
 
+}
 }

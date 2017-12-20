@@ -30,6 +30,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 class CppPreprocessor
 {
@@ -51,6 +53,7 @@ private:
     size_t m_position;
 };
 
+}
 }
 
 #include "linkoptions.h"

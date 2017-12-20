@@ -27,6 +27,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 // This is a source file as defined in the standard so it can be a .h or .cpp, .cxx.
 // Note that a header in the standard is defined as something else than a header file
@@ -46,6 +48,7 @@ private:
     std::istream& m_input;
 };
 
+}
 }
 
 #include "linkoptions.h"

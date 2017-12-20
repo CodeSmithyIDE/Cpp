@@ -24,6 +24,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 CppTranslationUnit::CppTranslationUnit()
 {
@@ -33,4 +35,5 @@ CppTranslationUnit::~CppTranslationUnit()
 {
 }
 
+}
 }

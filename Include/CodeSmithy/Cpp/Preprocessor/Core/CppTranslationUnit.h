@@ -25,6 +25,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 class CppTranslationUnit
 {
@@ -33,6 +35,7 @@ public:
     ~CppTranslationUnit();
 };
 
+}
 }
 
 #include "linkoptions.h"

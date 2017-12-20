@@ -40,7 +40,7 @@ TestResult::EOutcome CppPreprocessorCreationTest1(Test& test)
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::CppPreprocessor preprocessor(input);
+    CodeSmithy::Cpp::CppPreprocessor preprocessor(input);
 
     return TestResult::ePassed;
 }
@@ -51,7 +51,7 @@ TestResult::EOutcome CppPreprocessorRunTest1(FileComparisonTest& test)
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "CppPreprocessorRunTest1.txt");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::CppPreprocessor preprocessor(input);
+    CodeSmithy::Cpp::CppPreprocessor preprocessor(input);
 
     TestCallbacks callbacks;
     preprocessor.run(callbacks);
@@ -69,7 +69,7 @@ TestResult::EOutcome CppPreprocessorRunTest2(FileComparisonTest& test)
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "CppPreprocessorRunTest2.txt");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::CppPreprocessor preprocessor(input);
+    CodeSmithy::Cpp::CppPreprocessor preprocessor(input);
 
     TestCallbacks callbacks;
     preprocessor.run(callbacks);

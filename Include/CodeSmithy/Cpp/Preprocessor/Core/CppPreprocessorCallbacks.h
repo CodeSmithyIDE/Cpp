@@ -27,6 +27,8 @@
 
 namespace CodeSmithy
 {
+namespace Cpp
+{
 
 class CppPreprocessorCallbacks
 {
@@ -37,6 +39,7 @@ public:
     virtual void onToken(const CppPreprocessorToken& token);
 };
 
+}
 }
 
 #endif

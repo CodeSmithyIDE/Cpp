@@ -39,7 +39,7 @@ TestResult::EOutcome CppSourceFileCreationTest1(Test& test)
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::CppSourceFile source(input);
+    CodeSmithy::Cpp::CppSourceFile source(input);
 
     return TestResult::ePassed;
 }
@@ -51,7 +51,7 @@ TestResult::EOutcome CppSourceFileReadTest1(Test& test)
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::CppSourceFile source(input);
+    CodeSmithy::Cpp::CppSourceFile source(input);
 
     char buffer[3];
     if (source.read(buffer, 3))
@@ -72,7 +72,7 @@ TestResult::EOutcome CppSourceFileReadTest2(Test& test)
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyFile.cpp");
 
     std::ifstream input(inputPath.c_str());
-    CodeSmithy::CppSourceFile source(input);
+    CodeSmithy::Cpp::CppSourceFile source(input);
 
     char buffer[3];
     if ((!source.read(buffer, 3)) && (input.gcount() == 0))
