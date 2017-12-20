@@ -1,1 +1,4 @@
-int
+identifier: int
+white-space:  
+identifier: main
+op-or-punctuator: (

@@ -37,6 +37,9 @@ public:
     void write(const boost::filesystem::path& path);
 
 private:
+    static std::string typeToString(CodeSmithy::CppPreprocessorToken::EType type);
+
+private:
     std::vector<CodeSmithy::CppPreprocessorToken> m_tokens;
 };
 

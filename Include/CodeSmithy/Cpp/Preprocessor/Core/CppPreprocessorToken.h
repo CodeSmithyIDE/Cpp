@@ -33,7 +33,9 @@ class CppPreprocessorToken
 public:
     enum EType
     {
-        eIdentifier
+        eWhiteSpaceCharacters,
+        eIdentifier,
+        eOpOrPunctuator
     };
 
     CppPreprocessorToken(EType type);

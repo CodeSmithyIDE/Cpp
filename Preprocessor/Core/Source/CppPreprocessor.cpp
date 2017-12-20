@@ -44,12 +44,52 @@ void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
     {
         m_buffer[(unsigned int)m_source.gcount()] = '\0';
         char c = m_buffer[m_position];
-        if ((c >= 'a') && (c <= 'z'))
+        while (c != 0)
         {
-            CppPreprocessorToken token = readIdentifier();
-            callbacks.onToken(token);
+            if ((c >= 'a') && (c <= 'z'))
+            {
+                CppPreprocessorToken token = readIdentifier();
+                callbacks.onToken(token);
+            }
+            else if (c == ' ')
+            {
+                CppPreprocessorToken token = readWhiteSpaceCharacters();
+                callbacks.onToken(token);
+            }
+            else if ((c >= 'a') && (c <= 'z'))
+            {
+                CppPreprocessorToken token = readIdentifier();
+                callbacks.onToken(token);
+            }
+            else if (c == '(')
+            {
+                CppPreprocessorToken token = readOpOrPunctuator();
+                callbacks.onToken(token);
+            }
+            else
+            {
+                ++m_position;
+            }
+            c = m_buffer[m_position];
         }
     }
+}
+
+CppPreprocessorToken CppPreprocessor::readWhiteSpaceCharacters()
+{
+    CppPreprocessorToken result(CppPreprocessorToken::eWhiteSpaceCharacters);
+
+    size_t start = m_position;
+
+    char c = m_buffer[m_position];
+    while (c == ' ')
+    {
+        c = m_buffer[++m_position];
+    }
+
+    result.setText(std::string(&m_buffer[start], m_position - start));
+
+    return result;
 }
 
 CppPreprocessorToken CppPreprocessor::readIdentifier()
@@ -65,6 +105,16 @@ CppPreprocessorToken CppPreprocessor::readIdentifier()
     }
 
     result.setText(std::string(&m_buffer[start], m_position - start));
+
+    return result;
+}
+
+CppPreprocessorToken CppPreprocessor::readOpOrPunctuator()
+{
+    CppPreprocessorToken result(CppPreprocessorToken::eOpOrPunctuator);
+
+    result.setText(std::string(&m_buffer[m_position], 1));
+    ++m_position;
 
     return result;
 }

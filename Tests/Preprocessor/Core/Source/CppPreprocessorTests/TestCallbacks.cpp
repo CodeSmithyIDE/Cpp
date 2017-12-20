@@ -42,6 +42,31 @@ void TestCallbacks::write(const boost::filesystem::path& path)
 
     for (CodeSmithy::CppPreprocessorToken& token : m_tokens)
     {
-        stream << token.text() << std::endl;
+        stream << typeToString(token.type()) << ": " << token.text() << std::endl;
     }
+}
+
+std::string TestCallbacks::typeToString(CodeSmithy::CppPreprocessorToken::EType type)
+{
+    std::string result = "Invalid type";
+
+    switch (type)
+    {
+    case CodeSmithy::CppPreprocessorToken::eWhiteSpaceCharacters:
+        result = "white-space";
+        break;
+
+    case CodeSmithy::CppPreprocessorToken::eIdentifier:
+        result = "identifier";
+        break;
+
+    case CodeSmithy::CppPreprocessorToken::eOpOrPunctuator:
+        result = "op-or-punctuator";
+        break;
+
+    default:
+        break;
+    }
+
+    return result;
 }

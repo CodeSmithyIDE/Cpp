@@ -40,7 +40,9 @@ public:
     void run(CppPreprocessorCallbacks& callbacks);
 
 private:
+    CppPreprocessorToken readWhiteSpaceCharacters();
     CppPreprocessorToken readIdentifier();
+    CppPreprocessorToken readOpOrPunctuator();
 
 private:
     CppSourceFile m_source;
