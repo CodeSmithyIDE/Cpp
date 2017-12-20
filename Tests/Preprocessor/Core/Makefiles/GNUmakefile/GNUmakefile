@@ -74,8 +74,8 @@ CODESMITHY_ROOT ?= $(CODESMITHY)
 
 all: $(_builddir)CodeSmithyCppPreprocessorCoreTests
 
-$(_builddir)CodeSmithyCppPreprocessorCoreTests: $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_SourceFileTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_PreprocessorTokenTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_PreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TestCallbacks.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TranslationUnitTests.o
-	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_SourceFileTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_PreprocessorTokenTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_PreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TestCallbacks.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TranslationUnitTests.o -L$(CODESMITHY_ROOT)/Cpp/Lib -L$(ISHIKO_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/stage/lib -L$(ISHIKO_TESTFRAMEWORK_ROOT)/Lib -lIshikoTestFrameworkCore -lIshikoProcess -lboost_filesystem -lboost_system -pthread
+$(_builddir)CodeSmithyCppPreprocessorCoreTests: $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_SourceFileTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_PreprocessorTokenTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_PreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TestCallbacks.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TranslationUnitTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TranslationUnitBuilderCallbacksTests.o
+	$(CXX) -o $@ $(LDFLAGS) $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_SourceFileTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_PreprocessorTokenTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_PreprocessorTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TestCallbacks.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TranslationUnitTests.o $(_builddir)CodeSmithyCppPreprocessorCoreTests_TranslationUnitBuilderCallbacksTests.o -L$(CODESMITHY_ROOT)/Cpp/Lib -L$(ISHIKO_PROCESS_ROOT)/Lib -L$(BOOST_ROOT)/stage/lib -L$(ISHIKO_TESTFRAMEWORK_ROOT)/Lib -lIshikoTestFrameworkCore -lIshikoProcess -lboost_filesystem -lboost_system -pthread
 
 $(_builddir)CodeSmithyCppPreprocessorCoreTests_main.o: ../../Source/main.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(CODESMITHY_ROOT)/Cpp/Include -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/main.cpp
@@ -94,6 +94,9 @@ $(_builddir)CodeSmithyCppPreprocessorCoreTests_TestCallbacks.o: ../../Source/Pre
 
 $(_builddir)CodeSmithyCppPreprocessorCoreTests_TranslationUnitTests.o: ../../Source/TranslationUnitTests.cpp
 	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(CODESMITHY_ROOT)/Cpp/Include -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/TranslationUnitTests.cpp
+
+$(_builddir)CodeSmithyCppPreprocessorCoreTests_TranslationUnitBuilderCallbacksTests.o: ../../Source/TranslationUnitBuilderCallbacksTests.cpp
+	$(CXX) -c -o $@ $(CPPFLAGS) $(CXXFLAGS) -MD -MP -pthread -I$(CODESMITHY_ROOT)/Cpp/Include -I$(ISHIKO_PROCESS_ROOT)/Include -I$(BOOST_ROOT) -I$(ISHIKO_TESTFRAMEWORK_ROOT)/Include -std=c++11 ../../Source/TranslationUnitBuilderCallbacksTests.cpp
 
 clean:
 	rm -f $(_builddir)*.o

@@ -20,28 +20,18 @@
     IN THE SOFTWARE.
 */
 
-#include "SourceFileTests.h"
-#include "PreprocessorTokenTests.h"
-#include "TranslationUnitTests.h"
-#include "PreprocessorTests/PreprocessorTests.h"
 #include "TranslationUnitBuilderCallbacksTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
-#include <boost/filesystem/operations.hpp>
+#include "CodeSmithy/Cpp/Preprocessor/Core/TranslationUnitBuilderCallbacks.h"
 
-int main(int argc, char* argv[])
+void AddTranslationUnitBuilderCallbacksTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("CodeSmithyCppPreprocessorCore");
+    TestSequence& builderCallbacksTestSequence = theTestHarness.appendTestSequence("TranslationUnitBuilderCallbacks tests");
 
-    theTestHarness.environment().setTestDataDirectory("../../TestData");
-    theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
-    boost::filesystem::create_directories("../../TestOutput");
-    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
+    new HeapAllocationErrorsTest("Creation test 1", TranslationUnitBuilderCallbacksCreationTest1, builderCallbacksTestSequence);
+}
 
-    AddSourceFileTests(theTestHarness);
-    AddPreprocessorTokenTests(theTestHarness);
-    AddTranslationUnitTests(theTestHarness);
-    AddPreprocessorTests(theTestHarness);
-    AddTranslationUnitBuilderCallbacksTests(theTestHarness);
-
-    return theTestHarness.run();
+TestResult::EOutcome TranslationUnitBuilderCallbacksCreationTest1()
+{
+    CodeSmithy::Cpp::TranslationUnitBuilderCallbacks callbacks;
+    return TestResult::ePassed;
 }

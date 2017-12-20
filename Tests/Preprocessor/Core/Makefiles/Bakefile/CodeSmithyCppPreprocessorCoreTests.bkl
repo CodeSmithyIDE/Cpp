@@ -29,6 +29,7 @@ program CodeSmithyCppPreprocessorCoreTests : CodeSmithyCppPreprocessorCore, Ishi
         ../../Source/PreprocessorTests/PreprocessorTests.h
         ../../Source/PreprocessorTests/TestCallbacks.h
         ../../Source/TranslationUnitTests.h
+        ../../Source/TranslationUnitBuilderCallbacksTests.h
     }
 
     sources
@@ -39,5 +40,6 @@ program CodeSmithyCppPreprocessorCoreTests : CodeSmithyCppPreprocessorCore, Ishi
         ../../Source/PreprocessorTests/PreprocessorTests.cpp
         ../../Source/PreprocessorTests/TestCallbacks.cpp
         ../../Source/TranslationUnitTests.cpp
+        ../../Source/TranslationUnitBuilderCallbacksTests.cpp
     }
 }

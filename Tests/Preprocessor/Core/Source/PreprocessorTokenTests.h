@@ -29,4 +29,6 @@ using namespace Ishiko::TestFramework;
 
 void AddPreprocessorTokenTests(TestHarness& theTestHarness);
 
+TestResult::EOutcome PreprocessorTokenCreationTest1();
+
 #endif

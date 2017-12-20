@@ -21,8 +21,17 @@
 */
 
 #include "PreprocessorTokenTests.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/PreprocessorToken.h"
 
 void AddPreprocessorTokenTests(TestHarness& theTestHarness)
 {
     TestSequence& preprocessorTokenTestSequence = theTestHarness.appendTestSequence("PreprocessorToken tests");
+
+    new HeapAllocationErrorsTest("Creation test 1", PreprocessorTokenCreationTest1, preprocessorTokenTestSequence);
+}
+
+TestResult::EOutcome PreprocessorTokenCreationTest1()
+{
+    CodeSmithy::Cpp::PreprocessorToken token(CodeSmithy::Cpp::PreprocessorToken::eIdentifier);
+    return TestResult::ePassed;
 }

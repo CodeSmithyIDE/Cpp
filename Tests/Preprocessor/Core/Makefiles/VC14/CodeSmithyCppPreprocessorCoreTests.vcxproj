@@ -158,6 +158,7 @@
     <ClCompile Include="..\..\Source\PreprocessorTests\PreprocessorTests.cpp" />
     <ClCompile Include="..\..\Source\PreprocessorTests\TestCallbacks.cpp" />
     <ClCompile Include="..\..\Source\TranslationUnitTests.cpp" />
+    <ClCompile Include="..\..\Source\TranslationUnitBuilderCallbacksTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\SourceFileTests.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="..\..\Source\PreprocessorTests\PreprocessorTests.h" />
     <ClInclude Include="..\..\Source\PreprocessorTests\TestCallbacks.h" />
     <ClInclude Include="..\..\Source\TranslationUnitTests.h" />
+    <ClInclude Include="..\..\Source\TranslationUnitBuilderCallbacksTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
