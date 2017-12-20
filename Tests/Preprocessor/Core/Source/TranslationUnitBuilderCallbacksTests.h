@@ -30,5 +30,6 @@ using namespace Ishiko::TestFramework;
 void AddTranslationUnitBuilderCallbacksTests(TestHarness& theTestHarness);
 
 TestResult::EOutcome TranslationUnitBuilderCallbacksCreationTest1();
+TestResult::EOutcome TranslationUnitBuilderCallbacksRunTest1(FileComparisonTest& test);
 
 #endif

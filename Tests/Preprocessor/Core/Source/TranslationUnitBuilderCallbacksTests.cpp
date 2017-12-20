@@ -22,16 +22,44 @@
 
 #include "TranslationUnitBuilderCallbacksTests.h"
 #include "CodeSmithy/Cpp/Preprocessor/Core/TranslationUnitBuilderCallbacks.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/Preprocessor.h"
+#include <fstream>
 
 void AddTranslationUnitBuilderCallbacksTests(TestHarness& theTestHarness)
 {
     TestSequence& builderCallbacksTestSequence = theTestHarness.appendTestSequence("TranslationUnitBuilderCallbacks tests");
 
     new HeapAllocationErrorsTest("Creation test 1", TranslationUnitBuilderCallbacksCreationTest1, builderCallbacksTestSequence);
+
+    new FileComparisonTest("run test 1", TranslationUnitBuilderCallbacksRunTest1, builderCallbacksTestSequence);
 }
 
 TestResult::EOutcome TranslationUnitBuilderCallbacksCreationTest1()
 {
-    CodeSmithy::Cpp::TranslationUnitBuilderCallbacks callbacks;
+    CodeSmithy::Cpp::TranslationUnit translationUnit;
+    CodeSmithy::Cpp::TranslationUnitBuilderCallbacks callbacks(translationUnit);
     return TestResult::ePassed;
+}
+
+TestResult::EOutcome TranslationUnitBuilderCallbacksRunTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyFile.cpp");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "TranslationUnitBuilderCallbacksRunTest1.cpp");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
+
+    CodeSmithy::Cpp::TranslationUnit translationUnit;
+    CodeSmithy::Cpp::TranslationUnitBuilderCallbacks callbacks(translationUnit);
+    preprocessor.run(callbacks);
+
+    std::ofstream output(outputPath.c_str());
+    translationUnit.write(output);
+    
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "TranslationUnitBuilderCallbacksRunTest1.cpp");
+
+    return result;
 }
