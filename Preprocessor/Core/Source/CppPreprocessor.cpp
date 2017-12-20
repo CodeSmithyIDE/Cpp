@@ -53,7 +53,7 @@ void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
                 CppPreprocessorToken token = readIdentifier();
                 callbacks.onToken(token);
             }
-            else if (c == ' ')
+            else if ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
             {
                 CppPreprocessorToken token = readWhiteSpaceCharacters();
                 callbacks.onToken(token);
@@ -63,14 +63,25 @@ void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
                 CppPreprocessorToken token = readIdentifier();
                 callbacks.onToken(token);
             }
-            else if (c == '(')
+            else if ((c == '(') || (c == ')') || 
+                (c == '[') || (c == ']') || 
+                (c == '{') || (c == '}') ||
+                (c == '*') || (c == ','))
             {
                 CppPreprocessorToken token = readOpOrPunctuator();
                 callbacks.onToken(token);
             }
             else
             {
-                ++m_position;
+                bool skip = callbacks.onUnexpectedCharacter(c);
+                if (skip)
+                {
+                    ++m_position;
+                }
+                else
+                {
+                    break;
+                }
             }
             c = m_buffer[m_position];
         }
@@ -84,7 +95,7 @@ CppPreprocessorToken CppPreprocessor::readWhiteSpaceCharacters()
     size_t start = m_position;
 
     char c = m_buffer[m_position];
-    while (c == ' ')
+    while ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
     {
         c = m_buffer[++m_position];
     }

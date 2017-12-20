@@ -32,7 +32,10 @@ public:
     TestCallbacks();
     ~TestCallbacks() override;
 
+    size_t unexpectedCharactersCount() const;
+
     void onToken(const CodeSmithy::Cpp::CppPreprocessorToken& token) override;
+    bool onUnexpectedCharacter(char c) override;
 
     void write(const boost::filesystem::path& path);
 
@@ -41,6 +44,7 @@ private:
 
 private:
     std::vector<CodeSmithy::Cpp::CppPreprocessorToken> m_tokens;
+    size_t m_unexpectedCharactersCount;
 };
 
 #endif

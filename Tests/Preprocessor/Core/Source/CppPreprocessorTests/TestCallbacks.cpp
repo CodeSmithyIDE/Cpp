@@ -24,6 +24,7 @@
 #include <fstream>
 
 TestCallbacks::TestCallbacks()
+    : m_unexpectedCharactersCount(0)
 {
 }
 
@@ -31,9 +32,20 @@ TestCallbacks::~TestCallbacks()
 {
 }
 
+size_t TestCallbacks::unexpectedCharactersCount() const
+{
+    return m_unexpectedCharactersCount;
+}
+
 void TestCallbacks::onToken(const CodeSmithy::Cpp::CppPreprocessorToken& token)
 {
     m_tokens.push_back(token);
+}
+
+bool TestCallbacks::onUnexpectedCharacter(char c)
+{
+    ++m_unexpectedCharactersCount;
+    return false;
 }
 
 void TestCallbacks::write(const boost::filesystem::path& path)

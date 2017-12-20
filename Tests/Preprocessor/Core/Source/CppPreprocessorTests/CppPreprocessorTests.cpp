@@ -47,6 +47,8 @@ TestResult::EOutcome CppPreprocessorCreationTest1(Test& test)
 
 TestResult::EOutcome CppPreprocessorRunTest1(FileComparisonTest& test)
 {
+    TestResult::EOutcome result = TestResult::eFailed;
+
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "EmptyFile.cpp");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "CppPreprocessorRunTest1.txt");
 
@@ -60,11 +62,18 @@ TestResult::EOutcome CppPreprocessorRunTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "CppPreprocessorRunTest1.txt");
 
-    return TestResult::ePassed;
+    if (callbacks.unexpectedCharactersCount() == 0)
+    {
+        result = TestResult::ePassed;
+    }
+
+    return result;
 }
 
 TestResult::EOutcome CppPreprocessorRunTest2(FileComparisonTest& test)
 {
+    TestResult::EOutcome result = TestResult::eFailed;
+
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
     boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "CppPreprocessorRunTest2.txt");
 
@@ -78,5 +87,10 @@ TestResult::EOutcome CppPreprocessorRunTest2(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "CppPreprocessorRunTest2.txt");
 
-    return TestResult::ePassed;
+    if (callbacks.unexpectedCharactersCount() == 0)
+    {
+        result = TestResult::ePassed;
+    }
+
+    return result;
 }

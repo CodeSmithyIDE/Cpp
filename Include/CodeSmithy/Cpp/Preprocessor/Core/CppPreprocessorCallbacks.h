@@ -37,6 +37,7 @@ public:
     virtual ~CppPreprocessorCallbacks();
 
     virtual void onToken(const CppPreprocessorToken& token);
+    virtual bool onUnexpectedCharacter(char c);
 };
 
 }
