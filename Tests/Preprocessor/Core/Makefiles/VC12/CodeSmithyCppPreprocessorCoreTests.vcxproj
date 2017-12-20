@@ -155,14 +155,14 @@
     <ClCompile Include="..\..\Source\main.cpp" />
     <ClCompile Include="..\..\Source\SourceFileTests.cpp" />
     <ClCompile Include="..\..\Source\PreprocessorTokenTests.cpp" />
-    <ClCompile Include="..\..\Source\PreprocessorTests\CppPreprocessorTests.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessorTests\PreprocessorTests.cpp" />
     <ClCompile Include="..\..\Source\PreprocessorTests\TestCallbacks.cpp" />
     <ClCompile Include="..\..\Source\TranslationUnitTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\SourceFileTests.h" />
     <ClInclude Include="..\..\Source\PreprocessorTokenTests.h" />
-    <ClInclude Include="..\..\Source\PreprocessorTests\CppPreprocessorTests.h" />
+    <ClInclude Include="..\..\Source\PreprocessorTests\PreprocessorTests.h" />
     <ClInclude Include="..\..\Source\PreprocessorTests\TestCallbacks.h" />
     <ClInclude Include="..\..\Source\TranslationUnitTests.h" />
   </ItemGroup>
