@@ -33,14 +33,14 @@ namespace Cpp
 // This is a source file as defined in the standard so it can be a .h or .cpp, .cxx.
 // Note that a header in the standard is defined as something else than a header file
 // (see note 158 in section 17.4.1.2)
-class CppSourceFile
+class SourceFile
 {
 public:
-    CppSourceFile(std::istream& input);
-    ~CppSourceFile();
+    SourceFile(std::istream& input);
+    ~SourceFile();
 
     std::streamsize gcount() const;
-    CppSourceFile& read(char* s, std::streamsize n);
+    SourceFile& read(char* s, std::streamsize n);
     bool eof() const;
     explicit operator bool() const;
 

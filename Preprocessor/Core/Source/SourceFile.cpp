@@ -27,32 +27,32 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-CppSourceFile::CppSourceFile(std::istream& input)
+SourceFile::SourceFile(std::istream& input)
     : m_input(input)
 {
 }
 
-CppSourceFile::~CppSourceFile()
+SourceFile::~SourceFile()
 {
 }
 
-std::streamsize CppSourceFile::gcount() const
+std::streamsize SourceFile::gcount() const
 {
     return m_input.gcount();
 }
 
-CppSourceFile& CppSourceFile::read(char* s, std::streamsize n)
+SourceFile& SourceFile::read(char* s, std::streamsize n)
 {
     m_input.read(s, n);
     return *this;
 }
 
-bool CppSourceFile::eof() const
+bool SourceFile::eof() const
 {
     return m_input.eof();
 }
 
-CppSourceFile::operator bool() const
+SourceFile::operator bool() const
 {
     return ((bool)m_input);
 }

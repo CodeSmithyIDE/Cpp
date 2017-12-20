@@ -27,20 +27,20 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-CppPreprocessorCallbacks::CppPreprocessorCallbacks()
+PreprocessorCallbacks::PreprocessorCallbacks()
 {
 }
 
-CppPreprocessorCallbacks::~CppPreprocessorCallbacks()
+PreprocessorCallbacks::~PreprocessorCallbacks()
 {
 }
 
-void CppPreprocessorCallbacks::onToken(const CppPreprocessorToken& token)
+void PreprocessorCallbacks::onToken(const PreprocessorToken& token)
 {
     // Do nothing
 }
 
-bool CppPreprocessorCallbacks::onUnexpectedCharacter(char c)
+bool PreprocessorCallbacks::onUnexpectedCharacter(char c)
 {
     // By default, stop if an invalid character is encountered
     return false;

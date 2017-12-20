@@ -27,16 +27,16 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-CppPreprocessor::CppPreprocessor(std::istream& input)
+Preprocessor::Preprocessor(std::istream& input)
     : m_source(input)
 {
 }
 
-CppPreprocessor::~CppPreprocessor()
+Preprocessor::~Preprocessor()
 {
 }
 
-void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
+void Preprocessor::run(PreprocessorCallbacks& callbacks)
 {
     m_position = 0;
     while (m_source.read(&m_buffer[0], (m_bufferSize - 1)))
@@ -50,17 +50,17 @@ void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
         {
             if ((c >= 'a') && (c <= 'z'))
             {
-                CppPreprocessorToken token = readIdentifier();
+                PreprocessorToken token = readIdentifier();
                 callbacks.onToken(token);
             }
             else if ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
             {
-                CppPreprocessorToken token = readWhiteSpaceCharacters();
+                PreprocessorToken token = readWhiteSpaceCharacters();
                 callbacks.onToken(token);
             }
             else if ((c >= 'a') && (c <= 'z'))
             {
-                CppPreprocessorToken token = readIdentifier();
+                PreprocessorToken token = readIdentifier();
                 callbacks.onToken(token);
             }
             else if ((c == ';') || (c == '(') || (c == ')') ||
@@ -68,12 +68,12 @@ void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
                 (c == '{') || (c == '}') ||
                 (c == '*') || (c == ','))
             {
-                CppPreprocessorToken token = readOpOrPunctuator();
+                PreprocessorToken token = readOpOrPunctuator();
                 callbacks.onToken(token);
             }
             else if ((c >= '0') && (c <= '9'))
             {
-                CppPreprocessorToken token = readNumber();
+                PreprocessorToken token = readNumber();
                 callbacks.onToken(token);
             }
             else
@@ -93,9 +93,9 @@ void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
     }
 }
 
-CppPreprocessorToken CppPreprocessor::readWhiteSpaceCharacters()
+PreprocessorToken Preprocessor::readWhiteSpaceCharacters()
 {
-    CppPreprocessorToken result(CppPreprocessorToken::eWhiteSpaceCharacters);
+    PreprocessorToken result(PreprocessorToken::eWhiteSpaceCharacters);
 
     size_t start = m_position;
 
@@ -110,9 +110,9 @@ CppPreprocessorToken CppPreprocessor::readWhiteSpaceCharacters()
     return result;
 }
 
-CppPreprocessorToken CppPreprocessor::readIdentifier()
+PreprocessorToken Preprocessor::readIdentifier()
 {
-    CppPreprocessorToken result(CppPreprocessorToken::eIdentifier);
+    PreprocessorToken result(PreprocessorToken::eIdentifier);
 
     size_t start = m_position;
 
@@ -127,9 +127,9 @@ CppPreprocessorToken CppPreprocessor::readIdentifier()
     return result;
 }
 
-CppPreprocessorToken CppPreprocessor::readOpOrPunctuator()
+PreprocessorToken Preprocessor::readOpOrPunctuator()
 {
-    CppPreprocessorToken result(CppPreprocessorToken::eOpOrPunctuator);
+    PreprocessorToken result(PreprocessorToken::eOpOrPunctuator);
 
     result.setText(std::string(&m_buffer[m_position], 1));
     ++m_position;
@@ -137,9 +137,9 @@ CppPreprocessorToken CppPreprocessor::readOpOrPunctuator()
     return result;
 }
 
-CppPreprocessorToken CppPreprocessor::readNumber()
+PreprocessorToken Preprocessor::readNumber()
 {
-    CppPreprocessorToken result(CppPreprocessorToken::eNumber);
+    PreprocessorToken result(PreprocessorToken::eNumber);
 
     size_t start = m_position;
 

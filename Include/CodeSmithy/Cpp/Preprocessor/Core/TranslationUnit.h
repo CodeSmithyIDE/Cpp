@@ -28,11 +28,11 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-class CppTranslationUnit
+class TranslationUnit
 {
 public:
-    CppTranslationUnit();
-    ~CppTranslationUnit();
+    TranslationUnit();
+    ~TranslationUnit();
 };
 
 }

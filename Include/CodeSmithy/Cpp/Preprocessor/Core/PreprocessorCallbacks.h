@@ -30,13 +30,13 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-class CppPreprocessorCallbacks
+class PreprocessorCallbacks
 {
 public:
-    CppPreprocessorCallbacks();
-    virtual ~CppPreprocessorCallbacks();
+    PreprocessorCallbacks();
+    virtual ~PreprocessorCallbacks();
 
-    virtual void onToken(const CppPreprocessorToken& token);
+    virtual void onToken(const PreprocessorToken& token);
     virtual bool onUnexpectedCharacter(char c);
 };
 

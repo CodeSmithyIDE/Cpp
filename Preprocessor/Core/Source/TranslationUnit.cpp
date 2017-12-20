@@ -27,11 +27,11 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-CppTranslationUnit::CppTranslationUnit()
+TranslationUnit::TranslationUnit()
 {
 }
 
-CppTranslationUnit::~CppTranslationUnit()
+TranslationUnit::~TranslationUnit()
 {
 }
 

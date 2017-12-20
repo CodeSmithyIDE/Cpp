@@ -30,7 +30,7 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-class CppPreprocessorToken
+class PreprocessorToken
 {
 public:
     enum EType
@@ -41,8 +41,8 @@ public:
         eNumber
     };
 
-    CppPreprocessorToken(EType type);
-    ~CppPreprocessorToken();
+    PreprocessorToken(EType type);
+    ~PreprocessorToken();
 
     EType type() const;
     const std::string& text() const;

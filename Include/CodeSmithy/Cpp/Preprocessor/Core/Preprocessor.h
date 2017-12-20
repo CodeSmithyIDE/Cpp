@@ -33,22 +33,22 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-class CppPreprocessor
+class Preprocessor
 {
 public:
-    CppPreprocessor(std::istream& input);
-    ~CppPreprocessor();
+    Preprocessor(std::istream& input);
+    ~Preprocessor();
 
-    void run(CppPreprocessorCallbacks& callbacks);
-
-private:
-    CppPreprocessorToken readWhiteSpaceCharacters();
-    CppPreprocessorToken readIdentifier();
-    CppPreprocessorToken readOpOrPunctuator();
-    CppPreprocessorToken readNumber();
+    void run(PreprocessorCallbacks& callbacks);
 
 private:
-    CppSourceFile m_source;
+    PreprocessorToken readWhiteSpaceCharacters();
+    PreprocessorToken readIdentifier();
+    PreprocessorToken readOpOrPunctuator();
+    PreprocessorToken readNumber();
+
+private:
+    SourceFile m_source;
     static const int m_bufferSize = 1024;
     char m_buffer[m_bufferSize];
     size_t m_position;

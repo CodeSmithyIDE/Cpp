@@ -27,26 +27,26 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-CppPreprocessorToken::CppPreprocessorToken(EType type)
+PreprocessorToken::PreprocessorToken(EType type)
     : m_type(type)
 {
 }
 
-CppPreprocessorToken::~CppPreprocessorToken()
+PreprocessorToken::~PreprocessorToken()
 {
 }
 
-CppPreprocessorToken::EType CppPreprocessorToken::type() const
+PreprocessorToken::EType PreprocessorToken::type() const
 {
     return m_type;
 }
 
-const std::string& CppPreprocessorToken::text() const
+const std::string& PreprocessorToken::text() const
 {
     return m_text;
 }
 
-void CppPreprocessorToken::setText(const std::string& text)
+void PreprocessorToken::setText(const std::string& text)
 {
     m_text = text;
 }
