@@ -2,3 +2,29 @@ identifier: int
 white-space:  
 identifier: main
 op-or-punctuator: (
+identifier: int
+white-space:  
+identifier: argc
+op-or-punctuator: ,
+white-space:  
+identifier: char
+op-or-punctuator: *
+white-space:  
+identifier: argv
+op-or-punctuator: [
+op-or-punctuator: ]
+op-or-punctuator: )
+white-space: 
+
+op-or-punctuator: {
+white-space: 
+    
+identifier: return
+white-space:  
+number: 0
+op-or-punctuator: ;
+white-space: 
+
+op-or-punctuator: }
+white-space: 
+

@@ -37,7 +37,8 @@ public:
     {
         eWhiteSpaceCharacters,
         eIdentifier,
-        eOpOrPunctuator
+        eOpOrPunctuator,
+        eNumber
     };
 
     CppPreprocessorToken(EType type);

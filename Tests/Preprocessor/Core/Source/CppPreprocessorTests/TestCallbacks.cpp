@@ -76,6 +76,10 @@ std::string TestCallbacks::typeToString(CodeSmithy::Cpp::CppPreprocessorToken::E
         result = "op-or-punctuator";
         break;
 
+    case CodeSmithy::Cpp::CppPreprocessorToken::eNumber:
+        result = "number";
+        break;
+
     default:
         break;
     }

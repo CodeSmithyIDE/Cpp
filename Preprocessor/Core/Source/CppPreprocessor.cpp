@@ -63,12 +63,17 @@ void CppPreprocessor::run(CppPreprocessorCallbacks& callbacks)
                 CppPreprocessorToken token = readIdentifier();
                 callbacks.onToken(token);
             }
-            else if ((c == '(') || (c == ')') || 
+            else if ((c == ';') || (c == '(') || (c == ')') ||
                 (c == '[') || (c == ']') || 
                 (c == '{') || (c == '}') ||
                 (c == '*') || (c == ','))
             {
                 CppPreprocessorToken token = readOpOrPunctuator();
+                callbacks.onToken(token);
+            }
+            else if ((c >= '0') && (c <= '9'))
+            {
+                CppPreprocessorToken token = readNumber();
                 callbacks.onToken(token);
             }
             else
@@ -128,6 +133,23 @@ CppPreprocessorToken CppPreprocessor::readOpOrPunctuator()
 
     result.setText(std::string(&m_buffer[m_position], 1));
     ++m_position;
+
+    return result;
+}
+
+CppPreprocessorToken CppPreprocessor::readNumber()
+{
+    CppPreprocessorToken result(CppPreprocessorToken::eNumber);
+
+    size_t start = m_position;
+
+    char c = m_buffer[m_position];
+    while ((c >= '0') && (c <= '9'))
+    {
+        c = m_buffer[++m_position];
+    }
+
+    result.setText(std::string(&m_buffer[start], m_position - start));
 
     return result;
 }

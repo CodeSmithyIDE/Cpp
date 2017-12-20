@@ -45,6 +45,7 @@ private:
     CppPreprocessorToken readWhiteSpaceCharacters();
     CppPreprocessorToken readIdentifier();
     CppPreprocessorToken readOpOrPunctuator();
+    CppPreprocessorToken readNumber();
 
 private:
     CppSourceFile m_source;
