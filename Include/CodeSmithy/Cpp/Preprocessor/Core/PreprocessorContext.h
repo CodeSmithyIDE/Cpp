@@ -23,6 +23,11 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORCONTEXT_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORCONTEXT_H_
 
+#include "PreprocessingDirective.h"
+#include <map>
+#include <string>
+#include <memory>
+
 namespace CodeSmithy
 {
 namespace Cpp
@@ -33,6 +38,13 @@ namespace Cpp
 // list of defined macros.
 class PreprocessorContext
 {
+public:
+    PreprocessorContext();
+    ~PreprocessorContext();
+
+private:
+    // Only #define directive should end up in the context
+    std::map<std::string, std::shared_ptr<PreprocessingDirective> > m_directives;
 };
 
 }

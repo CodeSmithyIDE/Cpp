@@ -40,7 +40,7 @@ void AddPreprocessorTests(TestHarness& theTestHarness)
 
     new FileComparisonTest("mathematical expressions test 1", PreprocessorMathematicalExpressionsTest1, preprocessorTestSequence);
 
-    new FileComparisonTest("macro test 1", PreprocessorMacroTest1, preprocessorTestSequence);
+    new FileComparisonTest("directive test 1", PreprocessorDirectiveTest1, preprocessorTestSequence);
 }
 
 TestResult::EOutcome PreprocessorCreationTest1(Test& test)
@@ -178,12 +178,12 @@ TestResult::EOutcome PreprocessorMathematicalExpressionsTest1(FileComparisonTest
     return result;
 }
 
-TestResult::EOutcome PreprocessorMacroTest1(FileComparisonTest& test)
+TestResult::EOutcome PreprocessorDirectiveTest1(FileComparisonTest& test)
 {
     TestResult::EOutcome result = TestResult::eFailed;
 
     boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "HeaderGuards1.h");
-    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorMacroTest1.txt");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorDirectiveTest1.txt");
 
     std::ifstream input(inputPath.c_str());
     CodeSmithy::Cpp::Preprocessor preprocessor(input);
@@ -193,7 +193,7 @@ TestResult::EOutcome PreprocessorMacroTest1(FileComparisonTest& test)
     callbacks.write(outputPath);
 
     test.setOutputFilePath(outputPath);
-    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorMacroTest1.txt");
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorDirectiveTest1.txt");
 
     if (callbacks.unexpectedCharactersCount() == 0)
     {

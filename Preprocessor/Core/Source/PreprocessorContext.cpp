@@ -21,3 +21,19 @@
 */
 
 #include "PreprocessorContext.h"
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+PreprocessorContext::PreprocessorContext()
+{
+}
+
+PreprocessorContext::~PreprocessorContext()
+{
+}
+
+}
+}

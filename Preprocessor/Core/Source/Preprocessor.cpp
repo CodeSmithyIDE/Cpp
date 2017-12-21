@@ -114,7 +114,7 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                 else if ((token.type() == PreprocessorToken::eOpOrPunctuator) && (token.text() == "#"))
                 {
                     m_state = eDirective;
-                    m_directive = std::make_unique<PreprocessingDirective>();
+                    m_directive = std::make_shared<PreprocessingDirective>();
                 }
                 else
                 {
@@ -143,6 +143,11 @@ void Preprocessor::run(TranslationUnit& translationUnit)
 {
     TranslationUnitBuilderCallbacks callbacks(translationUnit);
     run(callbacks);
+}
+
+const PreprocessorContext& Preprocessor::context() const
+{
+    return m_context;
 }
 
 PreprocessorToken Preprocessor::readWhiteSpaceCharacters()

@@ -23,6 +23,7 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSOR_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSOR_H_
 
+#include "PreprocessorContext.h"
 #include "SourceFile.h"
 #include "PreprocessorToken.h"
 #include "PreprocessingDirective.h"
@@ -45,6 +46,8 @@ public:
     void run(PreprocessorCallbacks& callbacks);
     void run(TranslationUnit& translationUnit);
 
+    const PreprocessorContext& context() const;
+
 private:
     enum EState
     {
@@ -60,6 +63,7 @@ private:
     PreprocessorToken readStringLiteral();
 
 private:
+    PreprocessorContext m_context;
     SourceFile m_source;
     static const int m_bufferSize = 1024;
     char m_buffer[m_bufferSize];
@@ -69,7 +73,7 @@ private:
     // to parse the directive. m_directive is build progressively as
     // the tokens are extracted. So its contents will be incomplete 
     // until the last token of the directive is extracted.
-    std::unique_ptr<PreprocessingDirective> m_directive;
+    std::shared_ptr<PreprocessingDirective> m_directive;
 };
 
 }
