@@ -155,6 +155,7 @@
     <ClCompile Include="..\..\Source\PreprocessorContext.cpp" />
     <ClCompile Include="..\..\Source\PreprocessorCallbacks.cpp" />
     <ClCompile Include="..\..\Source\PreprocessorToken.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessingDirective.cpp" />
     <ClCompile Include="..\..\Source\TranslationUnit.cpp" />
     <ClCompile Include="..\..\Source\TranslationUnitBuilderCallbacks.cpp" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorContext.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorCallbacks.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorToken.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingDirective.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnit.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnitBuilderCallbacks.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\linkoptions.h" />
