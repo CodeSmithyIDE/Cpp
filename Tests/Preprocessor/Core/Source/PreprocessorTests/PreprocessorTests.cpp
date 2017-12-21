@@ -34,6 +34,8 @@ void AddPreprocessorTests(TestHarness& theTestHarness)
     new FileComparisonTest("run test 1", PreprocessorRunTest1, preprocessorTestSequence);
     new FileComparisonTest("run test 2", PreprocessorRunTest2, preprocessorTestSequence);
 
+    new FileComparisonTest("mathematical expressions test 1", PreprocessorMathematicalExpressionsTest1, preprocessorTestSequence);
+
     new FileComparisonTest("macro test 1", PreprocessorMacroTest1, preprocessorTestSequence);
 }
 
@@ -88,6 +90,31 @@ TestResult::EOutcome PreprocessorRunTest2(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorRunTest2.txt");
+
+    if (callbacks.unexpectedCharactersCount() == 0)
+    {
+        result = TestResult::ePassed;
+    }
+
+    return result;
+}
+
+TestResult::EOutcome PreprocessorMathematicalExpressionsTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MathematicalExpressions1.cpp");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorMathematicalExpressionsTest1.txt");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
+
+    TestCallbacks callbacks;
+    preprocessor.run(callbacks);
+    callbacks.write(outputPath);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorMathematicalExpressionsTest1.txt");
 
     if (callbacks.unexpectedCharactersCount() == 0)
     {

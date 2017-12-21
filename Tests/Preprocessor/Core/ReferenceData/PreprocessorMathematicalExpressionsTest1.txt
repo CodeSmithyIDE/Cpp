@@ -1,0 +1,66 @@
+identifier: int
+white-space:  
+identifier: one
+white-space:  
+op-or-punctuator: =
+white-space:  
+number: 1
+op-or-punctuator: ;
+white-space: 
+
+identifier: int
+white-space:  
+identifier: two
+white-space:  
+op-or-punctuator: =
+white-space:  
+number: 1
+white-space:  
+op-or-punctuator: +
+white-space:  
+number: 1
+op-or-punctuator: ;
+white-space: 
+
+identifier: int
+white-space:  
+identifier: four
+white-space:  
+op-or-punctuator: =
+white-space:  
+number: 2
+white-space:  
+op-or-punctuator: *
+white-space:  
+number: 2
+op-or-punctuator: ;
+white-space: 
+
+identifier: int
+white-space:  
+identifier: five
+white-space:  
+op-or-punctuator: =
+white-space:  
+number: 10
+white-space:  
+op-or-punctuator: /
+white-space:  
+number: 2
+op-or-punctuator: ;
+white-space: 
+
+identifier: int
+white-space:  
+identifier: six
+white-space:  
+op-or-punctuator: =
+white-space:  
+number: 7
+white-space:  
+op-or-punctuator: -
+white-space:  
+number: 1
+op-or-punctuator: ;
+white-space: 
+

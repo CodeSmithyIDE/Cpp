@@ -32,6 +32,7 @@ void AddPreprocessorTests(TestHarness& theTestHarness);
 TestResult::EOutcome PreprocessorCreationTest1(Test& test);
 TestResult::EOutcome PreprocessorRunTest1(FileComparisonTest& test);
 TestResult::EOutcome PreprocessorRunTest2(FileComparisonTest& test);
+TestResult::EOutcome PreprocessorMathematicalExpressionsTest1(FileComparisonTest& test);
 TestResult::EOutcome PreprocessorMacroTest1(FileComparisonTest& test);
 
 #endif

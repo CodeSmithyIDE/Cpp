@@ -67,9 +67,9 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                 callbacks.onToken(token);
             }
             else if ((c == ';') || (c == '(') || (c == ')') ||
-                (c == '[') || (c == ']') || 
-                (c == '{') || (c == '}') ||
-                (c == '*') || (c == ',') || (c == '#'))
+                (c == '[') || (c == ']') || (c == '{') || (c == '}') ||
+                (c == '*') || (c == ',') || (c == '=') || (c == '+') ||
+                (c == '-') || (c == '/') || (c == '#'))
             {
                 PreprocessorToken token = readOpOrPunctuator();
                 callbacks.onToken(token);
