@@ -49,6 +49,8 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
         char c = m_buffer[m_position];
         while (c != 0)
         {
+            PreprocessorToken token(PreprocessorToken::eInvalid);
+
             if (((c >= 'a') && (c <= 'z')) ||
                 ((c >= 'A') && (c <= 'Z')) ||
                 (c == '_'))
@@ -57,56 +59,41 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                 {
                     // This is a special case that needs to be checked first
                     // to avoid confusion with an identifier
-                    PreprocessorToken token = readCharacterLiteral();
-                    callbacks.onToken(token);
+                    token = readCharacterLiteral();
                 }
                 else if ((c == 'L') && (m_buffer[m_position + 1] == '\"'))
                 {
                     // This is a special case that needs to be checked first
                     // to avoid confusion with an identifier
-                    PreprocessorToken token = readStringLiteral();
-                    callbacks.onToken(token);
+                    token = readStringLiteral();
                 }
                 else
                 {
-                    PreprocessorToken token = readIdentifier();
-                    callbacks.onToken(token);
+                    token = readIdentifier();
                 }
             }
             else if ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
             {
-                PreprocessorToken token = readWhiteSpaceCharacters();
-                callbacks.onToken(token);
+                token = readWhiteSpaceCharacters();
             }
             else if (c == '\'')
             {
-                PreprocessorToken token = readCharacterLiteral();
-                callbacks.onToken(token);
+                token = readCharacterLiteral();
             }
             else if (c == '\"')
             {
-                PreprocessorToken token = readStringLiteral();
-                callbacks.onToken(token);
+                token = readStringLiteral();
             }
             else if ((c == ';') || (c == '(') || (c == ')') ||
                 (c == '[') || (c == ']') || (c == '{') || (c == '}') ||
                 (c == '*') || (c == ',') || (c == '=') || (c == '+') ||
                 (c == '-') || (c == '/') || (c == '#'))
             {
-                PreprocessorToken token = readOpOrPunctuator();
-                if (token.text() == "#")
-                {
-
-                }
-                else
-                {
-                    callbacks.onToken(token);
-                }
+                token = readOpOrPunctuator();
             }
             else if ((c >= '0') && (c <= '9'))
             {
-                PreprocessorToken token = readNumber();
-                callbacks.onToken(token);
+                token = readNumber();
             }
             else
             {
@@ -120,6 +107,13 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                     break;
                 }
             }
+
+            if ((token.type() != PreprocessorToken::eInvalid) &&
+                !((token.type() == PreprocessorToken::eOpOrPunctuator) && (token.text() == "#")))
+            {
+                callbacks.onToken(token);
+            }
+
             c = m_buffer[m_position];
         }
     }
@@ -129,6 +123,12 @@ void Preprocessor::run(TranslationUnit& translationUnit)
 {
     TranslationUnitBuilderCallbacks callbacks(translationUnit);
     run(callbacks);
+}
+
+PreprocessorToken Preprocessor::getNextToken()
+{
+    PreprocessorToken token(PreprocessorToken::eInvalid);
+    return token;
 }
 
 PreprocessorToken Preprocessor::readWhiteSpaceCharacters()

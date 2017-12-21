@@ -36,6 +36,7 @@ class PreprocessorToken
 public:
     enum EType
     {
+        eInvalid,
         eIdentifier,
         eNumber,
         eCharacterLiteral,

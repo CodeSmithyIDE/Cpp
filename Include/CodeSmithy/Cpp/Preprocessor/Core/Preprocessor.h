@@ -44,6 +44,7 @@ public:
     void run(TranslationUnit& translationUnit);
 
 private:
+    PreprocessorToken getNextToken();
     PreprocessorToken readWhiteSpaceCharacters();
     PreprocessorToken readIdentifier();
     PreprocessorToken readOpOrPunctuator();
