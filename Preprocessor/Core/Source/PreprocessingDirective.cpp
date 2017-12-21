@@ -21,3 +21,19 @@
 */
 
 #include "PreprocessingDirective.h"
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+PreprocessingDirective::PreprocessingDirective()
+{
+}
+
+PreprocessingDirective::~PreprocessingDirective()
+{
+}
+
+}
+}

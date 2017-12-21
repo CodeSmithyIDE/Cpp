@@ -25,9 +25,11 @@
 
 #include "SourceFile.h"
 #include "PreprocessorToken.h"
+#include "PreprocessingDirective.h"
 #include "PreprocessorCallbacks.h"
 #include "TranslationUnit.h"
 #include <istream>
+#include <memory>
 
 namespace CodeSmithy
 {
@@ -44,7 +46,12 @@ public:
     void run(TranslationUnit& translationUnit);
 
 private:
-    PreprocessorToken getNextToken();
+    enum EState
+    {
+        eNormal,
+        eDirective
+    };
+
     PreprocessorToken readWhiteSpaceCharacters();
     PreprocessorToken readIdentifier();
     PreprocessorToken readOpOrPunctuator();
@@ -57,6 +64,12 @@ private:
     static const int m_bufferSize = 1024;
     char m_buffer[m_bufferSize];
     size_t m_position;
+    EState m_state;
+    // When encountering a directive several tokens need to be read 
+    // to parse the directive. m_directive is build progressively as
+    // the tokens are extracted. So its contents will be incomplete 
+    // until the last token of the directive is extracted.
+    std::unique_ptr<PreprocessingDirective> m_directive;
 };
 
 }

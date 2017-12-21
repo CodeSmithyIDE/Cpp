@@ -29,7 +29,7 @@ namespace Cpp
 {
 
 Preprocessor::Preprocessor(std::istream& input)
-    : m_source(input)
+    : m_source(input), m_position(0), m_state(eNormal)
 {
 }
 
@@ -40,6 +40,7 @@ Preprocessor::~Preprocessor()
 void Preprocessor::run(PreprocessorCallbacks& callbacks)
 {
     m_position = 0;
+    m_state = eNormal;
     while (m_source.read(&m_buffer[0], (m_bufferSize - 1)))
     {
     }
@@ -95,23 +96,42 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
             {
                 token = readNumber();
             }
-            else
+
+            if (m_state == eNormal)
             {
-                bool skip = callbacks.onUnexpectedCharacter(c);
-                if (skip)
+                if (token.type() == PreprocessorToken::eInvalid)
                 {
-                    ++m_position;
+                    bool skip = callbacks.onUnexpectedCharacter(c);
+                    if (skip)
+                    {
+                        ++m_position;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else if ((token.type() == PreprocessorToken::eOpOrPunctuator) && (token.text() == "#"))
+                {
+                    m_state = eDirective;
+                    m_directive = std::make_unique<PreprocessingDirective>();
                 }
                 else
                 {
-                    break;
+                    callbacks.onToken(token);
                 }
             }
-
-            if ((token.type() != PreprocessorToken::eInvalid) &&
-                !((token.type() == PreprocessorToken::eOpOrPunctuator) && (token.text() == "#")))
+            else if (m_state == eDirective)
             {
-                callbacks.onToken(token);
+                if ((token.type() == PreprocessorToken::eWhiteSpaceCharacters) &&
+                    (token.text() == "\n"))
+                {
+                    // We have encountered the end of the directive
+                    m_state = eNormal;
+                }
+                else
+                {
+                }
             }
 
             c = m_buffer[m_position];
@@ -125,22 +145,28 @@ void Preprocessor::run(TranslationUnit& translationUnit)
     run(callbacks);
 }
 
-PreprocessorToken Preprocessor::getNextToken()
-{
-    PreprocessorToken token(PreprocessorToken::eInvalid);
-    return token;
-}
-
 PreprocessorToken Preprocessor::readWhiteSpaceCharacters()
 {
     PreprocessorToken result(PreprocessorToken::eWhiteSpaceCharacters);
 
     size_t start = m_position;
 
+    // As per the standard new-line characters must be retained but
+    // sequence of other white-space characters may or may not be 
+    // concatenated. So to make things easier we create one token
+    // for each new-line but group the sequences of other white-space
+    // characters into a single token.
     char c = m_buffer[m_position];
-    while ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
+    if (c == '\n')
     {
-        c = m_buffer[++m_position];
+        ++m_position;
+    }
+    else
+    {
+        while ((c == ' ') || (c == '\r') || (c == '\t'))
+        {
+            c = m_buffer[++m_position];
+        }
     }
 
     result.setText(std::string(&m_buffer[start], m_position - start));

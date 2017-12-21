@@ -23,4 +23,19 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGDIRECTIVE_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGDIRECTIVE_H_
 
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+class PreprocessingDirective
+{
+public:
+    PreprocessingDirective();
+    ~PreprocessingDirective();
+};
+
+}
+}
+
 #endif

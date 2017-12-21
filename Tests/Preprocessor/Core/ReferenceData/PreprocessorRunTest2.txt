@@ -18,7 +18,8 @@ white-space:
 
 op-or-punctuator: {
 white-space: 
-    
+
+white-space:     
 identifier: return
 white-space:  
 number: 0
