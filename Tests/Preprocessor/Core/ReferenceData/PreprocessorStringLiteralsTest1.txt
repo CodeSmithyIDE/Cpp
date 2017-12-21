@@ -1,0 +1,22 @@
+identifier: char
+op-or-punctuator: *
+white-space:  
+identifier: c
+white-space:  
+op-or-punctuator: =
+white-space:  
+string-literal: "hello"
+op-or-punctuator: ;
+white-space: 
+
+identifier: wchar_t
+op-or-punctuator: *
+white-space:  
+identifier: w
+white-space:  
+op-or-punctuator: =
+white-space:  
+string-literal: L"world"
+op-or-punctuator: ;
+white-space: 
+

@@ -48,6 +48,8 @@ private:
     PreprocessorToken readIdentifier();
     PreprocessorToken readOpOrPunctuator();
     PreprocessorToken readNumber();
+    PreprocessorToken readCharacterLiteral();
+    PreprocessorToken readStringLiteral();
 
 private:
     SourceFile m_source;

@@ -34,6 +34,10 @@ void AddPreprocessorTests(TestHarness& theTestHarness)
     new FileComparisonTest("run test 1", PreprocessorRunTest1, preprocessorTestSequence);
     new FileComparisonTest("run test 2", PreprocessorRunTest2, preprocessorTestSequence);
 
+    new FileComparisonTest("character literals test 1", PreprocessorCharacterLiteralsTest1, preprocessorTestSequence);
+
+    new FileComparisonTest("string literals test 1", PreprocessorStringLiteralsTest1, preprocessorTestSequence);
+
     new FileComparisonTest("mathematical expressions test 1", PreprocessorMathematicalExpressionsTest1, preprocessorTestSequence);
 
     new FileComparisonTest("macro test 1", PreprocessorMacroTest1, preprocessorTestSequence);
@@ -90,6 +94,56 @@ TestResult::EOutcome PreprocessorRunTest2(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorRunTest2.txt");
+
+    if (callbacks.unexpectedCharactersCount() == 0)
+    {
+        result = TestResult::ePassed;
+    }
+
+    return result;
+}
+
+TestResult::EOutcome PreprocessorCharacterLiteralsTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "CharacterLiterals1.cpp");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorCharacterLiteralsTest1.txt");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
+
+    TestCallbacks callbacks;
+    preprocessor.run(callbacks);
+    callbacks.write(outputPath);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorCharacterLiteralsTest1.txt");
+
+    if (callbacks.unexpectedCharactersCount() == 0)
+    {
+        result = TestResult::ePassed;
+    }
+
+    return result;
+}
+
+TestResult::EOutcome PreprocessorStringLiteralsTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "StringLiterals1.cpp");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorStringLiteralsTest1.txt");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
+
+    TestCallbacks callbacks;
+    preprocessor.run(callbacks);
+    callbacks.write(outputPath);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorStringLiteralsTest1.txt");
 
     if (callbacks.unexpectedCharactersCount() == 0)
     {

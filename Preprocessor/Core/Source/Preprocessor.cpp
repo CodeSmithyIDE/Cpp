@@ -53,17 +53,39 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                 ((c >= 'A') && (c <= 'Z')) ||
                 (c == '_'))
             {
-                PreprocessorToken token = readIdentifier();
-                callbacks.onToken(token);
+                if ((c == 'L') && (m_buffer[m_position + 1] == '\''))
+                {
+                    // This is a special case that needs to be checked first
+                    // to avoid confusion with an identifier
+                    PreprocessorToken token = readCharacterLiteral();
+                    callbacks.onToken(token);
+                }
+                else if ((c == 'L') && (m_buffer[m_position + 1] == '\"'))
+                {
+                    // This is a special case that needs to be checked first
+                    // to avoid confusion with an identifier
+                    PreprocessorToken token = readStringLiteral();
+                    callbacks.onToken(token);
+                }
+                else
+                {
+                    PreprocessorToken token = readIdentifier();
+                    callbacks.onToken(token);
+                }
             }
             else if ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
             {
                 PreprocessorToken token = readWhiteSpaceCharacters();
                 callbacks.onToken(token);
             }
-            else if ((c >= 'a') && (c <= 'z'))
+            else if (c == '\'')
             {
-                PreprocessorToken token = readIdentifier();
+                PreprocessorToken token = readCharacterLiteral();
+                callbacks.onToken(token);
+            }
+            else if (c == '\"')
+            {
+                PreprocessorToken token = readStringLiteral();
                 callbacks.onToken(token);
             }
             else if ((c == ';') || (c == '(') || (c == ')') ||
@@ -72,7 +94,14 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                 (c == '-') || (c == '/') || (c == '#'))
             {
                 PreprocessorToken token = readOpOrPunctuator();
-                callbacks.onToken(token);
+                if (token.text() == "#")
+                {
+
+                }
+                else
+                {
+                    callbacks.onToken(token);
+                }
             }
             else if ((c >= '0') && (c <= '9'))
             {
@@ -159,6 +188,72 @@ PreprocessorToken Preprocessor::readNumber()
     {
         c = m_buffer[++m_position];
     }
+
+    result.setText(std::string(&m_buffer[start], m_position - start));
+
+    return result;
+}
+
+PreprocessorToken Preprocessor::readCharacterLiteral()
+{
+    PreprocessorToken result(PreprocessorToken::eCharacterLiteral);
+
+    size_t start = m_position;
+
+    char c = m_buffer[m_position];
+    // The readCharacterLiteral function is only called if we
+    // encountered "'" or "L'" so we check which one it is
+    // and increase the position accordingly.
+    if (c == 'L')
+    {
+        m_position += 2;
+    }
+    else
+    {
+        ++m_position;
+    }
+
+    c = m_buffer[m_position];
+    while (c != '\'')
+    {
+        c = m_buffer[++m_position];
+    }
+
+    // We do want to include the closing '\'' in the token
+    ++m_position;
+
+    result.setText(std::string(&m_buffer[start], m_position - start));
+
+    return result;
+}
+
+PreprocessorToken Preprocessor::readStringLiteral()
+{
+    PreprocessorToken result(PreprocessorToken::eStringLiteral);
+
+    size_t start = m_position;
+
+    char c = m_buffer[m_position];
+    // The readStringLiteral function is only called if we
+    // encountered "\"" or "L\"" so we check which one it is
+    // and increase the position accordingly.
+    if (c == 'L')
+    {
+        m_position += 2;
+    }
+    else
+    {
+        ++m_position;
+    }
+
+    c = m_buffer[m_position];
+    while (c != '\"')
+    {
+        c = m_buffer[++m_position];
+    }
+
+    // We do want to include the closing '\'' in the token
+    ++m_position;
 
     result.setText(std::string(&m_buffer[start], m_position - start));
 

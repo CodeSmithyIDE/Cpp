@@ -36,10 +36,12 @@ class PreprocessorToken
 public:
     enum EType
     {
-        eWhiteSpaceCharacters,
         eIdentifier,
+        eNumber,
+        eCharacterLiteral,
+        eStringLiteral,
         eOpOrPunctuator,
-        eNumber
+        eWhiteSpaceCharacters
     };
 
     PreprocessorToken(EType type);

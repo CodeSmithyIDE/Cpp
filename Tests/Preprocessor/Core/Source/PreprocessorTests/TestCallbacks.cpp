@@ -64,21 +64,31 @@ std::string TestCallbacks::typeToString(CodeSmithy::Cpp::PreprocessorToken::ETyp
 
     switch (type)
     {
-    case CodeSmithy::Cpp::PreprocessorToken::eWhiteSpaceCharacters:
-        result = "white-space";
-        break;
-
     case CodeSmithy::Cpp::PreprocessorToken::eIdentifier:
         result = "identifier";
+        break;
+
+    case CodeSmithy::Cpp::PreprocessorToken::eNumber:
+        result = "number";
+        break;
+
+    case CodeSmithy::Cpp::PreprocessorToken::eCharacterLiteral:
+        result = "character-literal";
+        break;
+
+    case CodeSmithy::Cpp::PreprocessorToken::eStringLiteral:
+        result = "string-literal";
         break;
 
     case CodeSmithy::Cpp::PreprocessorToken::eOpOrPunctuator:
         result = "op-or-punctuator";
         break;
 
-    case CodeSmithy::Cpp::PreprocessorToken::eNumber:
-        result = "number";
+
+    case CodeSmithy::Cpp::PreprocessorToken::eWhiteSpaceCharacters:
+        result = "white-space";
         break;
+
 
     default:
         break;

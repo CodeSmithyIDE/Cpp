@@ -1,0 +1,20 @@
+identifier: char
+white-space:  
+identifier: c
+white-space:  
+op-or-punctuator: =
+white-space:  
+character-literal: 'c'
+op-or-punctuator: ;
+white-space: 
+
+identifier: wchar_t
+white-space:  
+identifier: w
+white-space:  
+op-or-punctuator: =
+white-space:  
+character-literal: L'w'
+op-or-punctuator: ;
+white-space: 
+
