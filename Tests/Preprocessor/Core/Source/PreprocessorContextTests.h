@@ -20,30 +20,15 @@
     IN THE SOFTWARE.
 */
 
-#include "SourceFileTests.h"
-#include "PreprocessorTokenTests.h"
-#include "TranslationUnitTests.h"
-#include "PreprocessorContextTests.h"
-#include "PreprocessorTests/PreprocessorTests.h"
-#include "TranslationUnitBuilderCallbacksTests.h"
+#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_PREPROCESSORCONTEXTTESTS_H_
+#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_PREPROCESSORCONTEXTTESTS_H_
+
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
-#include <boost/filesystem/operations.hpp>
 
-int main(int argc, char* argv[])
-{
-    Ishiko::TestFramework::TestHarness theTestHarness("CodeSmithyCppPreprocessorCore");
+using namespace Ishiko::TestFramework;
 
-    theTestHarness.environment().setTestDataDirectory("../../TestData");
-    theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
-    boost::filesystem::create_directories("../../TestOutput");
-    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
+void AddPreprocessorContextTests(TestHarness& theTestHarness);
 
-    AddSourceFileTests(theTestHarness);
-    AddPreprocessorTokenTests(theTestHarness);
-    AddTranslationUnitTests(theTestHarness);
-    AddPreprocessorContextTests(theTestHarness);
-    AddPreprocessorTests(theTestHarness);
-    AddTranslationUnitBuilderCallbacksTests(theTestHarness);
+TestResult::EOutcome PreprocessorContextCreationTest1();
 
-    return theTestHarness.run();
-}
+#endif
