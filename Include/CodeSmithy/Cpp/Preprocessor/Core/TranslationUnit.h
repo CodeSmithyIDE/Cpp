@@ -23,7 +23,9 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_TRANSLATIONUNIT_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_TRANSLATIONUNIT_H_
 
+#include "PreprocessorToken.h"
 #include <ostream>
+#include <vector>
 
 namespace CodeSmithy
 {
@@ -36,7 +38,12 @@ public:
     TranslationUnit();
     ~TranslationUnit();
 
+    void push_back(const PreprocessorToken& token);
+
     void write(std::ostream& output) const;
+
+private:
+    std::vector<PreprocessorToken> m_tokens;
 };
 
 }

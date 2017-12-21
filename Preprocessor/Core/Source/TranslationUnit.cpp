@@ -35,8 +35,17 @@ TranslationUnit::~TranslationUnit()
 {
 }
 
+void TranslationUnit::push_back(const PreprocessorToken& token)
+{
+    m_tokens.push_back(token);
+}
+
 void TranslationUnit::write(std::ostream& output) const
 {
+    for (PreprocessorToken token : m_tokens)
+    {
+        token.write(output);
+    }
 }
 
 }

@@ -49,7 +49,9 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
         char c = m_buffer[m_position];
         while (c != 0)
         {
-            if ((c >= 'a') && (c <= 'z'))
+            if (((c >= 'a') && (c <= 'z')) ||
+                ((c >= 'A') && (c <= 'Z')) ||
+                (c == '_'))
             {
                 PreprocessorToken token = readIdentifier();
                 callbacks.onToken(token);
@@ -67,7 +69,7 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
             else if ((c == ';') || (c == '(') || (c == ')') ||
                 (c == '[') || (c == ']') || 
                 (c == '{') || (c == '}') ||
-                (c == '*') || (c == ','))
+                (c == '*') || (c == ',') || (c == '#'))
             {
                 PreprocessorToken token = readOpOrPunctuator();
                 callbacks.onToken(token);
@@ -124,7 +126,9 @@ PreprocessorToken Preprocessor::readIdentifier()
     size_t start = m_position;
 
     char c = m_buffer[m_position];
-    while ((c >= 'a') && (c <= 'z'))
+    while (((c >= 'a') && (c <= 'z')) ||
+        ((c >= 'A') && (c <= 'Z')) ||
+        (c == '_'))
     {
         c = m_buffer[++m_position];
     }

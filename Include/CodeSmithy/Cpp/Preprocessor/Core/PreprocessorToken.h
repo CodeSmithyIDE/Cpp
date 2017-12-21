@@ -23,6 +23,7 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORTOKEN_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORTOKEN_H_
 
+#include <ostream>
 #include <string>
 
 namespace CodeSmithy
@@ -47,6 +48,8 @@ public:
     EType type() const;
     const std::string& text() const;
     void setText(const std::string& text);
+
+    void write(std::ostream& output) const;
 
 private:
     EType m_type;

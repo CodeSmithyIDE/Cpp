@@ -32,6 +32,7 @@ void AddTranslationUnitBuilderCallbacksTests(TestHarness& theTestHarness)
     new HeapAllocationErrorsTest("Creation test 1", TranslationUnitBuilderCallbacksCreationTest1, builderCallbacksTestSequence);
 
     new FileComparisonTest("run test 1", TranslationUnitBuilderCallbacksRunTest1, builderCallbacksTestSequence);
+    new FileComparisonTest("run test 2", TranslationUnitBuilderCallbacksRunTest2, builderCallbacksTestSequence);
 }
 
 TestResult::EOutcome TranslationUnitBuilderCallbacksCreationTest1()
@@ -60,6 +61,29 @@ TestResult::EOutcome TranslationUnitBuilderCallbacksRunTest1(FileComparisonTest&
     
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "TranslationUnitBuilderCallbacksRunTest1.cpp");
+
+    return result;
+}
+
+TestResult::EOutcome TranslationUnitBuilderCallbacksRunTest2(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "MinimalMainFunction1.cpp");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "TranslationUnitBuilderCallbacksRunTest2.cpp");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
+
+    CodeSmithy::Cpp::TranslationUnit translationUnit;
+    CodeSmithy::Cpp::TranslationUnitBuilderCallbacks callbacks(translationUnit);
+    preprocessor.run(callbacks);
+
+    std::ofstream output(outputPath.c_str());
+    translationUnit.write(output);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "TranslationUnitBuilderCallbacksRunTest2.cpp");
 
     return result;
 }

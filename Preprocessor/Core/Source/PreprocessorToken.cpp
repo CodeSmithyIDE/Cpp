@@ -51,5 +51,10 @@ void PreprocessorToken::setText(const std::string& text)
     m_text = text;
 }
 
+void PreprocessorToken::write(std::ostream& output) const
+{
+    output.write(m_text.c_str(), m_text.size());
+}
+
 }
 }

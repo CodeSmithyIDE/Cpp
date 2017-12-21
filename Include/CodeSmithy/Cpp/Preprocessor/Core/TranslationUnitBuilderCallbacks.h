@@ -40,6 +40,8 @@ public:
     TranslationUnitBuilderCallbacks(TranslationUnit& translationUnit);
     ~TranslationUnitBuilderCallbacks() override;
 
+    void onToken(const PreprocessorToken& token) override;
+
 private:
     TranslationUnit& m_translationUnit;
 };

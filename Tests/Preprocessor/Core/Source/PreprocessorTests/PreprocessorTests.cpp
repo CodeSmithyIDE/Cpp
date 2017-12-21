@@ -33,6 +33,8 @@ void AddPreprocessorTests(TestHarness& theTestHarness)
 
     new FileComparisonTest("run test 1", PreprocessorRunTest1, preprocessorTestSequence);
     new FileComparisonTest("run test 2", PreprocessorRunTest2, preprocessorTestSequence);
+
+    new FileComparisonTest("macro test 1", PreprocessorMacroTest1, preprocessorTestSequence);
 }
 
 TestResult::EOutcome PreprocessorCreationTest1(Test& test)
@@ -86,6 +88,31 @@ TestResult::EOutcome PreprocessorRunTest2(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorRunTest2.txt");
+
+    if (callbacks.unexpectedCharactersCount() == 0)
+    {
+        result = TestResult::ePassed;
+    }
+
+    return result;
+}
+
+TestResult::EOutcome PreprocessorMacroTest1(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "HeaderGuards1.h");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorMacroTest1.txt");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
+
+    TestCallbacks callbacks;
+    preprocessor.run(callbacks);
+    callbacks.write(outputPath);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorMacroTest1.txt");
 
     if (callbacks.unexpectedCharactersCount() == 0)
     {

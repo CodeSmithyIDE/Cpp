@@ -36,5 +36,10 @@ TranslationUnitBuilderCallbacks::~TranslationUnitBuilderCallbacks()
 {
 }
 
+void TranslationUnitBuilderCallbacks::onToken(const PreprocessorToken& token)
+{
+    m_translationUnit.push_back(token);
+}
+
 }
 }
