@@ -34,7 +34,7 @@ public:
 
     size_t unexpectedCharactersCount() const;
 
-    void onToken(const CodeSmithy::Cpp::PreprocessorToken& token) override;
+    void onTokens(const std::vector<CodeSmithy::Cpp::PreprocessorToken>& tokens) override;
     bool onUnexpectedCharacter(char c) override;
 
     void write(const boost::filesystem::path& path);

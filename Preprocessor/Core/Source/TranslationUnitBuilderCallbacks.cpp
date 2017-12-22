@@ -36,9 +36,9 @@ TranslationUnitBuilderCallbacks::~TranslationUnitBuilderCallbacks()
 {
 }
 
-void TranslationUnitBuilderCallbacks::onToken(const PreprocessorToken& token)
+void TranslationUnitBuilderCallbacks::onTokens(const std::vector<PreprocessorToken>& tokens)
 {
-    m_translationUnit.push_back(token);
+    m_translationUnit.insert(m_translationUnit.end(), tokens.begin(), tokens.end());
 }
 
 }

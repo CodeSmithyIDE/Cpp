@@ -118,7 +118,9 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                 }
                 else
                 {
-                    callbacks.onToken(token);
+                    std::vector<PreprocessorToken> tokens;
+                    tokens.push_back(token);
+                    callbacks.onTokens(tokens);
                 }
             }
             else if (m_state == eDirective)

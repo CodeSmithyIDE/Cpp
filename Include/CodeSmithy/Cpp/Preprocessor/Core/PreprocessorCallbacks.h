@@ -24,6 +24,7 @@
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORCALLBACKS_H_
 
 #include "PreprocessorToken.h"
+#include <vector>
 
 namespace CodeSmithy
 {
@@ -36,7 +37,10 @@ public:
     PreprocessorCallbacks();
     virtual ~PreprocessorCallbacks();
 
-    virtual void onToken(const PreprocessorToken& token);
+    // In general there will only be one token passed at a time but when
+    // the tokens are the result of a macro expansion they will be passed
+    // in together.
+    virtual void onTokens(const std::vector<PreprocessorToken>& tokens);
     virtual bool onUnexpectedCharacter(char c);
 };
 

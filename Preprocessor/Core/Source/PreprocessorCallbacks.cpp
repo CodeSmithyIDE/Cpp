@@ -35,7 +35,7 @@ PreprocessorCallbacks::~PreprocessorCallbacks()
 {
 }
 
-void PreprocessorCallbacks::onToken(const PreprocessorToken& token)
+void PreprocessorCallbacks::onTokens(const std::vector<PreprocessorToken>& tokens)
 {
     // Do nothing
 }

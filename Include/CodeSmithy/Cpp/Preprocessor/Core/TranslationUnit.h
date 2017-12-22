@@ -38,6 +38,8 @@ public:
     TranslationUnit();
     ~TranslationUnit();
 
+    std::vector<PreprocessorToken>::iterator end();
+    template<class InputIt> std::vector<PreprocessorToken>::iterator insert(std::vector<PreprocessorToken>::const_iterator pos, InputIt first, InputIt last);
     void push_back(const PreprocessorToken& token);
 
     void write(std::ostream& output) const;
@@ -47,6 +49,12 @@ private:
 };
 
 }
+}
+
+template<class InputIt>
+std::vector<CodeSmithy::Cpp::PreprocessorToken>::iterator CodeSmithy::Cpp::TranslationUnit::insert(std::vector<CodeSmithy::Cpp::PreprocessorToken>::const_iterator pos, InputIt first, InputIt last)
+{
+    return m_tokens.insert(pos, first, last);
 }
 
 #include "linkoptions.h"

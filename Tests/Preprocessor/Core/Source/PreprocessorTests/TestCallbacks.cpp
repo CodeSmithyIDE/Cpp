@@ -37,9 +37,9 @@ size_t TestCallbacks::unexpectedCharactersCount() const
     return m_unexpectedCharactersCount;
 }
 
-void TestCallbacks::onToken(const CodeSmithy::Cpp::PreprocessorToken& token)
+void TestCallbacks::onTokens(const std::vector<CodeSmithy::Cpp::PreprocessorToken>& tokens)
 {
-    m_tokens.push_back(token);
+    m_tokens.insert(m_tokens.end(), tokens.begin(), tokens.end());
 }
 
 bool TestCallbacks::onUnexpectedCharacter(char c)

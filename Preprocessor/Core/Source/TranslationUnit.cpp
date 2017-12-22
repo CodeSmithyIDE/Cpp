@@ -35,6 +35,11 @@ TranslationUnit::~TranslationUnit()
 {
 }
 
+std::vector<PreprocessorToken>::iterator TranslationUnit::end()
+{
+    return m_tokens.end();
+}
+
 void TranslationUnit::push_back(const PreprocessorToken& token)
 {
     m_tokens.push_back(token);
