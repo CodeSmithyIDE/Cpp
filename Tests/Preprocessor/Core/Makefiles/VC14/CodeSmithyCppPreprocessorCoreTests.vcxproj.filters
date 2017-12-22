@@ -20,7 +20,7 @@
     <ClInclude Include="..\..\Source\SourceFileTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\PreprocessorTokenTests.h">
+    <ClInclude Include="..\..\Source\PreprocessingTokenTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\PreprocessorContextTests.h">
@@ -46,7 +46,7 @@
     <ClCompile Include="..\..\Source\SourceFileTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\PreprocessorTokenTests.cpp">
+    <ClCompile Include="..\..\Source\PreprocessingTokenTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PreprocessorContextTests.cpp">
