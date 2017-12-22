@@ -29,7 +29,7 @@
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorCallbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorToken.h">
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingToken.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingDirective.h">
@@ -58,7 +58,7 @@
     <ClCompile Include="..\..\Source\PreprocessorCallbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\PreprocessorToken.cpp">
+    <ClCompile Include="..\..\Source\PreprocessingToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PreprocessingDirective.cpp">
