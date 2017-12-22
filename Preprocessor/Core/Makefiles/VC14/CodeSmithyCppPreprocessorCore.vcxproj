@@ -156,6 +156,8 @@
     <ClCompile Include="..\..\Source\PreprocessorCallbacks.cpp" />
     <ClCompile Include="..\..\Source\PreprocessingToken.cpp" />
     <ClCompile Include="..\..\Source\PreprocessingDirective.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessingIncludeDirectiveResolver.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessingIncludeDirectiveDefaultResolver.cpp" />
     <ClCompile Include="..\..\Source\TranslationUnit.cpp" />
     <ClCompile Include="..\..\Source\TranslationUnitBuilderCallbacks.cpp" />
   </ItemGroup>
@@ -166,6 +168,8 @@
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorCallbacks.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingToken.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingDirective.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingIncludeDirectiveResolver.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingIncludeDirectiveDefaultResolver.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnit.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnitBuilderCallbacks.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\linkoptions.h" />

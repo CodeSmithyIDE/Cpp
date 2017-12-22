@@ -33,6 +33,8 @@ library CodeSmithyCppPreprocessorCore
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessorCallbacks.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessingToken.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessingDirective.h
+        ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessingIncludeDirectiveResolver.h
+        ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessingIncludeDirectiveDefaultResolver.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/TranslationUnit.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/TranslationUnitBuilderCallbacks.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/linkoptions.h
@@ -46,6 +48,8 @@ library CodeSmithyCppPreprocessorCore
         ../../Source/PreprocessorCallbacks.cpp
         ../../Source/PreprocessingToken.cpp
         ../../Source/PreprocessingDirective.cpp
+        ../../Source/PreprocessingIncludeDirectiveResolver.cpp
+        ../../Source/PreprocessingIncludeDirectiveDefaultResolver.cpp
         ../../Source/TranslationUnit.cpp
         ../../Source/TranslationUnitBuilderCallbacks.cpp
     }

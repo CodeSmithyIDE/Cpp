@@ -35,6 +35,12 @@
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingDirective.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingIncludeDirectiveResolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingIncludeDirectiveDefaultResolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\TranslationUnit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,6 +68,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\PreprocessingDirective.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PreprocessingIncludeDirectiveResolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PreprocessingIncludeDirectiveDefaultResolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\TranslationUnit.cpp">
