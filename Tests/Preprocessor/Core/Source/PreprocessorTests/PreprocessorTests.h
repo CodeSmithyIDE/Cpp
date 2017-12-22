@@ -36,5 +36,6 @@ TestResult::EOutcome PreprocessorCharacterLiteralsTest1(FileComparisonTest& test
 TestResult::EOutcome PreprocessorStringLiteralsTest1(FileComparisonTest& test);
 TestResult::EOutcome PreprocessorMathematicalExpressionsTest1(FileComparisonTest& test);
 TestResult::EOutcome PreprocessorDirectiveTest1(FileComparisonTest& test);
+TestResult::EOutcome PreprocessorDirectiveTest2(FileComparisonTest& test);
 
 #endif

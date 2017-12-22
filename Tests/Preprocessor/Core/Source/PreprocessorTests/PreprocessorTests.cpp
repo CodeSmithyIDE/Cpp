@@ -41,6 +41,7 @@ void AddPreprocessorTests(TestHarness& theTestHarness)
     new FileComparisonTest("mathematical expressions test 1", PreprocessorMathematicalExpressionsTest1, preprocessorTestSequence);
 
     new FileComparisonTest("directive test 1", PreprocessorDirectiveTest1, preprocessorTestSequence);
+    new FileComparisonTest("directive test 2", PreprocessorDirectiveTest2, preprocessorTestSequence);
 }
 
 TestResult::EOutcome PreprocessorCreationTest1(Test& test)
@@ -208,6 +209,32 @@ TestResult::EOutcome PreprocessorDirectiveTest1(FileComparisonTest& test)
         {
             result = TestResult::ePassed;
         }
+    }
+
+    return result;
+}
+
+TestResult::EOutcome PreprocessorDirectiveTest2(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "IncludeDirective1.cpp");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorDirectiveTest2.txt");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
+
+    TestCallbacks callbacks;
+    preprocessor.run(callbacks);
+    callbacks.write(outputPath);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorDirectiveTest2.txt");
+
+    if ((callbacks.unexpectedCharactersCount() == 0) &&
+        (preprocessor.context().size() == 0))
+    {
+        result = TestResult::ePassed;
     }
 
     return result;
