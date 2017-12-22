@@ -35,5 +35,25 @@ PreprocessorContext::~PreprocessorContext()
 {
 }
 
+std::shared_ptr<PreprocessingDirective>& PreprocessorContext::operator[](const std::string& key)
+{
+    return m_directives[key];
+}
+
+std::map<std::string, std::shared_ptr<PreprocessingDirective> >::const_iterator PreprocessorContext::end() const
+{
+    return m_directives.end();
+}
+
+std::map<std::string, std::shared_ptr<PreprocessingDirective> >::size_type PreprocessorContext::size() const
+{
+    return m_directives.size();
+}
+
+std::map<std::string, std::shared_ptr<PreprocessingDirective> >::const_iterator PreprocessorContext::find(const std::string& key) const
+{
+    return m_directives.find(key);
+}
+
 }
 }

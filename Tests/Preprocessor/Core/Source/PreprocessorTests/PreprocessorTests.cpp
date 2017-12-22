@@ -70,7 +70,8 @@ TestResult::EOutcome PreprocessorRunTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorRunTest1.txt");
 
-    if (callbacks.unexpectedCharactersCount() == 0)
+    if ((callbacks.unexpectedCharactersCount() == 0) &&
+        (preprocessor.context().size() == 0))
     {
         result = TestResult::ePassed;
     }
@@ -95,7 +96,8 @@ TestResult::EOutcome PreprocessorRunTest2(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorRunTest2.txt");
 
-    if (callbacks.unexpectedCharactersCount() == 0)
+    if ((callbacks.unexpectedCharactersCount() == 0) &&
+        (preprocessor.context().size() == 0))
     {
         result = TestResult::ePassed;
     }
@@ -120,7 +122,8 @@ TestResult::EOutcome PreprocessorCharacterLiteralsTest1(FileComparisonTest& test
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorCharacterLiteralsTest1.txt");
 
-    if (callbacks.unexpectedCharactersCount() == 0)
+    if ((callbacks.unexpectedCharactersCount() == 0) &&
+        (preprocessor.context().size() == 0))
     {
         result = TestResult::ePassed;
     }
@@ -145,7 +148,8 @@ TestResult::EOutcome PreprocessorStringLiteralsTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorStringLiteralsTest1.txt");
 
-    if (callbacks.unexpectedCharactersCount() == 0)
+    if ((callbacks.unexpectedCharactersCount() == 0) &&
+        (preprocessor.context().size() == 0))
     {
         result = TestResult::ePassed;
     }
@@ -170,7 +174,8 @@ TestResult::EOutcome PreprocessorMathematicalExpressionsTest1(FileComparisonTest
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorMathematicalExpressionsTest1.txt");
 
-    if (callbacks.unexpectedCharactersCount() == 0)
+    if ((callbacks.unexpectedCharactersCount() == 0) &&
+        (preprocessor.context().size() == 0))
     {
         result = TestResult::ePassed;
     }
@@ -195,9 +200,14 @@ TestResult::EOutcome PreprocessorDirectiveTest1(FileComparisonTest& test)
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorDirectiveTest1.txt");
 
-    if (callbacks.unexpectedCharactersCount() == 0)
+    if ((callbacks.unexpectedCharactersCount() == 0) &&
+        (preprocessor.context().size() == 1))
     {
-        result = TestResult::ePassed;
+        auto it = preprocessor.context().find("_SOMETHING_");
+        if (it != preprocessor.context().end())
+        {
+            result = TestResult::ePassed;
+        }
     }
 
     return result;

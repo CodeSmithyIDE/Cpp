@@ -23,6 +23,8 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGDIRECTIVE_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGDIRECTIVE_H_
 
+#include "PreprocessorToken.h"
+
 namespace CodeSmithy
 {
 namespace Cpp
@@ -31,8 +33,23 @@ namespace Cpp
 class PreprocessingDirective
 {
 public:
-    PreprocessingDirective();
+    enum EType
+    {
+        eInvalid,
+        eDefine
+    };
+
+    PreprocessingDirective(EType type);
     ~PreprocessingDirective();
+
+    EType type() const;
+    void setType(EType type);
+    const PreprocessorToken& identifier() const;
+    void setIdentifier(const PreprocessorToken& identifier);
+
+private:
+    EType m_type;
+    PreprocessorToken m_identifier;
 };
 
 }

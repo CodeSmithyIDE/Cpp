@@ -42,6 +42,11 @@ public:
     PreprocessorContext();
     ~PreprocessorContext();
 
+    std::shared_ptr<PreprocessingDirective>& operator[](const std::string& key);
+    std::map<std::string, std::shared_ptr<PreprocessingDirective> >::const_iterator end() const;
+    std::map<std::string, std::shared_ptr<PreprocessingDirective> >::size_type size() const;
+    std::map<std::string, std::shared_ptr<PreprocessingDirective> >::const_iterator find(const std::string& key) const;
+
 private:
     // Only #define directive should end up in the context
     std::map<std::string, std::shared_ptr<PreprocessingDirective> > m_directives;

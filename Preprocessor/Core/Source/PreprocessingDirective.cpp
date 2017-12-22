@@ -27,12 +27,33 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-PreprocessingDirective::PreprocessingDirective()
+PreprocessingDirective::PreprocessingDirective(EType type)
+    : m_type(type), m_identifier(PreprocessorToken::eInvalid)
 {
 }
 
 PreprocessingDirective::~PreprocessingDirective()
 {
+}
+
+PreprocessingDirective::EType PreprocessingDirective::type() const
+{
+    return m_type;
+}
+
+void PreprocessingDirective::setType(EType type)
+{
+    m_type = type;
+}
+
+const PreprocessorToken& PreprocessingDirective::identifier() const
+{
+    return m_identifier;
+}
+
+void PreprocessingDirective::setIdentifier(const PreprocessorToken& identifier)
+{
+    m_identifier = identifier;
 }
 
 }

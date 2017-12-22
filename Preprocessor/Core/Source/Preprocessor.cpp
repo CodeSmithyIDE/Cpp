@@ -114,7 +114,7 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                 else if ((token.type() == PreprocessorToken::eOpOrPunctuator) && (token.text() == "#"))
                 {
                     m_state = eDirective;
-                    m_directive = std::make_shared<PreprocessingDirective>();
+                    m_directive = std::make_shared<PreprocessingDirective>(PreprocessingDirective::eInvalid);
                 }
                 else
                 {
@@ -127,10 +127,26 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                     (token.text() == "\n"))
                 {
                     // We have encountered the end of the directive
+                    if (m_directive->type() == PreprocessingDirective::eDefine)
+                    {
+                        m_context[m_directive->identifier().text()] = m_directive;
+                    }
                     m_state = eNormal;
                 }
-                else
+                else if (token.type() == PreprocessorToken::eIdentifier)
                 {
+                    if (m_directive->type() == PreprocessingDirective::eInvalid)
+                    {
+                        if (token.text() == "define")
+                        {
+                            m_directive->setType(PreprocessingDirective::eDefine);
+                        }
+                    }
+                    else if ((m_directive->type() == PreprocessingDirective::eDefine) &&
+                        (m_directive->identifier().type() == PreprocessorToken::eInvalid))
+                    {
+                        m_directive->setIdentifier(token);
+                    }
                 }
             }
 
