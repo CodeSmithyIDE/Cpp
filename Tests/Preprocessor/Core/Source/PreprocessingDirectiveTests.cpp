@@ -20,32 +20,18 @@
     IN THE SOFTWARE.
 */
 
-#include "SourceFileTests.h"
-#include "PreprocessingTokenTests.h"
 #include "PreprocessingDirectiveTests.h"
-#include "TranslationUnitTests.h"
-#include "PreprocessorContextTests.h"
-#include "PreprocessorTests/PreprocessorTests.h"
-#include "TranslationUnitBuilderCallbacksTests.h"
-#include "Ishiko/TestFramework/TestFrameworkCore.h"
-#include <boost/filesystem/operations.hpp>
+#include "CodeSmithy/Cpp/Preprocessor/Core/PreprocessingDirective.h"
 
-int main(int argc, char* argv[])
+void AddPreprocessingDirectiveTests(TestHarness& theTestHarness)
 {
-    Ishiko::TestFramework::TestHarness theTestHarness("CodeSmithyCppPreprocessorCore");
+    TestSequence& preprocessingDirectiveTestSequence = theTestHarness.appendTestSequence("PreprocessingDirective tests");
 
-    theTestHarness.environment().setTestDataDirectory("../../TestData");
-    theTestHarness.environment().setTestOutputDirectory("../../TestOutput");
-    boost::filesystem::create_directories("../../TestOutput");
-    theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
+    new HeapAllocationErrorsTest("Creation test 1", PreprocessingDirectiveCreationTest1, preprocessingDirectiveTestSequence);
+}
 
-    AddSourceFileTests(theTestHarness);
-    AddPreprocessingTokenTests(theTestHarness);
-    AddPreprocessingDirectiveTests(theTestHarness);
-    AddTranslationUnitTests(theTestHarness);
-    AddPreprocessorContextTests(theTestHarness);
-    AddPreprocessorTests(theTestHarness);
-    AddTranslationUnitBuilderCallbacksTests(theTestHarness);
-
-    return theTestHarness.run();
+TestResult::EOutcome PreprocessingDirectiveCreationTest1()
+{
+    CodeSmithy::Cpp::PreprocessingDirective directive(CodeSmithy::Cpp::PreprocessingDirective::eInvalid);
+    return TestResult::ePassed;
 }

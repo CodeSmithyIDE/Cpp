@@ -26,6 +26,7 @@ program CodeSmithyCppPreprocessorCoreTests : CodeSmithyCppPreprocessorCore, Ishi
     {
         ../../Source/SourceFileTests.h
         ../../Source/PreprocessingTokenTests.h
+        ../../Source/PreprocessingDirectiveTests.h
         ../../Source/PreprocessorContextTests.h
         ../../Source/PreprocessorTests/PreprocessorTests.h
         ../../Source/PreprocessorTests/TestCallbacks.h
@@ -38,6 +39,7 @@ program CodeSmithyCppPreprocessorCoreTests : CodeSmithyCppPreprocessorCore, Ishi
         ../../Source/main.cpp
         ../../Source/SourceFileTests.cpp
         ../../Source/PreprocessingTokenTests.cpp
+        ../../Source/PreprocessingDirectiveTests.cpp
         ../../Source/PreprocessorContextTests.cpp
         ../../Source/PreprocessorTests/PreprocessorTests.cpp
         ../../Source/PreprocessorTests/TestCallbacks.cpp
