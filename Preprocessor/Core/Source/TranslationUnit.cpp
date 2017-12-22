@@ -35,19 +35,19 @@ TranslationUnit::~TranslationUnit()
 {
 }
 
-std::vector<PreprocessorToken>::iterator TranslationUnit::end()
+std::vector<PreprocessingToken>::iterator TranslationUnit::end()
 {
     return m_tokens.end();
 }
 
-void TranslationUnit::push_back(const PreprocessorToken& token)
+void TranslationUnit::push_back(const PreprocessingToken& token)
 {
     m_tokens.push_back(token);
 }
 
 void TranslationUnit::write(std::ostream& output) const
 {
-    for (PreprocessorToken token : m_tokens)
+    for (PreprocessingToken token : m_tokens)
     {
         token.write(output);
     }

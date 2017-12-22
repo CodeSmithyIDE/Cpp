@@ -37,7 +37,7 @@ size_t TestCallbacks::unexpectedCharactersCount() const
     return m_unexpectedCharactersCount;
 }
 
-void TestCallbacks::onTokens(const std::vector<CodeSmithy::Cpp::PreprocessorToken>& tokens)
+void TestCallbacks::onTokens(const std::vector<CodeSmithy::Cpp::PreprocessingToken>& tokens)
 {
     m_tokens.insert(m_tokens.end(), tokens.begin(), tokens.end());
 }
@@ -52,40 +52,40 @@ void TestCallbacks::write(const boost::filesystem::path& path)
 {
     std::ofstream stream(path.c_str());
 
-    for (CodeSmithy::Cpp::PreprocessorToken& token : m_tokens)
+    for (CodeSmithy::Cpp::PreprocessingToken& token : m_tokens)
     {
         stream << typeToString(token.type()) << ": " << token.text() << std::endl;
     }
 }
 
-std::string TestCallbacks::typeToString(CodeSmithy::Cpp::PreprocessorToken::EType type)
+std::string TestCallbacks::typeToString(CodeSmithy::Cpp::PreprocessingToken::EType type)
 {
     std::string result = "Invalid type";
 
     switch (type)
     {
-    case CodeSmithy::Cpp::PreprocessorToken::eIdentifier:
+    case CodeSmithy::Cpp::PreprocessingToken::eIdentifier:
         result = "identifier";
         break;
 
-    case CodeSmithy::Cpp::PreprocessorToken::eNumber:
+    case CodeSmithy::Cpp::PreprocessingToken::eNumber:
         result = "number";
         break;
 
-    case CodeSmithy::Cpp::PreprocessorToken::eCharacterLiteral:
+    case CodeSmithy::Cpp::PreprocessingToken::eCharacterLiteral:
         result = "character-literal";
         break;
 
-    case CodeSmithy::Cpp::PreprocessorToken::eStringLiteral:
+    case CodeSmithy::Cpp::PreprocessingToken::eStringLiteral:
         result = "string-literal";
         break;
 
-    case CodeSmithy::Cpp::PreprocessorToken::eOpOrPunctuator:
+    case CodeSmithy::Cpp::PreprocessingToken::eOpOrPunctuator:
         result = "op-or-punctuator";
         break;
 
 
-    case CodeSmithy::Cpp::PreprocessorToken::eWhiteSpaceCharacters:
+    case CodeSmithy::Cpp::PreprocessingToken::eWhiteSpaceCharacters:
         result = "white-space";
         break;
 

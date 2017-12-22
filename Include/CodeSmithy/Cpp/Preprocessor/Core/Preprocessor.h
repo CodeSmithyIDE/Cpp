@@ -25,7 +25,7 @@
 
 #include "PreprocessorContext.h"
 #include "SourceFile.h"
-#include "PreprocessorToken.h"
+#include "PreprocessingToken.h"
 #include "PreprocessingDirective.h"
 #include "PreprocessorCallbacks.h"
 #include "TranslationUnit.h"
@@ -55,12 +55,12 @@ private:
         eDirective
     };
 
-    PreprocessorToken readWhiteSpaceCharacters();
-    PreprocessorToken readIdentifier();
-    PreprocessorToken readOpOrPunctuator();
-    PreprocessorToken readNumber();
-    PreprocessorToken readCharacterLiteral();
-    PreprocessorToken readStringLiteral();
+    PreprocessingToken readWhiteSpaceCharacters();
+    PreprocessingToken readIdentifier();
+    PreprocessingToken readOpOrPunctuator();
+    PreprocessingToken readNumber();
+    PreprocessingToken readCharacterLiteral();
+    PreprocessingToken readStringLiteral();
 
 private:
     PreprocessorContext m_context;

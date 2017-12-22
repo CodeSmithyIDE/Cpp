@@ -40,7 +40,7 @@ public:
     TranslationUnitBuilderCallbacks(TranslationUnit& translationUnit);
     ~TranslationUnitBuilderCallbacks() override;
 
-    void onTokens(const std::vector<PreprocessorToken>& tokens) override;
+    void onTokens(const std::vector<PreprocessingToken>& tokens) override;
 
 private:
     TranslationUnit& m_translationUnit;

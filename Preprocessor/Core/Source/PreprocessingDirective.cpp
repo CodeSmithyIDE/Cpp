@@ -28,7 +28,7 @@ namespace Cpp
 {
 
 PreprocessingDirective::PreprocessingDirective(EType type)
-    : m_type(type), m_identifier(PreprocessorToken::eInvalid)
+    : m_type(type), m_identifier(PreprocessingToken::eInvalid)
 {
 }
 
@@ -46,12 +46,12 @@ void PreprocessingDirective::setType(EType type)
     m_type = type;
 }
 
-const PreprocessorToken& PreprocessingDirective::identifier() const
+const PreprocessingToken& PreprocessingDirective::identifier() const
 {
     return m_identifier;
 }
 
-void PreprocessingDirective::setIdentifier(const PreprocessorToken& identifier)
+void PreprocessingDirective::setIdentifier(const PreprocessingToken& identifier)
 {
     m_identifier = identifier;
 }

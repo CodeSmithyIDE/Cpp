@@ -20,38 +20,38 @@
     IN THE SOFTWARE.
 */
 
-#include "PreprocessorToken.h"
+#include "PreprocessingToken.h"
 
 namespace CodeSmithy
 {
 namespace Cpp
 {
 
-PreprocessorToken::PreprocessorToken(EType type)
+PreprocessingToken::PreprocessingToken(EType type)
     : m_type(type)
 {
 }
 
-PreprocessorToken::~PreprocessorToken()
+PreprocessingToken::~PreprocessingToken()
 {
 }
 
-PreprocessorToken::EType PreprocessorToken::type() const
+PreprocessingToken::EType PreprocessingToken::type() const
 {
     return m_type;
 }
 
-const std::string& PreprocessorToken::text() const
+const std::string& PreprocessingToken::text() const
 {
     return m_text;
 }
 
-void PreprocessorToken::setText(const std::string& text)
+void PreprocessingToken::setText(const std::string& text)
 {
     m_text = text;
 }
 
-void PreprocessorToken::write(std::ostream& output) const
+void PreprocessingToken::write(std::ostream& output) const
 {
     output.write(m_text.c_str(), m_text.size());
 }

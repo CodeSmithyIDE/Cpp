@@ -34,16 +34,16 @@ public:
 
     size_t unexpectedCharactersCount() const;
 
-    void onTokens(const std::vector<CodeSmithy::Cpp::PreprocessorToken>& tokens) override;
+    void onTokens(const std::vector<CodeSmithy::Cpp::PreprocessingToken>& tokens) override;
     bool onUnexpectedCharacter(char c) override;
 
     void write(const boost::filesystem::path& path);
 
 private:
-    static std::string typeToString(CodeSmithy::Cpp::PreprocessorToken::EType type);
+    static std::string typeToString(CodeSmithy::Cpp::PreprocessingToken::EType type);
 
 private:
-    std::vector<CodeSmithy::Cpp::PreprocessorToken> m_tokens;
+    std::vector<CodeSmithy::Cpp::PreprocessingToken> m_tokens;
     size_t m_unexpectedCharactersCount;
 };
 

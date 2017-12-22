@@ -21,7 +21,7 @@
 */
 
 #include "PreprocessorTokenTests.h"
-#include "CodeSmithy/Cpp/Preprocessor/Core/PreprocessorToken.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/PreprocessingToken.h"
 
 void AddPreprocessorTokenTests(TestHarness& theTestHarness)
 {
@@ -32,6 +32,6 @@ void AddPreprocessorTokenTests(TestHarness& theTestHarness)
 
 TestResult::EOutcome PreprocessorTokenCreationTest1()
 {
-    CodeSmithy::Cpp::PreprocessorToken token(CodeSmithy::Cpp::PreprocessorToken::eIdentifier);
+    CodeSmithy::Cpp::PreprocessingToken token(CodeSmithy::Cpp::PreprocessingToken::eIdentifier);
     return TestResult::ePassed;
 }

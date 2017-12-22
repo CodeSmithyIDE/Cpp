@@ -50,7 +50,7 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
         char c = m_buffer[m_position];
         while (c != 0)
         {
-            PreprocessorToken token(PreprocessorToken::eInvalid);
+            PreprocessingToken token(PreprocessingToken::eInvalid);
 
             if (((c >= 'a') && (c <= 'z')) ||
                 ((c >= 'A') && (c <= 'Z')) ||
@@ -99,7 +99,7 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
 
             if (m_state == eNormal)
             {
-                if (token.type() == PreprocessorToken::eInvalid)
+                if (token.type() == PreprocessingToken::eInvalid)
                 {
                     bool skip = callbacks.onUnexpectedCharacter(c);
                     if (skip)
@@ -111,21 +111,21 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                         break;
                     }
                 }
-                else if ((token.type() == PreprocessorToken::eOpOrPunctuator) && (token.text() == "#"))
+                else if ((token.type() == PreprocessingToken::eOpOrPunctuator) && (token.text() == "#"))
                 {
                     m_state = eDirective;
                     m_directive = std::make_shared<PreprocessingDirective>(PreprocessingDirective::eInvalid);
                 }
                 else
                 {
-                    std::vector<PreprocessorToken> tokens;
+                    std::vector<PreprocessingToken> tokens;
                     tokens.push_back(token);
                     callbacks.onTokens(tokens);
                 }
             }
             else if (m_state == eDirective)
             {
-                if ((token.type() == PreprocessorToken::eWhiteSpaceCharacters) &&
+                if ((token.type() == PreprocessingToken::eWhiteSpaceCharacters) &&
                     (token.text() == "\n"))
                 {
                     // We have encountered the end of the directive
@@ -135,7 +135,7 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                     }
                     m_state = eNormal;
                 }
-                else if (token.type() == PreprocessorToken::eIdentifier)
+                else if (token.type() == PreprocessingToken::eIdentifier)
                 {
                     if (m_directive->type() == PreprocessingDirective::eInvalid)
                     {
@@ -145,7 +145,7 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                         }
                     }
                     else if ((m_directive->type() == PreprocessingDirective::eDefine) &&
-                        (m_directive->identifier().type() == PreprocessorToken::eInvalid))
+                        (m_directive->identifier().type() == PreprocessingToken::eInvalid))
                     {
                         m_directive->setIdentifier(token);
                     }
@@ -168,9 +168,9 @@ const PreprocessorContext& Preprocessor::context() const
     return m_context;
 }
 
-PreprocessorToken Preprocessor::readWhiteSpaceCharacters()
+PreprocessingToken Preprocessor::readWhiteSpaceCharacters()
 {
-    PreprocessorToken result(PreprocessorToken::eWhiteSpaceCharacters);
+    PreprocessingToken result(PreprocessingToken::eWhiteSpaceCharacters);
 
     size_t start = m_position;
 
@@ -197,9 +197,9 @@ PreprocessorToken Preprocessor::readWhiteSpaceCharacters()
     return result;
 }
 
-PreprocessorToken Preprocessor::readIdentifier()
+PreprocessingToken Preprocessor::readIdentifier()
 {
-    PreprocessorToken result(PreprocessorToken::eIdentifier);
+    PreprocessingToken result(PreprocessingToken::eIdentifier);
 
     size_t start = m_position;
 
@@ -216,9 +216,9 @@ PreprocessorToken Preprocessor::readIdentifier()
     return result;
 }
 
-PreprocessorToken Preprocessor::readOpOrPunctuator()
+PreprocessingToken Preprocessor::readOpOrPunctuator()
 {
-    PreprocessorToken result(PreprocessorToken::eOpOrPunctuator);
+    PreprocessingToken result(PreprocessingToken::eOpOrPunctuator);
 
     result.setText(std::string(&m_buffer[m_position], 1));
     ++m_position;
@@ -226,9 +226,9 @@ PreprocessorToken Preprocessor::readOpOrPunctuator()
     return result;
 }
 
-PreprocessorToken Preprocessor::readNumber()
+PreprocessingToken Preprocessor::readNumber()
 {
-    PreprocessorToken result(PreprocessorToken::eNumber);
+    PreprocessingToken result(PreprocessingToken::eNumber);
 
     size_t start = m_position;
 
@@ -243,9 +243,9 @@ PreprocessorToken Preprocessor::readNumber()
     return result;
 }
 
-PreprocessorToken Preprocessor::readCharacterLiteral()
+PreprocessingToken Preprocessor::readCharacterLiteral()
 {
-    PreprocessorToken result(PreprocessorToken::eCharacterLiteral);
+    PreprocessingToken result(PreprocessingToken::eCharacterLiteral);
 
     size_t start = m_position;
 
@@ -276,9 +276,9 @@ PreprocessorToken Preprocessor::readCharacterLiteral()
     return result;
 }
 
-PreprocessorToken Preprocessor::readStringLiteral()
+PreprocessingToken Preprocessor::readStringLiteral()
 {
-    PreprocessorToken result(PreprocessorToken::eStringLiteral);
+    PreprocessingToken result(PreprocessingToken::eStringLiteral);
 
     size_t start = m_position;
 

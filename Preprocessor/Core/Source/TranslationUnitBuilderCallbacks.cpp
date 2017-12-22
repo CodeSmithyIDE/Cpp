@@ -36,7 +36,7 @@ TranslationUnitBuilderCallbacks::~TranslationUnitBuilderCallbacks()
 {
 }
 
-void TranslationUnitBuilderCallbacks::onTokens(const std::vector<PreprocessorToken>& tokens)
+void TranslationUnitBuilderCallbacks::onTokens(const std::vector<PreprocessingToken>& tokens)
 {
     m_translationUnit.insert(m_translationUnit.end(), tokens.begin(), tokens.end());
 }

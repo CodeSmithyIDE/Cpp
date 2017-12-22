@@ -20,8 +20,8 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORTOKEN_H_
-#define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORTOKEN_H_
+#ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGTOKEN_H_
+#define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGTOKEN_H_
 
 #include <ostream>
 #include <string>
@@ -31,7 +31,7 @@ namespace CodeSmithy
 namespace Cpp
 {
 
-class PreprocessorToken
+class PreprocessingToken
 {
 public:
     enum EType
@@ -45,8 +45,8 @@ public:
         eWhiteSpaceCharacters
     };
 
-    PreprocessorToken(EType type);
-    ~PreprocessorToken();
+    PreprocessingToken(EType type);
+    ~PreprocessingToken();
 
     EType type() const;
     const std::string& text() const;

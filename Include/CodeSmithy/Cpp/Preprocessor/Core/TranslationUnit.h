@@ -23,7 +23,7 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_TRANSLATIONUNIT_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_TRANSLATIONUNIT_H_
 
-#include "PreprocessorToken.h"
+#include "PreprocessingToken.h"
 #include <ostream>
 #include <vector>
 
@@ -38,21 +38,21 @@ public:
     TranslationUnit();
     ~TranslationUnit();
 
-    std::vector<PreprocessorToken>::iterator end();
-    template<class InputIt> std::vector<PreprocessorToken>::iterator insert(std::vector<PreprocessorToken>::const_iterator pos, InputIt first, InputIt last);
-    void push_back(const PreprocessorToken& token);
+    std::vector<PreprocessingToken>::iterator end();
+    template<class InputIt> std::vector<PreprocessingToken>::iterator insert(std::vector<PreprocessingToken>::const_iterator pos, InputIt first, InputIt last);
+    void push_back(const PreprocessingToken& token);
 
     void write(std::ostream& output) const;
 
 private:
-    std::vector<PreprocessorToken> m_tokens;
+    std::vector<PreprocessingToken> m_tokens;
 };
 
 }
 }
 
 template<class InputIt>
-std::vector<CodeSmithy::Cpp::PreprocessorToken>::iterator CodeSmithy::Cpp::TranslationUnit::insert(std::vector<CodeSmithy::Cpp::PreprocessorToken>::const_iterator pos, InputIt first, InputIt last)
+std::vector<CodeSmithy::Cpp::PreprocessingToken>::iterator CodeSmithy::Cpp::TranslationUnit::insert(std::vector<CodeSmithy::Cpp::PreprocessingToken>::const_iterator pos, InputIt first, InputIt last)
 {
     return m_tokens.insert(pos, first, last);
 }
