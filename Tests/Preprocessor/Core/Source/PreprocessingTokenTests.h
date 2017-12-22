@@ -20,15 +20,15 @@
     IN THE SOFTWARE.
 */
 
-#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_PREPROCESSORTOKENTESTS_H_
-#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_PREPROCESSORTOKENTESTS_H_
+#ifndef _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_PREPROCESSINGTOKENTESTS_H_
+#define _CODESMITHY_TEST_CPP_PREPROCESSOR_CORE_PREPROCESSINGTOKENTESTS_H_
 
 #include "Ishiko/TestFramework/TestFrameworkCore.h"
 
 using namespace Ishiko::TestFramework;
 
-void AddPreprocessorTokenTests(TestHarness& theTestHarness);
+void AddPreprocessingTokenTests(TestHarness& theTestHarness);
 
-TestResult::EOutcome PreprocessorTokenCreationTest1();
+TestResult::EOutcome PreprocessingTokenCreationTest1();
 
 #endif

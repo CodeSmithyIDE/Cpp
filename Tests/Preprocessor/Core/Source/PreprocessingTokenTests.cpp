@@ -20,17 +20,17 @@
     IN THE SOFTWARE.
 */
 
-#include "PreprocessorTokenTests.h"
+#include "PreprocessingTokenTests.h"
 #include "CodeSmithy/Cpp/Preprocessor/Core/PreprocessingToken.h"
 
-void AddPreprocessorTokenTests(TestHarness& theTestHarness)
+void AddPreprocessingTokenTests(TestHarness& theTestHarness)
 {
-    TestSequence& preprocessorTokenTestSequence = theTestHarness.appendTestSequence("PreprocessorToken tests");
+    TestSequence& preprocessingTokenTestSequence = theTestHarness.appendTestSequence("PreprocessingToken tests");
 
-    new HeapAllocationErrorsTest("Creation test 1", PreprocessorTokenCreationTest1, preprocessorTokenTestSequence);
+    new HeapAllocationErrorsTest("Creation test 1", PreprocessingTokenCreationTest1, preprocessingTokenTestSequence);
 }
 
-TestResult::EOutcome PreprocessorTokenCreationTest1()
+TestResult::EOutcome PreprocessingTokenCreationTest1()
 {
     CodeSmithy::Cpp::PreprocessingToken token(CodeSmithy::Cpp::PreprocessingToken::eIdentifier);
     return TestResult::ePassed;

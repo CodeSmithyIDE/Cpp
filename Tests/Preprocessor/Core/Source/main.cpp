@@ -21,7 +21,7 @@
 */
 
 #include "SourceFileTests.h"
-#include "PreprocessorTokenTests.h"
+#include "PreprocessingTokenTests.h"
 #include "TranslationUnitTests.h"
 #include "PreprocessorContextTests.h"
 #include "PreprocessorTests/PreprocessorTests.h"
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     theTestHarness.environment().setReferenceDataDirectory("../../ReferenceData");
 
     AddSourceFileTests(theTestHarness);
-    AddPreprocessorTokenTests(theTestHarness);
+    AddPreprocessingTokenTests(theTestHarness);
     AddTranslationUnitTests(theTestHarness);
     AddPreprocessorContextTests(theTestHarness);
     AddPreprocessorTests(theTestHarness);
