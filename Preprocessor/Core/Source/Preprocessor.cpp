@@ -40,7 +40,7 @@ Preprocessor::~Preprocessor()
 void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver, 
                        PreprocessorCallbacks& callbacks)
 {
-    State& state = m_stateStack[0];
+    State& state = m_stateStack.back();
 
     while (state.m_source.read(&state.m_buffer[0], (state.m_bufferSize - 1)))
     {
@@ -115,7 +115,7 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                 else if ((token.type() == PreprocessingToken::eOpOrPunctuator) && (token.text() == "#"))
                 {
                     state.m_mode = eDirective;
-                    m_directive = std::make_shared<PreprocessingDirective>(PreprocessingDirective::eInvalid);
+                    state.m_directive = std::make_shared<PreprocessingDirective>(PreprocessingDirective::eInvalid);
                 }
                 else
                 {
@@ -130,13 +130,13 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                     (token.text() == "\n"))
                 {
                     // We have encountered the end of the directive
-                    if (m_directive->type() == PreprocessingDirective::eDefine)
+                    if (state.m_directive->type() == PreprocessingDirective::eDefine)
                     {
-                        m_context[m_directive->identifier().text()] = m_directive;
+                        m_context[state.m_directive->identifier().text()] = state.m_directive;
                     }
-                    else if (m_directive->type() == PreprocessingDirective::eInclude)
+                    else if (state.m_directive->type() == PreprocessingDirective::eInclude)
                     {
-                        const std::vector<PreprocessingToken>& tokens = m_directive->tokens();
+                        const std::vector<PreprocessingToken>& tokens = state.m_directive->tokens();
                         if (tokens.size() > 0)
                         {
                             if (tokens[0].type() == PreprocessingToken::eStringLiteral)
@@ -169,28 +169,28 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                 }
                 else if (token.type() == PreprocessingToken::eIdentifier)
                 {
-                    if (m_directive->type() == PreprocessingDirective::eInvalid)
+                    if (state.m_directive->type() == PreprocessingDirective::eInvalid)
                     {
                         if (token.text() == "define")
                         {
-                            m_directive->setType(PreprocessingDirective::eDefine);
+                            state.m_directive->setType(PreprocessingDirective::eDefine);
                         }
                         else if (token.text() == "include")
                         {
-                            m_directive->setType(PreprocessingDirective::eInclude);
+                            state.m_directive->setType(PreprocessingDirective::eInclude);
                         }
                     }
-                    else if ((m_directive->type() == PreprocessingDirective::eDefine) &&
-                        (m_directive->identifier().type() == PreprocessingToken::eInvalid))
+                    else if ((state.m_directive->type() == PreprocessingDirective::eDefine) &&
+                        (state.m_directive->identifier().type() == PreprocessingToken::eInvalid))
                     {
-                        m_directive->setIdentifier(token);
+                        state.m_directive->setIdentifier(token);
                     }
                 }
                 else if(token.type() == PreprocessingToken::eStringLiteral)
                 {
-                    if (m_directive->type() == PreprocessingDirective::eInclude)
+                    if (state.m_directive->type() == PreprocessingDirective::eInclude)
                     {
-                        m_directive->appendToken(token);
+                        state.m_directive->appendToken(token);
                     }
                 }
             }

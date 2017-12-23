@@ -75,19 +75,22 @@ private:
         char m_buffer[m_bufferSize];
         size_t m_position;
         EMode m_mode;
+        // When encountering a directive several tokens need to be read 
+        // to parse the directive. m_directive is build progressively as
+        // the tokens are extracted. So its contents will be incomplete 
+        // until the last token of the directive is extracted.
+        std::shared_ptr<PreprocessingDirective> m_directive;
     };
 
 private:
     PreprocessorSettings m_settings;
+    // The context is not part of the state because included files
+    // do not have a separate nested context, they use the same
+    // context as the top file.
     PreprocessorContext m_context;
     // We need a stack of states as we do not want to use recursion to
     // handle include directives.
     std::vector<State> m_stateStack;
-    // When encountering a directive several tokens need to be read 
-    // to parse the directive. m_directive is build progressively as
-    // the tokens are extracted. So its contents will be incomplete 
-    // until the last token of the directive is extracted.
-    std::shared_ptr<PreprocessingDirective> m_directive;
 };
 
 }
