@@ -29,25 +29,28 @@ namespace Cpp
 {
 
 Preprocessor::Preprocessor(std::istream& input)
-    : m_source(input), m_position(0), m_state(eNormal)
+    : m_state(eNormal)
 {
+    m_stateStack.push_back(State(input));
 }
 
 Preprocessor::~Preprocessor()
 {
 }
 
-void Preprocessor::run(PreprocessorCallbacks& callbacks)
+void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver, 
+                       PreprocessorCallbacks& callbacks)
 {
-    m_position = 0;
+    State& state = m_stateStack[0];
+
     m_state = eNormal;
-    while (m_source.read(&m_buffer[0], (m_bufferSize - 1)))
+    while (state.m_source.read(&state.m_buffer[0], (state.m_bufferSize - 1)))
     {
     }
-    if (m_source.eof())
+    if (state.m_source.eof())
     {
-        m_buffer[(unsigned int)m_source.gcount()] = '\0';
-        char c = m_buffer[m_position];
+        state.m_buffer[(unsigned int)state.m_source.gcount()] = '\0';
+        char c = state.m_buffer[state.m_position];
         while (c != 0)
         {
             PreprocessingToken token(PreprocessingToken::eInvalid);
@@ -56,45 +59,45 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                 ((c >= 'A') && (c <= 'Z')) ||
                 (c == '_'))
             {
-                if ((c == 'L') && (m_buffer[m_position + 1] == '\''))
+                if ((c == 'L') && (state.m_buffer[state.m_position + 1] == '\''))
                 {
                     // This is a special case that needs to be checked first
                     // to avoid confusion with an identifier
-                    token = readCharacterLiteral();
+                    token = readCharacterLiteral(state.m_buffer, state.m_position);
                 }
-                else if ((c == 'L') && (m_buffer[m_position + 1] == '\"'))
+                else if ((c == 'L') && (state.m_buffer[state.m_position + 1] == '\"'))
                 {
                     // This is a special case that needs to be checked first
                     // to avoid confusion with an identifier
-                    token = readStringLiteral();
+                    token = readStringLiteral(state.m_buffer, state.m_position);
                 }
                 else
                 {
-                    token = readIdentifier();
+                    token = readIdentifier(state.m_buffer, state.m_position);
                 }
             }
             else if ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
             {
-                token = readWhiteSpaceCharacters();
+                token = readWhiteSpaceCharacters(state.m_buffer, state.m_position);
             }
             else if (c == '\'')
             {
-                token = readCharacterLiteral();
+                token = readCharacterLiteral(state.m_buffer, state.m_position);
             }
             else if (c == '\"')
             {
-                token = readStringLiteral();
+                token = readStringLiteral(state.m_buffer, state.m_position);
             }
             else if ((c == ';') || (c == '(') || (c == ')') ||
                 (c == '[') || (c == ']') || (c == '{') || (c == '}') ||
                 (c == '*') || (c == ',') || (c == '=') || (c == '+') ||
                 (c == '-') || (c == '/') || (c == '#'))
             {
-                token = readOpOrPunctuator();
+                token = readOpOrPunctuator(state.m_buffer, state.m_position);
             }
             else if ((c >= '0') && (c <= '9'))
             {
-                token = readNumber();
+                token = readNumber(state.m_buffer, state.m_position);
             }
 
             if (m_state == eNormal)
@@ -104,7 +107,7 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                     bool skip = callbacks.onUnexpectedCharacter(c);
                     if (skip)
                     {
-                        ++m_position;
+                        ++state.m_position;
                     }
                     else
                     {
@@ -133,6 +136,37 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                     {
                         m_context[m_directive->identifier().text()] = m_directive;
                     }
+                    else if (m_directive->type() == PreprocessingDirective::eInclude)
+                    {
+                        const std::vector<PreprocessingToken>& tokens = m_directive->tokens();
+                        if (tokens.size() > 0)
+                        {
+                            if (tokens[0].type() == PreprocessingToken::eStringLiteral)
+                            {
+                                // The string literal includes the opening and closing quotes, so
+                                // remove them
+                                const std::string& text = tokens[0].text();
+                                std::shared_ptr<std::istream> includeInput = includeResolver.resolve(text.substr(1, text.size() - 2));
+                                if (includeInput)
+                                {
+                                    Preprocessor includePreprocessor(*includeInput);
+                                    includePreprocessor.run(includeResolver, callbacks);
+                                }
+                                else
+                                {
+                                    bool skip = callbacks.onError();
+                                    if (skip)
+                                    {
+                                        ++state.m_position;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
                     m_state = eNormal;
                 }
                 else if (token.type() == PreprocessingToken::eIdentifier)
@@ -143,6 +177,10 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                         {
                             m_directive->setType(PreprocessingDirective::eDefine);
                         }
+                        else if (token.text() == "include")
+                        {
+                            m_directive->setType(PreprocessingDirective::eInclude);
+                        }
                     }
                     else if ((m_directive->type() == PreprocessingDirective::eDefine) &&
                         (m_directive->identifier().type() == PreprocessingToken::eInvalid))
@@ -150,17 +188,25 @@ void Preprocessor::run(PreprocessorCallbacks& callbacks)
                         m_directive->setIdentifier(token);
                     }
                 }
+                else if(token.type() == PreprocessingToken::eStringLiteral)
+                {
+                    if (m_directive->type() == PreprocessingDirective::eInclude)
+                    {
+                        m_directive->appendToken(token);
+                    }
+                }
             }
 
-            c = m_buffer[m_position];
+            c = state.m_buffer[state.m_position];
         }
     }
 }
 
-void Preprocessor::run(TranslationUnit& translationUnit)
+void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
+                       TranslationUnit& translationUnit)
 {
     TranslationUnitBuilderCallbacks callbacks(translationUnit);
-    run(callbacks);
+    run(includeResolver, callbacks);
 }
 
 const PreprocessorContext& Preprocessor::context() const
@@ -168,145 +214,154 @@ const PreprocessorContext& Preprocessor::context() const
     return m_context;
 }
 
-PreprocessingToken Preprocessor::readWhiteSpaceCharacters()
+PreprocessingToken Preprocessor::readWhiteSpaceCharacters(const char* buffer, size_t& position)
 {
     PreprocessingToken result(PreprocessingToken::eWhiteSpaceCharacters);
 
-    size_t start = m_position;
+    size_t start = position;
 
     // As per the standard new-line characters must be retained but
     // sequence of other white-space characters may or may not be 
     // concatenated. So to make things easier we create one token
     // for each new-line but group the sequences of other white-space
     // characters into a single token.
-    char c = m_buffer[m_position];
+    char c = buffer[position];
     if (c == '\n')
     {
-        ++m_position;
+        ++position;
     }
     else
     {
         while ((c == ' ') || (c == '\r') || (c == '\t'))
         {
-            c = m_buffer[++m_position];
+            c = buffer[++position];
         }
     }
 
-    result.setText(std::string(&m_buffer[start], m_position - start));
+    result.setText(std::string(&buffer[start], position - start));
 
     return result;
 }
 
-PreprocessingToken Preprocessor::readIdentifier()
+PreprocessingToken Preprocessor::readIdentifier(const char* buffer, size_t& position)
 {
     PreprocessingToken result(PreprocessingToken::eIdentifier);
 
-    size_t start = m_position;
+    size_t start = position;
 
-    char c = m_buffer[m_position];
+    char c = buffer[position];
     while (((c >= 'a') && (c <= 'z')) ||
         ((c >= 'A') && (c <= 'Z')) ||
         (c == '_'))
     {
-        c = m_buffer[++m_position];
+        c = buffer[++position];
     }
 
-    result.setText(std::string(&m_buffer[start], m_position - start));
+    result.setText(std::string(&buffer[start], position - start));
 
     return result;
 }
 
-PreprocessingToken Preprocessor::readOpOrPunctuator()
+PreprocessingToken Preprocessor::readOpOrPunctuator(const char* buffer, size_t& position)
 {
     PreprocessingToken result(PreprocessingToken::eOpOrPunctuator);
 
-    result.setText(std::string(&m_buffer[m_position], 1));
-    ++m_position;
+    result.setText(std::string(&buffer[position], 1));
+    ++position;
 
     return result;
 }
 
-PreprocessingToken Preprocessor::readNumber()
+PreprocessingToken Preprocessor::readNumber(const char* buffer, size_t& position)
 {
     PreprocessingToken result(PreprocessingToken::eNumber);
 
-    size_t start = m_position;
+    size_t start = position;
 
-    char c = m_buffer[m_position];
+    char c = buffer[position];
     while ((c >= '0') && (c <= '9'))
     {
-        c = m_buffer[++m_position];
+        c = buffer[++position];
     }
 
-    result.setText(std::string(&m_buffer[start], m_position - start));
+    result.setText(std::string(&buffer[start], position - start));
 
     return result;
 }
 
-PreprocessingToken Preprocessor::readCharacterLiteral()
+PreprocessingToken Preprocessor::readCharacterLiteral(const char* buffer, size_t& position)
 {
     PreprocessingToken result(PreprocessingToken::eCharacterLiteral);
 
-    size_t start = m_position;
+    size_t start = position;
 
-    char c = m_buffer[m_position];
+    char c = buffer[position];
     // The readCharacterLiteral function is only called if we
     // encountered "'" or "L'" so we check which one it is
     // and increase the position accordingly.
     if (c == 'L')
     {
-        m_position += 2;
+        position += 2;
     }
     else
     {
-        ++m_position;
+        ++position;
     }
 
-    c = m_buffer[m_position];
+    c = buffer[position];
     while (c != '\'')
     {
-        c = m_buffer[++m_position];
+        c = buffer[++position];
     }
 
     // We do want to include the closing '\'' in the token
-    ++m_position;
+    ++position;
 
-    result.setText(std::string(&m_buffer[start], m_position - start));
+    result.setText(std::string(&buffer[start], position - start));
 
     return result;
 }
 
-PreprocessingToken Preprocessor::readStringLiteral()
+PreprocessingToken Preprocessor::readStringLiteral(const char* buffer, size_t& position)
 {
     PreprocessingToken result(PreprocessingToken::eStringLiteral);
 
-    size_t start = m_position;
+    size_t start = position;
 
-    char c = m_buffer[m_position];
+    char c = buffer[position];
     // The readStringLiteral function is only called if we
     // encountered "\"" or "L\"" so we check which one it is
     // and increase the position accordingly.
     if (c == 'L')
     {
-        m_position += 2;
+        position += 2;
     }
     else
     {
-        ++m_position;
+        ++position;
     }
 
-    c = m_buffer[m_position];
+    c = buffer[position];
     while (c != '\"')
     {
-        c = m_buffer[++m_position];
+        c = buffer[++position];
     }
 
     // We do want to include the closing '\'' in the token
-    ++m_position;
+    ++position;
 
-    result.setText(std::string(&m_buffer[start], m_position - start));
+    result.setText(std::string(&buffer[start], position - start));
 
     return result;
+}
+
+Preprocessor::State::State(std::istream& input)
+    : m_source(input), m_position(0)
+{
+}
+
+Preprocessor::State::~State()
+{
 }
 
 }

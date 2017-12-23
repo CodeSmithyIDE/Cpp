@@ -23,10 +23,12 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSOR_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSOR_H_
 
+#include "PreprocessorSettings.h"
 #include "PreprocessorContext.h"
 #include "SourceFile.h"
 #include "PreprocessingToken.h"
 #include "PreprocessingDirective.h"
+#include "PreprocessingIncludeDirectiveResolver.h"
 #include "PreprocessorCallbacks.h"
 #include "TranslationUnit.h"
 #include <istream>
@@ -43,31 +45,43 @@ public:
     Preprocessor(std::istream& input);
     ~Preprocessor();
 
-    void run(PreprocessorCallbacks& callbacks);
-    void run(TranslationUnit& translationUnit);
+    void run(PreprocessingIncludeDirectiveResolver& includeResolver, PreprocessorCallbacks& callbacks);
+    void run(PreprocessingIncludeDirectiveResolver& includeResolver, TranslationUnit& translationUnit);
 
     const PreprocessorContext& context() const;
 
 private:
+    class State
+    {
+    public:
+        State(std::istream& input);
+        ~State();
+
+        SourceFile m_source;
+        static const int m_bufferSize = 1024;
+        char m_buffer[m_bufferSize];
+        size_t m_position;
+    };
+
+    PreprocessingToken readWhiteSpaceCharacters(const char* buffer, size_t& position);
+    PreprocessingToken readIdentifier(const char* buffer, size_t& position);
+    PreprocessingToken readOpOrPunctuator(const char* buffer, size_t& position);
+    PreprocessingToken readNumber(const char* buffer, size_t& position);
+    PreprocessingToken readCharacterLiteral(const char* buffer, size_t& position);
+    PreprocessingToken readStringLiteral(const char* buffer, size_t& position);
+
     enum EState
     {
         eNormal,
         eDirective
     };
 
-    PreprocessingToken readWhiteSpaceCharacters();
-    PreprocessingToken readIdentifier();
-    PreprocessingToken readOpOrPunctuator();
-    PreprocessingToken readNumber();
-    PreprocessingToken readCharacterLiteral();
-    PreprocessingToken readStringLiteral();
-
 private:
+    PreprocessorSettings m_settings;
     PreprocessorContext m_context;
-    SourceFile m_source;
-    static const int m_bufferSize = 1024;
-    char m_buffer[m_bufferSize];
-    size_t m_position;
+    // We need a stack of states as we do not want to use recursion to
+    // handle include directives.
+    std::vector<State> m_stateStack;
     EState m_state;
     // When encountering a directive several tokens need to be read 
     // to parse the directive. m_directive is build progressively as
