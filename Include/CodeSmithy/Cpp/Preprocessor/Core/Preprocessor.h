@@ -74,6 +74,7 @@ private:
         SourceFile m_source;
         static const int m_bufferCapacity = 1024;
         char m_buffer[m_bufferCapacity];
+        size_t m_bufferSize;
         size_t m_position;
         EMode m_mode;
         // When encountering a directive several tokens need to be read 

@@ -56,13 +56,25 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
         // See also the use of the 'stateStackChanged' variable below.
         State& state = m_stateStack.back();
 
-        while (state.m_source.read(&state.m_buffer[0], (state.m_bufferCapacity - 1)))
+        if (state.m_position < state.m_bufferSize)
         {
+            // This is a state for a file that we started processing but
+            // was interrupted by an included file.
         }
+        else
+        {
+            state.m_source.read(&state.m_buffer[0], (state.m_bufferCapacity - 1));
+            if (state.m_source.eof())
+            {
+                state.m_bufferSize = (unsigned int)state.m_source.gcount();
+                state.m_buffer[state.m_bufferSize] = '\0';
+            }
+        }
+
         if (state.m_source.eof())
         {
             bool stateStackChanged = false;
-            state.m_buffer[(unsigned int)state.m_source.gcount()] = '\0';
+
             char c = state.m_buffer[state.m_position];
             while (c != 0)
             {
@@ -145,6 +157,8 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                         (token.text() == "\n"))
                     {
                         // We have encountered the end of the directive
+                        state.m_mode = eNormal;
+
                         if (state.m_directive->type() == PreprocessingDirective::eDefine)
                         {
                             m_context[state.m_directive->identifier().text()] = state.m_directive;
@@ -185,7 +199,6 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                                 }
                             }
                         }
-                        state.m_mode = eNormal;
                     }
                     else if (token.type() == PreprocessingToken::eIdentifier)
                     {
@@ -382,13 +395,13 @@ PreprocessingToken Preprocessor::readStringLiteral(const char* buffer, size_t& p
 }
 
 Preprocessor::State::State(std::istream& input)
-    : m_source(input), m_position(0), m_mode(eNormal)
+    : m_source(input), m_bufferSize(0), m_position(0), m_mode(eNormal)
 {
 }
 
 Preprocessor::State::State(std::istream& input,
                            std::shared_ptr<std::istream>& includedInput)
-    : m_source(input), m_position(0), m_mode(eNormal),
+    : m_source(input), m_bufferSize(0), m_position(0), m_mode(eNormal),
     m_includedInput(includedInput)
 {
 }
