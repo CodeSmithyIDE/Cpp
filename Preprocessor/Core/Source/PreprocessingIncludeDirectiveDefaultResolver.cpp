@@ -21,3 +21,41 @@
 */
 
 #include "PreprocessingIncludeDirectiveDefaultResolver.h"
+#include <fstream>
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+PreprocessingIncludeDirectiveDefaultResolver::PreprocessingIncludeDirectiveDefaultResolver()
+{
+}
+
+PreprocessingIncludeDirectiveDefaultResolver::~PreprocessingIncludeDirectiveDefaultResolver()
+{
+}
+
+void PreprocessingIncludeDirectiveDefaultResolver::appendSearchPath(const std::string& path)
+{
+    m_searchPaths.push_back(path);
+}
+
+std::shared_ptr<std::istream> PreprocessingIncludeDirectiveDefaultResolver::resolve(const std::string& path) const
+{
+    std::shared_ptr<std::istream> result;
+
+    for (const std::string& dirPath : m_searchPaths)
+    {
+        result = std::make_shared<std::ifstream>(dirPath + path);
+        if (!result->fail())
+        {
+            break;
+        }
+    }
+
+    return result;
+}
+
+}
+}

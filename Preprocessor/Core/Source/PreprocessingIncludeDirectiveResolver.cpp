@@ -21,3 +21,19 @@
 */
 
 #include "PreprocessingIncludeDirectiveResolver.h"
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+PreprocessingIncludeDirectiveResolver::PreprocessingIncludeDirectiveResolver()
+{
+}
+
+PreprocessingIncludeDirectiveResolver::~PreprocessingIncludeDirectiveResolver()
+{
+}
+
+}
+}

@@ -23,4 +23,32 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGINCLUDEDIRECTIVEDEFAULTRESOLVER_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGINCLUDEDIRECTIVEDEFAULTRESOLVER_H_
 
+#include "PreprocessingIncludeDirectiveResolver.h"
+#include <vector>
+#include <string>
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+class PreprocessingIncludeDirectiveDefaultResolver : public PreprocessingIncludeDirectiveResolver
+{
+public:
+    PreprocessingIncludeDirectiveDefaultResolver();
+    ~PreprocessingIncludeDirectiveDefaultResolver() override;
+
+    void appendSearchPath(const std::string& path);
+
+    std::shared_ptr<std::istream> resolve(const std::string& path) const override;
+
+private:
+    std::vector<std::string> m_searchPaths;
+};
+
+}
+}
+
+#include "linkoptions.h"
+
 #endif

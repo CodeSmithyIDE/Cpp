@@ -23,4 +23,28 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGINCLUDEDIRECTIVERESOLVER_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGINCLUDEDIRECTIVERESOLVER_H_
 
+#include <istream>
+#include <string>
+#include <memory>
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+class PreprocessingIncludeDirectiveResolver
+{
+public:
+    PreprocessingIncludeDirectiveResolver();
+    virtual ~PreprocessingIncludeDirectiveResolver();
+
+    // Returns a null shared_ptr if the file can't be found.
+    virtual std::shared_ptr<std::istream> resolve(const std::string& path) const = 0;
+};
+
+}
+}
+
+#include "linkoptions.h"
+
 #endif
