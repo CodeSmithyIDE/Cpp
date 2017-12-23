@@ -40,162 +40,189 @@ Preprocessor::~Preprocessor()
 void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver, 
                        PreprocessorCallbacks& callbacks)
 {
-    State& state = m_stateStack.back();
-
-    while (state.m_source.read(&state.m_buffer[0], (state.m_bufferSize - 1)))
+    // We continously loop until the state stack is empty which means
+    // we have processed the top file and all included files.
+    while (true)
     {
-    }
-    if (state.m_source.eof())
-    {
-        state.m_buffer[(unsigned int)state.m_source.gcount()] = '\0';
-        char c = state.m_buffer[state.m_position];
-        while (c != 0)
+        if (m_stateStack.empty())
         {
-            PreprocessingToken token(PreprocessingToken::eInvalid);
+            break;
+        }
 
-            if (((c >= 'a') && (c <= 'z')) ||
-                ((c >= 'A') && (c <= 'Z')) ||
-                (c == '_'))
-            {
-                if ((c == 'L') && (state.m_buffer[state.m_position + 1] == '\''))
-                {
-                    // This is a special case that needs to be checked first
-                    // to avoid confusion with an identifier
-                    token = readCharacterLiteral(state.m_buffer, state.m_position);
-                }
-                else if ((c == 'L') && (state.m_buffer[state.m_position + 1] == '\"'))
-                {
-                    // This is a special case that needs to be checked first
-                    // to avoid confusion with an identifier
-                    token = readStringLiteral(state.m_buffer, state.m_position);
-                }
-                else
-                {
-                    token = readIdentifier(state.m_buffer, state.m_position);
-                }
-            }
-            else if ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
-            {
-                token = readWhiteSpaceCharacters(state.m_buffer, state.m_position);
-            }
-            else if (c == '\'')
-            {
-                token = readCharacterLiteral(state.m_buffer, state.m_position);
-            }
-            else if (c == '\"')
-            {
-                token = readStringLiteral(state.m_buffer, state.m_position);
-            }
-            else if ((c == ';') || (c == '(') || (c == ')') ||
-                (c == '[') || (c == ']') || (c == '{') || (c == '}') ||
-                (c == '*') || (c == ',') || (c == '=') || (c == '+') ||
-                (c == '-') || (c == '/') || (c == '#'))
-            {
-                token = readOpOrPunctuator(state.m_buffer, state.m_position);
-            }
-            else if ((c >= '0') && (c <= '9'))
-            {
-                token = readNumber(state.m_buffer, state.m_position);
-            }
+        // Note that the code that follows adds items to this vector. This may 
+        // invalidate the reference. This is not really a problem as when that
+        // happens it means we need to proceed and process the newly added state
+        // so we need to stop using the current state anyway.
+        // See also the use of the 'stateStackChanged' variable below.
+        State& state = m_stateStack.back();
 
-            if (state.m_mode == eNormal)
+        while (state.m_source.read(&state.m_buffer[0], (state.m_bufferSize - 1)))
+        {
+        }
+        if (state.m_source.eof())
+        {
+            bool stateStackChanged = false;
+            state.m_buffer[(unsigned int)state.m_source.gcount()] = '\0';
+            char c = state.m_buffer[state.m_position];
+            while (c != 0)
             {
-                if (token.type() == PreprocessingToken::eInvalid)
+                PreprocessingToken token(PreprocessingToken::eInvalid);
+
+                if (((c >= 'a') && (c <= 'z')) ||
+                    ((c >= 'A') && (c <= 'Z')) ||
+                    (c == '_'))
                 {
-                    bool skip = callbacks.onUnexpectedCharacter(c);
-                    if (skip)
+                    if ((c == 'L') && (state.m_buffer[state.m_position + 1] == '\''))
                     {
-                        ++state.m_position;
+                        // This is a special case that needs to be checked first
+                        // to avoid confusion with an identifier
+                        token = readCharacterLiteral(state.m_buffer, state.m_position);
+                    }
+                    else if ((c == 'L') && (state.m_buffer[state.m_position + 1] == '\"'))
+                    {
+                        // This is a special case that needs to be checked first
+                        // to avoid confusion with an identifier
+                        token = readStringLiteral(state.m_buffer, state.m_position);
                     }
                     else
                     {
-                        break;
+                        token = readIdentifier(state.m_buffer, state.m_position);
                     }
                 }
-                else if ((token.type() == PreprocessingToken::eOpOrPunctuator) && (token.text() == "#"))
+                else if ((c == ' ') || (c == '\r') || (c == '\n') || (c == '\t'))
                 {
-                    state.m_mode = eDirective;
-                    state.m_directive = std::make_shared<PreprocessingDirective>(PreprocessingDirective::eInvalid);
+                    token = readWhiteSpaceCharacters(state.m_buffer, state.m_position);
                 }
-                else
+                else if (c == '\'')
                 {
-                    std::vector<PreprocessingToken> tokens;
-                    tokens.push_back(token);
-                    callbacks.onTokens(tokens);
+                    token = readCharacterLiteral(state.m_buffer, state.m_position);
                 }
-            }
-            else if (state.m_mode == eDirective)
-            {
-                if ((token.type() == PreprocessingToken::eWhiteSpaceCharacters) &&
-                    (token.text() == "\n"))
+                else if (c == '\"')
                 {
-                    // We have encountered the end of the directive
-                    if (state.m_directive->type() == PreprocessingDirective::eDefine)
+                    token = readStringLiteral(state.m_buffer, state.m_position);
+                }
+                else if ((c == ';') || (c == '(') || (c == ')') ||
+                    (c == '[') || (c == ']') || (c == '{') || (c == '}') ||
+                    (c == '*') || (c == ',') || (c == '=') || (c == '+') ||
+                    (c == '-') || (c == '/') || (c == '#'))
+                {
+                    token = readOpOrPunctuator(state.m_buffer, state.m_position);
+                }
+                else if ((c >= '0') && (c <= '9'))
+                {
+                    token = readNumber(state.m_buffer, state.m_position);
+                }
+
+                if (state.m_mode == eNormal)
+                {
+                    if (token.type() == PreprocessingToken::eInvalid)
                     {
-                        m_context[state.m_directive->identifier().text()] = state.m_directive;
-                    }
-                    else if (state.m_directive->type() == PreprocessingDirective::eInclude)
-                    {
-                        const std::vector<PreprocessingToken>& tokens = state.m_directive->tokens();
-                        if (tokens.size() > 0)
+                        bool skip = callbacks.onUnexpectedCharacter(c);
+                        if (skip)
                         {
-                            if (tokens[0].type() == PreprocessingToken::eStringLiteral)
+                            ++state.m_position;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    else if ((token.type() == PreprocessingToken::eOpOrPunctuator) && (token.text() == "#"))
+                    {
+                        state.m_mode = eDirective;
+                        state.m_directive = std::make_shared<PreprocessingDirective>(PreprocessingDirective::eInvalid);
+                    }
+                    else
+                    {
+                        std::vector<PreprocessingToken> tokens;
+                        tokens.push_back(token);
+                        callbacks.onTokens(tokens);
+                    }
+                }
+                else if (state.m_mode == eDirective)
+                {
+                    if ((token.type() == PreprocessingToken::eWhiteSpaceCharacters) &&
+                        (token.text() == "\n"))
+                    {
+                        // We have encountered the end of the directive
+                        if (state.m_directive->type() == PreprocessingDirective::eDefine)
+                        {
+                            m_context[state.m_directive->identifier().text()] = state.m_directive;
+                        }
+                        else if (state.m_directive->type() == PreprocessingDirective::eInclude)
+                        {
+                            const std::vector<PreprocessingToken>& tokens = state.m_directive->tokens();
+                            if (tokens.size() > 0)
                             {
-                                // The string literal includes the opening and closing quotes, so
-                                // remove them
-                                const std::string& text = tokens[0].text();
-                                std::shared_ptr<std::istream> includeInput = includeResolver.resolve(text.substr(1, text.size() - 2));
-                                if (includeInput)
+                                if (tokens[0].type() == PreprocessingToken::eStringLiteral)
                                 {
-                                    Preprocessor includePreprocessor(*includeInput);
-                                    includePreprocessor.run(includeResolver, callbacks);
-                                }
-                                else
-                                {
-                                    bool skip = callbacks.onError();
-                                    if (skip)
+                                    // The string literal includes the opening and closing quotes, so
+                                    // remove them
+                                    const std::string& text = tokens[0].text();
+                                    std::shared_ptr<std::istream> includeInput = includeResolver.resolve(text.substr(1, text.size() - 2));
+                                    if (includeInput)
                                     {
-                                        ++state.m_position;
+                                        // When we reach here the current state is in the right state to complete the loop. The code at the
+                                        // end of the loop would update 'c' but that would be incorrect as we want to start preprocessing the
+                                        // include file. So we set 'c' to 0 to stop the current loop.
+                                        c = 0;
+                                        m_stateStack.push_back(State(*includeInput, includeInput));
+                                        stateStackChanged = true;
+                                        continue;
                                     }
                                     else
                                     {
-                                        break;
+                                        bool skip = callbacks.onError();
+                                        if (skip)
+                                        {
+                                            ++state.m_position;
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
                                     }
                                 }
                             }
                         }
+                        state.m_mode = eNormal;
                     }
-                    state.m_mode = eNormal;
-                }
-                else if (token.type() == PreprocessingToken::eIdentifier)
-                {
-                    if (state.m_directive->type() == PreprocessingDirective::eInvalid)
+                    else if (token.type() == PreprocessingToken::eIdentifier)
                     {
-                        if (token.text() == "define")
+                        if (state.m_directive->type() == PreprocessingDirective::eInvalid)
                         {
-                            state.m_directive->setType(PreprocessingDirective::eDefine);
+                            if (token.text() == "define")
+                            {
+                                state.m_directive->setType(PreprocessingDirective::eDefine);
+                            }
+                            else if (token.text() == "include")
+                            {
+                                state.m_directive->setType(PreprocessingDirective::eInclude);
+                            }
                         }
-                        else if (token.text() == "include")
+                        else if ((state.m_directive->type() == PreprocessingDirective::eDefine) &&
+                            (state.m_directive->identifier().type() == PreprocessingToken::eInvalid))
                         {
-                            state.m_directive->setType(PreprocessingDirective::eInclude);
+                            state.m_directive->setIdentifier(token);
                         }
                     }
-                    else if ((state.m_directive->type() == PreprocessingDirective::eDefine) &&
-                        (state.m_directive->identifier().type() == PreprocessingToken::eInvalid))
+                    else if (token.type() == PreprocessingToken::eStringLiteral)
                     {
-                        state.m_directive->setIdentifier(token);
+                        if (state.m_directive->type() == PreprocessingDirective::eInclude)
+                        {
+                            state.m_directive->appendToken(token);
+                        }
                     }
                 }
-                else if(token.type() == PreprocessingToken::eStringLiteral)
-                {
-                    if (state.m_directive->type() == PreprocessingDirective::eInclude)
-                    {
-                        state.m_directive->appendToken(token);
-                    }
-                }
-            }
 
-            c = state.m_buffer[state.m_position];
+                c = state.m_buffer[state.m_position];
+            }
+            if ((c == 0) && !stateStackChanged)
+            {
+                // We finished the last character of the input (since
+                // we are in the EOF case) for the current state.
+                m_stateStack.pop_back();
+            }
         }
     }
 }
@@ -355,6 +382,13 @@ PreprocessingToken Preprocessor::readStringLiteral(const char* buffer, size_t& p
 
 Preprocessor::State::State(std::istream& input)
     : m_source(input), m_position(0), m_mode(eNormal)
+{
+}
+
+Preprocessor::State::State(std::istream& input,
+                           std::shared_ptr<std::istream>& includedInput)
+    : m_source(input), m_position(0), m_mode(eNormal),
+    m_includedInput(includedInput)
 {
 }
 

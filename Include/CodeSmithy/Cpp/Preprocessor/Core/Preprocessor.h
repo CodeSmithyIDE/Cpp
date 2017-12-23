@@ -68,6 +68,7 @@ private:
     {
     public:
         State(std::istream& input);
+        State(std::istream& input, std::shared_ptr<std::istream>& includedInput);
         ~State();
 
         SourceFile m_source;
@@ -80,6 +81,11 @@ private:
         // the tokens are extracted. So its contents will be incomplete 
         // until the last token of the directive is extracted.
         std::shared_ptr<PreprocessingDirective> m_directive;
+        // For included files we need to keep the istream object
+        // somewhere in scope so we keep it in the state itself. This
+        // member is never access directly, only via the SourceFile
+        // object.
+        std::shared_ptr<std::istream> m_includedInput;
     };
 
 private:
