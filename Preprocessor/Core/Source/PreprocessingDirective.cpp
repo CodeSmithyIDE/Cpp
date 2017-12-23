@@ -56,5 +56,15 @@ void PreprocessingDirective::setIdentifier(const PreprocessingToken& identifier)
     m_identifier = identifier;
 }
 
+const std::vector<PreprocessingToken>& PreprocessingDirective::tokens() const
+{
+    return m_tokens;
+}
+
+void PreprocessingDirective::appendToken(const PreprocessingToken& token)
+{
+    m_tokens.push_back(token);
+}
+
 }
 }

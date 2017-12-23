@@ -24,6 +24,7 @@
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSINGDIRECTIVE_H_
 
 #include "PreprocessingToken.h"
+#include <vector>
 
 namespace CodeSmithy
 {
@@ -36,7 +37,8 @@ public:
     enum EType
     {
         eInvalid,
-        eDefine
+        eDefine,
+        eInclude
     };
 
     PreprocessingDirective(EType type);
@@ -46,10 +48,13 @@ public:
     void setType(EType type);
     const PreprocessingToken& identifier() const;
     void setIdentifier(const PreprocessingToken& identifier);
+    const std::vector<PreprocessingToken>& tokens() const;
+    void appendToken(const PreprocessingToken& token);
 
 private:
     EType m_type;
     PreprocessingToken m_identifier;
+    std::vector<PreprocessingToken> m_tokens;
 };
 
 }

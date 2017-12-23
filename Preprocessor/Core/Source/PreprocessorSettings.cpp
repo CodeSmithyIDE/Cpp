@@ -21,3 +21,25 @@
 */
 
 #include "PreprocessorSettings.h"
+
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+PreprocessorSettings::PreprocessorSettings()
+    : m_maxIncludeNestingLevel(4096)
+{
+}
+
+PreprocessorSettings::~PreprocessorSettings()
+{
+}
+
+size_t PreprocessorSettings::maxIncludeNestingLevel() const
+{
+    return m_maxIncludeNestingLevel;
+}
+
+}
+}

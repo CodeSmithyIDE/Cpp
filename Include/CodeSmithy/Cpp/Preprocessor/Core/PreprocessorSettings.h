@@ -23,4 +23,24 @@
 #ifndef _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORSETTINGS_H_
 #define _CODESMITHY_CPP_PREPROCESSOR_CORE_PREPROCESSORSETTINGS_H_
 
+namespace CodeSmithy
+{
+namespace Cpp
+{
+
+class PreprocessorSettings
+{
+public:
+    PreprocessorSettings();
+    ~PreprocessorSettings();
+
+    size_t maxIncludeNestingLevel() const;
+
+private:
+    size_t m_maxIncludeNestingLevel;
+};
+
+}
+}
+
 #endif
