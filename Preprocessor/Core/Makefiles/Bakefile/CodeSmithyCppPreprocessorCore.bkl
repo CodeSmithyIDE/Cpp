@@ -29,6 +29,7 @@ library CodeSmithyCppPreprocessorCore
     {
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/SourceFile.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/Preprocessor.h
+        ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessorSettings.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessorContext.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessorCallbacks.h
         ../../../../Include/CodeSmithy/Cpp/Preprocessor/Core/PreprocessingToken.h
@@ -44,6 +45,7 @@ library CodeSmithyCppPreprocessorCore
     {
         ../../Source/SourceFile.cpp
         ../../Source/Preprocessor.cpp
+        ../../Source/PreprocessorSettings.cpp
         ../../Source/PreprocessorContext.cpp
         ../../Source/PreprocessorCallbacks.cpp
         ../../Source/PreprocessingToken.cpp

@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\SourceFile.cpp" />
     <ClCompile Include="..\..\Source\Preprocessor.cpp" />
+    <ClCompile Include="..\..\Source\PreprocessorSettings.cpp" />
     <ClCompile Include="..\..\Source\PreprocessorContext.cpp" />
     <ClCompile Include="..\..\Source\PreprocessorCallbacks.cpp" />
     <ClCompile Include="..\..\Source\PreprocessingToken.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\SourceFile.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\Preprocessor.h" />
+    <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorSettings.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorContext.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessorCallbacks.h" />
     <ClInclude Include="..\..\..\..\Include\CodeSmithy\Cpp\Preprocessor\Core\PreprocessingToken.h" />
