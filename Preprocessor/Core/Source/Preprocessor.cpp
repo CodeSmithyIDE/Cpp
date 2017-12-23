@@ -56,7 +56,7 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
         // See also the use of the 'stateStackChanged' variable below.
         State& state = m_stateStack.back();
 
-        while (state.m_source.read(&state.m_buffer[0], (state.m_bufferSize - 1)))
+        while (state.m_source.read(&state.m_buffer[0], (state.m_bufferCapacity - 1)))
         {
         }
         if (state.m_source.eof())
