@@ -23,6 +23,7 @@
 #include "TranslationUnitBuilderCallbacksTests.h"
 #include "CodeSmithy/Cpp/Preprocessor/Core/TranslationUnitBuilderCallbacks.h"
 #include "CodeSmithy/Cpp/Preprocessor/Core/Preprocessor.h"
+#include "CodeSmithy/Cpp/Preprocessor/Core/PreprocessingIncludeDirectiveDefaultResolver.h"
 #include <fstream>
 
 void AddTranslationUnitBuilderCallbacksTests(TestHarness& theTestHarness)
@@ -52,9 +53,10 @@ TestResult::EOutcome TranslationUnitBuilderCallbacksRunTest1(FileComparisonTest&
     std::ifstream input(inputPath.c_str());
     CodeSmithy::Cpp::Preprocessor preprocessor(input);
 
+    CodeSmithy::Cpp::PreprocessingIncludeDirectiveDefaultResolver includeResolver;
     CodeSmithy::Cpp::TranslationUnit translationUnit;
     CodeSmithy::Cpp::TranslationUnitBuilderCallbacks callbacks(translationUnit);
-    preprocessor.run(callbacks);
+    preprocessor.run(includeResolver, callbacks);
 
     std::ofstream output(outputPath.c_str());
     translationUnit.write(output);
@@ -75,9 +77,10 @@ TestResult::EOutcome TranslationUnitBuilderCallbacksRunTest2(FileComparisonTest&
     std::ifstream input(inputPath.c_str());
     CodeSmithy::Cpp::Preprocessor preprocessor(input);
 
+    CodeSmithy::Cpp::PreprocessingIncludeDirectiveDefaultResolver includeResolver;
     CodeSmithy::Cpp::TranslationUnit translationUnit;
     CodeSmithy::Cpp::TranslationUnitBuilderCallbacks callbacks(translationUnit);
-    preprocessor.run(callbacks);
+    preprocessor.run(includeResolver, callbacks);
 
     std::ofstream output(outputPath.c_str());
     translationUnit.write(output);

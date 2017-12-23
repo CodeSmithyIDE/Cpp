@@ -38,5 +38,6 @@ TestResult::EOutcome PreprocessorMathematicalExpressionsTest1(FileComparisonTest
 TestResult::EOutcome PreprocessorDirectiveTest1(FileComparisonTest& test);
 TestResult::EOutcome PreprocessorDirectiveTest2(FileComparisonTest& test);
 TestResult::EOutcome PreprocessorDirectiveTest3(FileComparisonTest& test);
+TestResult::EOutcome PreprocessorDirectiveTest4(FileComparisonTest& test);
 
 #endif

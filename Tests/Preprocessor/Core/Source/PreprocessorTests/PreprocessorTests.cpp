@@ -44,6 +44,7 @@ void AddPreprocessorTests(TestHarness& theTestHarness)
     new FileComparisonTest("directive test 1", PreprocessorDirectiveTest1, preprocessorTestSequence);
     new FileComparisonTest("directive test 2", PreprocessorDirectiveTest2, preprocessorTestSequence);
     new FileComparisonTest("directive test 3", PreprocessorDirectiveTest3, preprocessorTestSequence);
+    new FileComparisonTest("directive test 4", PreprocessorDirectiveTest4, preprocessorTestSequence);
 }
 
 TestResult::EOutcome PreprocessorCreationTest1(Test& test)
@@ -267,6 +268,34 @@ TestResult::EOutcome PreprocessorDirectiveTest3(FileComparisonTest& test)
 
     test.setOutputFilePath(outputPath);
     test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorDirectiveTest3.txt");
+
+    if ((callbacks.unexpectedCharactersCount() == 0) &&
+        (preprocessor.context().size() == 0))
+    {
+        result = TestResult::ePassed;
+    }
+
+    return result;
+}
+
+TestResult::EOutcome PreprocessorDirectiveTest4(FileComparisonTest& test)
+{
+    TestResult::EOutcome result = TestResult::eFailed;
+
+    boost::filesystem::path inputPath(test.environment().getTestDataDirectory() / "IncludeDirective3.cpp");
+    boost::filesystem::path outputPath(test.environment().getTestOutputDirectory() / "PreprocessorDirectiveTest4.txt");
+
+    std::ifstream input(inputPath.c_str());
+    CodeSmithy::Cpp::Preprocessor preprocessor(input);
+
+    CodeSmithy::Cpp::PreprocessingIncludeDirectiveDefaultResolver includeResolver;
+    includeResolver.appendSearchPath(test.environment().getTestDataDirectory().string() + '/');
+    TestCallbacks callbacks;
+    preprocessor.run(includeResolver, callbacks);
+    callbacks.write(outputPath);
+
+    test.setOutputFilePath(outputPath);
+    test.setReferenceFilePath(test.environment().getReferenceDataDirectory() / "PreprocessorDirectiveTest4.txt");
 
     if ((callbacks.unexpectedCharactersCount() == 0) &&
         (preprocessor.context().size() == 0))

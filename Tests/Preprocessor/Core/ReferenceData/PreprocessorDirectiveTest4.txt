@@ -1,0 +1,16 @@
+identifier: void
+white-space:  
+identifier: MyFunction1
+op-or-punctuator: (
+op-or-punctuator: )
+op-or-punctuator: ;
+white-space: 
+
+white-space: 
+
+identifier: MyFunction1
+op-or-punctuator: (
+op-or-punctuator: )
+op-or-punctuator: ;
+white-space: 
+
