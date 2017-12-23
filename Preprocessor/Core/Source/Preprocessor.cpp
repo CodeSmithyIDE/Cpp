@@ -29,7 +29,6 @@ namespace Cpp
 {
 
 Preprocessor::Preprocessor(std::istream& input)
-    : m_state(eNormal)
 {
     m_stateStack.push_back(State(input));
 }
@@ -43,7 +42,6 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
 {
     State& state = m_stateStack[0];
 
-    m_state = eNormal;
     while (state.m_source.read(&state.m_buffer[0], (state.m_bufferSize - 1)))
     {
     }
@@ -100,7 +98,7 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                 token = readNumber(state.m_buffer, state.m_position);
             }
 
-            if (m_state == eNormal)
+            if (state.m_mode == eNormal)
             {
                 if (token.type() == PreprocessingToken::eInvalid)
                 {
@@ -116,7 +114,7 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                 }
                 else if ((token.type() == PreprocessingToken::eOpOrPunctuator) && (token.text() == "#"))
                 {
-                    m_state = eDirective;
+                    state.m_mode = eDirective;
                     m_directive = std::make_shared<PreprocessingDirective>(PreprocessingDirective::eInvalid);
                 }
                 else
@@ -126,7 +124,7 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                     callbacks.onTokens(tokens);
                 }
             }
-            else if (m_state == eDirective)
+            else if (state.m_mode == eDirective)
             {
                 if ((token.type() == PreprocessingToken::eWhiteSpaceCharacters) &&
                     (token.text() == "\n"))
@@ -167,7 +165,7 @@ void Preprocessor::run(PreprocessingIncludeDirectiveResolver& includeResolver,
                             }
                         }
                     }
-                    m_state = eNormal;
+                    state.m_mode = eNormal;
                 }
                 else if (token.type() == PreprocessingToken::eIdentifier)
                 {
@@ -356,7 +354,7 @@ PreprocessingToken Preprocessor::readStringLiteral(const char* buffer, size_t& p
 }
 
 Preprocessor::State::State(std::istream& input)
-    : m_source(input), m_position(0)
+    : m_source(input), m_position(0), m_mode(eNormal)
 {
 }
 
