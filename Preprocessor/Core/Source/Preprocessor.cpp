@@ -277,6 +277,7 @@ PreprocessingToken Preprocessor::readIdentifier(const char* buffer, size_t& posi
     char c = buffer[position];
     while (((c >= 'a') && (c <= 'z')) ||
         ((c >= 'A') && (c <= 'Z')) ||
+        ((c >= '0') && (c <= '9')) ||
         (c == '_'))
     {
         c = buffer[++position];
