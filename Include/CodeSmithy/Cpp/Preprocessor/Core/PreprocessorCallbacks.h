@@ -42,6 +42,7 @@ public:
     // in together.
     virtual void onTokens(const std::vector<PreprocessingToken>& tokens);
     virtual bool onUnexpectedCharacter(char c);
+    virtual bool onError();
 };
 
 }

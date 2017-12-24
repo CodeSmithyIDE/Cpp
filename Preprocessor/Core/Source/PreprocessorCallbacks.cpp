@@ -46,5 +46,11 @@ bool PreprocessorCallbacks::onUnexpectedCharacter(char c)
     return false;
 }
 
+bool PreprocessorCallbacks::onError()
+{
+    // By default, stop if an included file can't be found
+    return false;
+}
+
 }
 }
